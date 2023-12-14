@@ -19,8 +19,8 @@ local, and you've found our code helpful, please buy us a round!
 Distributed as-is; no warranty is given.
 ******************************************************************************/
 
-#ifndef __SparkFun_Qwiic_Button_H__
-#define __SparkFun_Qwiic_Button_H__
+#ifndef __SparkFun_Qwiic_Buzzer_H__
+#define __SparkFun_Qwiic_Buzzer_H__
 
 #include <Wire.h>
 #include <Arduino.h>
@@ -29,7 +29,7 @@ Distributed as-is; no warranty is given.
 #define SFE_QWIIC_BUTTON_DEFAULT_ADDRESS 0x6F //default I2C address of the button
 #define SFE_QWIIC_BUTTON_DEV_ID 0x5D          //device ID of the Qwiic Button
 
-class QwiicButton
+class QwiicBuzzer
 {
 private:
     TwoWire *_i2cPort;      //Generic connection to user's chosen I2C port
@@ -79,8 +79,8 @@ public:
                    uint16_t offTime, uint8_t granularity = 1); //Configures the LED with the given max brightness, granularity (1 is fine for most applications), cycle time, and off time.
     bool LEDoff();                                             //Turns the onboard LED off
     bool LEDon(uint8_t brightness = 255);                      //Turns the onboard LED on with specified brightness. Set brightness to an integer between 0 and 255, where 0 is off and 255 is max brightness.
-    bool buzzerOn(uint16_t cycleTime = 255, uint8_t brightness = 255);
-    bool buzzerOff();
+    bool on(uint16_t cycleTime = 2730, uint8_t brightness = 255);
+    bool off();
 
     //Internal I2C Abstraction
     uint8_t readSingleRegister(Qwiic_Button_Register reg);                              //Reads a single 8-bit register.

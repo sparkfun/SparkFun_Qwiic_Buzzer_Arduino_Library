@@ -19,7 +19,7 @@ Distributed as-is; no warranty is given.
 ******************************************************************************/
 
 #include <Wire.h>
-#include <SparkFun_Qwiic_Button.h>
+#include <SparkFun_Qwiic_Buzzer_Arduino_Library.h>
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
@@ -29,7 +29,7 @@ Distributed as-is; no warranty is given.
 
 /*-------------------------------- Device Status ------------------------*/
 
-bool QwiicButton::begin(uint8_t address, TwoWire &wirePort)
+bool QwiicBuzzer::begin(uint8_t address, TwoWire &wirePort)
 {
     _deviceAddress = address; //grab the address that the sensor is on
     _i2cPort = &wirePort;     //grab the port that the user wants to use
@@ -38,7 +38,7 @@ bool QwiicButton::begin(uint8_t address, TwoWire &wirePort)
     return (isConnected() && checkDeviceID());
 }
 
-bool QwiicButton::isConnected()
+bool QwiicBuzzer::isConnected()
 {
     _i2cPort->beginTransmission(_deviceAddress);
     if (_i2cPort->endTransmission() == 0)
@@ -46,17 +46,17 @@ bool QwiicButton::isConnected()
     return false;
 }
 
-uint8_t QwiicButton::deviceID()
+uint8_t QwiicBuzzer::deviceID()
 {
     return readSingleRegister(SFE_QWIIC_BUTTON_ID); //read and return the value in the ID register
 }
 
-bool QwiicButton::checkDeviceID()
+bool QwiicBuzzer::checkDeviceID()
 {
     return (deviceID() == SFE_QWIIC_BUTTON_DEV_ID); //Return true if the device ID matches
 }
 
-uint8_t QwiicButton::getDeviceType()
+uint8_t QwiicBuzzer::getDeviceType()
 {
     if (isConnected())
     { //only try to get the device ID if the device will acknowledge
@@ -67,14 +67,14 @@ uint8_t QwiicButton::getDeviceType()
     return 0;
 }
 
-uint16_t QwiicButton::getFirmwareVersion()
+uint16_t QwiicBuzzer::getFirmwareVersion()
 {
     uint16_t version = (readSingleRegister(SFE_QWIIC_BUTTON_FIRMWARE_MAJOR)) << 8;
     version |= readSingleRegister(SFE_QWIIC_BUTTON_FIRMWARE_MINOR);
     return version;
 }
 
-bool QwiicButton::setI2Caddress(uint8_t address)
+bool QwiicBuzzer::setI2Caddress(uint8_t address)
 {
     if (address < 0x08 || address > 0x77)
     {
@@ -97,38 +97,38 @@ bool QwiicButton::setI2Caddress(uint8_t address)
     }
 }
 
-uint8_t QwiicButton::getI2Caddress()
+uint8_t QwiicBuzzer::getI2Caddress()
 {
     return _deviceAddress;
 }
 
 /*------------------------------ Button Status ---------------------- */
-bool QwiicButton::isPressed()
+bool QwiicBuzzer::isPressed()
 {
     statusRegisterBitField statusRegister;
     statusRegister.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_BUTTON_STATUS);
     return statusRegister.isPressed;
 }
 
-bool QwiicButton::hasBeenClicked()
+bool QwiicBuzzer::hasBeenClicked()
 {
     statusRegisterBitField statusRegister;
     statusRegister.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_BUTTON_STATUS);
     return statusRegister.hasBeenClicked;
 }
 
-uint16_t QwiicButton::getDebounceTime()
+uint16_t QwiicBuzzer::getDebounceTime()
 {
     return readDoubleRegister(SFE_QWIIC_BUTTON_BUTTON_DEBOUNCE_TIME);
 }
 
-uint8_t QwiicButton::setDebounceTime(uint16_t time)
+uint8_t QwiicBuzzer::setDebounceTime(uint16_t time)
 {
     return writeDoubleRegisterWithReadback(SFE_QWIIC_BUTTON_BUTTON_DEBOUNCE_TIME, time);
 }
 
 /*------------------- Interrupt Status/Configuration ---------------- */
-uint8_t QwiicButton::enablePressedInterrupt()
+uint8_t QwiicBuzzer::enablePressedInterrupt()
 {
     interruptConfigBitField interruptConfigure;
     interruptConfigure.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG);
@@ -136,7 +136,7 @@ uint8_t QwiicButton::enablePressedInterrupt()
     return writeSingleRegisterWithReadback(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG, interruptConfigure.byteWrapped);
 }
 
-uint8_t QwiicButton::disablePressedInterrupt()
+uint8_t QwiicBuzzer::disablePressedInterrupt()
 {
     interruptConfigBitField interruptConfigure;
     interruptConfigure.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG);
@@ -144,7 +144,7 @@ uint8_t QwiicButton::disablePressedInterrupt()
     return writeSingleRegisterWithReadback(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG, interruptConfigure.byteWrapped);
 }
 
-uint8_t QwiicButton::enableClickedInterrupt()
+uint8_t QwiicBuzzer::enableClickedInterrupt()
 {
     interruptConfigBitField interruptConfigure;
     interruptConfigure.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG);
@@ -152,7 +152,7 @@ uint8_t QwiicButton::enableClickedInterrupt()
     return writeSingleRegisterWithReadback(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG, interruptConfigure.byteWrapped);
 }
 
-uint8_t QwiicButton::disableClickedInterrupt()
+uint8_t QwiicBuzzer::disableClickedInterrupt()
 {
     interruptConfigBitField interruptConfigure;
     interruptConfigure.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG);
@@ -160,14 +160,14 @@ uint8_t QwiicButton::disableClickedInterrupt()
     return writeSingleRegisterWithReadback(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG, interruptConfigure.byteWrapped);
 }
 
-bool QwiicButton::available()
+bool QwiicBuzzer::available()
 {
     statusRegisterBitField buttonStatus;
     buttonStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_BUTTON_STATUS);
     return buttonStatus.eventAvailable;
 }
 
-uint8_t QwiicButton::clearEventBits()
+uint8_t QwiicBuzzer::clearEventBits()
 {
     statusRegisterBitField buttonStatus;
     buttonStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_BUTTON_STATUS);
@@ -177,7 +177,7 @@ uint8_t QwiicButton::clearEventBits()
     return writeSingleRegisterWithReadback(SFE_QWIIC_BUTTON_BUTTON_STATUS, buttonStatus.byteWrapped);
 }
 
-uint8_t QwiicButton::resetInterruptConfig()
+uint8_t QwiicBuzzer::resetInterruptConfig()
 {
     interruptConfigBitField interruptConfigure;
     interruptConfigure.pressedEnable = 1;
@@ -190,31 +190,31 @@ uint8_t QwiicButton::resetInterruptConfig()
 
 /*------------------------- Queue Manipulation ---------------------- */
 //pressed queue manipulation
-bool QwiicButton::isPressedQueueFull()
+bool QwiicBuzzer::isPressedQueueFull()
 {
     queueStatusBitField pressedQueueStatus;
     pressedQueueStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_PRESSED_QUEUE_STATUS);
     return pressedQueueStatus.isFull;
 }
 
-bool QwiicButton::isPressedQueueEmpty()
+bool QwiicBuzzer::isPressedQueueEmpty()
 {
     queueStatusBitField pressedQueueStatus;
     pressedQueueStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_PRESSED_QUEUE_STATUS);
     return pressedQueueStatus.isEmpty;
 }
 
-unsigned long QwiicButton::timeSinceLastPress()
+unsigned long QwiicBuzzer::timeSinceLastPress()
 {
     return readQuadRegister(SFE_QWIIC_BUTTON_PRESSED_QUEUE_FRONT);
 }
 
-unsigned long QwiicButton::timeSinceFirstPress()
+unsigned long QwiicBuzzer::timeSinceFirstPress()
 {
     return readQuadRegister(SFE_QWIIC_BUTTON_PRESSED_QUEUE_BACK);
 }
 
-unsigned long QwiicButton::popPressedQueue()
+unsigned long QwiicBuzzer::popPressedQueue()
 {
     unsigned long tempData = timeSinceFirstPress(); //grab the oldest value on the queue
 
@@ -227,31 +227,31 @@ unsigned long QwiicButton::popPressedQueue()
 }
 
 //clicked queue manipulation
-bool QwiicButton::isClickedQueueFull()
+bool QwiicBuzzer::isClickedQueueFull()
 {
     queueStatusBitField clickedQueueStatus;
     clickedQueueStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_CLICKED_QUEUE_STATUS);
     return clickedQueueStatus.isFull;
 }
 
-bool QwiicButton::isClickedQueueEmpty()
+bool QwiicBuzzer::isClickedQueueEmpty()
 {
     queueStatusBitField clickedQueueStatus;
     clickedQueueStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_CLICKED_QUEUE_STATUS);
     return clickedQueueStatus.isEmpty;
 }
 
-unsigned long QwiicButton::timeSinceLastClick()
+unsigned long QwiicBuzzer::timeSinceLastClick()
 {
     return readQuadRegister(SFE_QWIIC_BUTTON_CLICKED_QUEUE_FRONT);
 }
 
-unsigned long QwiicButton::timeSinceFirstClick()
+unsigned long QwiicBuzzer::timeSinceFirstClick()
 {
     return readQuadRegister(SFE_QWIIC_BUTTON_CLICKED_QUEUE_BACK);
 }
 
-unsigned long QwiicButton::popClickedQueue()
+unsigned long QwiicBuzzer::popClickedQueue()
 {
     unsigned long tempData = timeSinceFirstClick();
     queueStatusBitField clickedQueueStatus;
@@ -262,7 +262,7 @@ unsigned long QwiicButton::popClickedQueue()
 }
 
 /*------------------------ LED Configuration ------------------------ */
-bool QwiicButton::LEDconfig(uint8_t brightness, uint16_t cycleTime, uint16_t offTime, uint8_t granularity)
+bool QwiicBuzzer::LEDconfig(uint8_t brightness, uint16_t cycleTime, uint16_t offTime, uint8_t granularity)
 {
     bool success = writeSingleRegister(SFE_QWIIC_BUTTON_LED_BRIGHTNESS, brightness);
     success &= writeSingleRegister(SFE_QWIIC_BUTTON_LED_PULSE_GRANULARITY, granularity);
@@ -271,29 +271,29 @@ bool QwiicButton::LEDconfig(uint8_t brightness, uint16_t cycleTime, uint16_t off
     return success;
 }
 
-bool QwiicButton::LEDoff()
+bool QwiicBuzzer::LEDoff()
 {
     return LEDconfig(0, 0, 0);
 }
 
-bool QwiicButton::LEDon(uint8_t brightness)
+bool QwiicBuzzer::LEDon(uint8_t brightness)
 {
     return LEDconfig(brightness, 0, 0);
 }
 
-bool QwiicButton::buzzerOn(uint16_t cycleTime, uint8_t brightness)
+bool QwiicBuzzer::on(uint16_t cycleTime, uint8_t brightness)
 {
     return LEDconfig(brightness, cycleTime, 0);
 }
 
-bool QwiicButton::buzzerOff()
+bool QwiicBuzzer::off()
 {
     return LEDconfig(0, 0, 0);
 }
 
 /*------------------------- Internal I2C Abstraction ---------------- */
 
-uint8_t QwiicButton::readSingleRegister(Qwiic_Button_Register reg)
+uint8_t QwiicBuzzer::readSingleRegister(Qwiic_Button_Register reg)
 {
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -308,7 +308,7 @@ uint8_t QwiicButton::readSingleRegister(Qwiic_Button_Register reg)
     return 0;
 }
 
-uint16_t QwiicButton::readDoubleRegister(Qwiic_Button_Register reg)
+uint16_t QwiicBuzzer::readDoubleRegister(Qwiic_Button_Register reg)
 { //little endian
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -325,7 +325,7 @@ uint16_t QwiicButton::readDoubleRegister(Qwiic_Button_Register reg)
     return 0;
 }
 
-unsigned long QwiicButton::readQuadRegister(Qwiic_Button_Register reg)
+unsigned long QwiicBuzzer::readQuadRegister(Qwiic_Button_Register reg)
 {
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -350,7 +350,7 @@ unsigned long QwiicButton::readQuadRegister(Qwiic_Button_Register reg)
     return data.integer;
 }
 
-bool QwiicButton::writeSingleRegister(Qwiic_Button_Register reg, uint8_t data)
+bool QwiicBuzzer::writeSingleRegister(Qwiic_Button_Register reg, uint8_t data)
 {
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -360,7 +360,7 @@ bool QwiicButton::writeSingleRegister(Qwiic_Button_Register reg, uint8_t data)
     return false;
 }
 
-bool QwiicButton::writeDoubleRegister(Qwiic_Button_Register reg, uint16_t data)
+bool QwiicBuzzer::writeDoubleRegister(Qwiic_Button_Register reg, uint16_t data)
 {
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -371,7 +371,7 @@ bool QwiicButton::writeDoubleRegister(Qwiic_Button_Register reg, uint16_t data)
     return false;
 }
 
-uint8_t QwiicButton::writeSingleRegisterWithReadback(Qwiic_Button_Register reg, uint8_t data)
+uint8_t QwiicBuzzer::writeSingleRegisterWithReadback(Qwiic_Button_Register reg, uint8_t data)
 {
     if (writeSingleRegister(reg, data))
         return 1;
@@ -380,7 +380,7 @@ uint8_t QwiicButton::writeSingleRegisterWithReadback(Qwiic_Button_Register reg, 
     return 0;
 }
 
-uint16_t QwiicButton::writeDoubleRegisterWithReadback(Qwiic_Button_Register reg, uint16_t data)
+uint16_t QwiicBuzzer::writeDoubleRegisterWithReadback(Qwiic_Button_Register reg, uint16_t data)
 {
     if (writeDoubleRegister(reg, data))
         return 1;
