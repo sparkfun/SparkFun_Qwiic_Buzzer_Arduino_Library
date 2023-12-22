@@ -262,7 +262,7 @@ unsigned long QwiicBuzzer::popClickedQueue()
 }
 
 /*------------------------ LED Configuration ------------------------ */
-bool QwiicBuzzer::LEDconfig(uint8_t brightness, uint16_t cycleTime, uint16_t offTime, uint8_t granularity)
+bool QwiicBuzzer::BUZZERconfig(uint8_t brightness, uint16_t cycleTime, uint16_t offTime, uint8_t granularity)
 {
     bool success = writeSingleRegister(SFE_QWIIC_BUTTON_LED_BRIGHTNESS, brightness);
     success &= writeSingleRegister(SFE_QWIIC_BUTTON_LED_PULSE_GRANULARITY, granularity);
@@ -273,22 +273,22 @@ bool QwiicBuzzer::LEDconfig(uint8_t brightness, uint16_t cycleTime, uint16_t off
 
 bool QwiicBuzzer::LEDoff()
 {
-    return LEDconfig(0, 0, 0);
+    return BUZZERconfig(0, 0, 0);
 }
 
 bool QwiicBuzzer::LEDon(uint8_t brightness)
 {
-    return LEDconfig(brightness, 0, 0);
+    return BUZZERconfig(brightness, 0, 0);
 }
 
 bool QwiicBuzzer::on(uint16_t cycleTime, uint8_t brightness)
 {
-    return LEDconfig(brightness, cycleTime, 0);
+    return BUZZERconfig(brightness, cycleTime, 0);
 }
 
 bool QwiicBuzzer::off()
 {
-    return LEDconfig(0, 0, 0);
+    return BUZZERconfig(0, 0, 0);
 }
 
 /*------------------------- Internal I2C Abstraction ---------------- */

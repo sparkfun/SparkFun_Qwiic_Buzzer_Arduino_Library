@@ -75,7 +75,7 @@ public:
     unsigned long popClickedQueue();     //Returns the oldest value in the queue (milliseconds since first button click), and then removes it.
 
     //LED configuration
-    bool LEDconfig(uint8_t brightness, uint16_t cycleTime,
+    bool BUZZERconfig(uint8_t brightness, uint16_t cycleTime,
                    uint16_t offTime, uint8_t granularity = 1); //Configures the LED with the given max brightness, granularity (1 is fine for most applications), cycle time, and off time.
     bool LEDoff();                                             //Turns the onboard LED off
     bool LEDon(uint8_t brightness = 255);                      //Turns the onboard LED on with specified brightness. Set brightness to an integer between 0 and 255, where 0 is off and 255 is max brightness.

@@ -39,6 +39,6 @@ isClickedQueueEmpty 		KEYWORD2
 timeSinceLastClick  		KEYWORD2
 timeSinceFirstClick 		KEYWORD2
 popClickedQueue 			KEYWORD2
-LEDconfig   				KEYWORD2
+BUZZERconfig   				KEYWORD2
 LEDoff  					KEYWORD2
 LEDon   					KEYWORD2
