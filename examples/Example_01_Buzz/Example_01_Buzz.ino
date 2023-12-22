@@ -34,22 +34,25 @@ void setup() {
     while (1);
   }
   Serial.println("Buzzer acknowledged.");
-}
 
-void loop() {
   buzzer.on(2730);
   
-  delay(1000);
+  delay(100);
   
   buzzer.off();
   
-  delay(1000);
+  delay(100);
 
     buzzer.on(1000);
   
-  delay(1000);
+  delay(100);
   
   buzzer.off();
   
-  delay(1000);
+  delay(100);
+
+}
+
+void loop() {
+
 }
