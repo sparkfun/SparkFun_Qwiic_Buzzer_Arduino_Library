@@ -26,7 +26,7 @@ Distributed as-is; no warranty is given.
 #include <Arduino.h>
 #include "registers.h"
 
-#define SFE_QWIIC_BUTTON_DEFAULT_ADDRESS 0x6F //default I2C address of the button
+#define SFE_QWIIC_BUTTON_DEFAULT_ADDRESS 0x34 //default I2C address of the button
 #define SFE_QWIIC_BUTTON_DEV_ID 0x5D          //device ID of the Qwiic Button
 
 class QwiicBuzzer
