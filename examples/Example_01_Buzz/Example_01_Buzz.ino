@@ -37,7 +37,15 @@ void setup() {
 }
 
 void loop() {
-  buzzer.on();
+  buzzer.on(2730);
+  
+  delay(1000);
+  
+  buzzer.off();
+  
+  delay(1000);
+
+    buzzer.on(1000);
   
   delay(1000);
   
