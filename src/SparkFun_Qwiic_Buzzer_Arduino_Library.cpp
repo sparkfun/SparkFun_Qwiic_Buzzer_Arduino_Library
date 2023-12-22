@@ -266,7 +266,7 @@ bool QwiicBuzzer::LEDconfig(uint8_t brightness, uint16_t cycleTime, uint16_t off
 {
     bool success = writeSingleRegister(SFE_QWIIC_BUTTON_LED_BRIGHTNESS, brightness);
     success &= writeSingleRegister(SFE_QWIIC_BUTTON_LED_PULSE_GRANULARITY, granularity);
-    success &= writeDoubleRegister(SFE_QWIIC_BUTTON_LED_PULSE_CYCLE_TIME, cycleTime);
+    success &= writeDoubleRegister(SFE_QWIIC_BUZZER_TONE_FREQUENCY, cycleTime);
     success &= writeDoubleRegister(SFE_QWIIC_BUTTON_LED_PULSE_OFF_TIME, offTime);
     return success;
 }
