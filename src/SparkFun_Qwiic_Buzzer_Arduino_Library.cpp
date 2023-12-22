@@ -262,11 +262,11 @@ unsigned long QwiicBuzzer::popClickedQueue()
 }
 
 /*------------------------ LED Configuration ------------------------ */
-bool QwiicBuzzer::BUZZERconfig(uint8_t brightness, uint16_t cycleTime, uint16_t offTime, uint8_t granularity)
+bool QwiicBuzzer::BUZZERconfig(uint8_t brightness, uint16_t toneFrequency, uint16_t offTime, uint8_t granularity)
 {
     bool success = writeSingleRegister(SFE_QWIIC_BUTTON_LED_BRIGHTNESS, brightness);
     success &= writeSingleRegister(SFE_QWIIC_BUTTON_LED_PULSE_GRANULARITY, granularity);
-    success &= writeDoubleRegister(SFE_QWIIC_BUZZER_TONE_FREQUENCY, cycleTime);
+    success &= writeDoubleRegister(SFE_QWIIC_BUZZER_TONE_FREQUENCY, toneFrequency);
     success &= writeDoubleRegister(SFE_QWIIC_BUTTON_LED_PULSE_OFF_TIME, offTime);
     return success;
 }
@@ -281,9 +281,9 @@ bool QwiicBuzzer::LEDon(uint8_t brightness)
     return BUZZERconfig(brightness, 0, 0);
 }
 
-bool QwiicBuzzer::on(uint16_t cycleTime, uint8_t brightness)
+bool QwiicBuzzer::on(uint16_t toneFrequency, uint8_t brightness)
 {
-    return BUZZERconfig(brightness, cycleTime, 0);
+    return BUZZERconfig(brightness, toneFrequency, 0);
 }
 
 bool QwiicBuzzer::off()
