@@ -105,10 +105,20 @@ uint8_t QwiicBuzzer::getI2Caddress()
 
 
 /*------------------------ BUZZER Configuration ------------------------ */
-bool QwiicBuzzer::BUZZERconfig(uint16_t toneFrequency, uint8_t volume, uint16_t offTime, uint8_t granularity)
+bool QwiicBuzzer::BUZZERconfig(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
     bool success = writeSingleRegister(SFE_QWIIC_BUZZER_VOLUME, volume);
-    success &= writeDoubleRegister(SFE_QWIIC_BUZZER_TONE_FREQUENCY, toneFrequency);
+
+    uint8_t toneFrequencyMSB = ((toneFrequency & 0xFF00) >> 8 );
+    uint8_t toneFrequencyLSB = (toneFrequency & 0x00FF);
+    success &= writeSingleRegister(SFE_QWIIC_BUZZER_TONE_FREQUENCY_MSB, toneFrequencyMSB);
+    success &= writeSingleRegister(SFE_QWIIC_BUZZER_TONE_FREQUENCY_LSB, toneFrequencyLSB);
+
+    uint8_t durationMSB = ((duration & 0xFF00) >> 8 );
+    uint8_t durationLSB = (duration & 0x00FF);
+    success &= writeSingleRegister(SFE_QWIIC_BUZZER_DURATION_MSB, durationMSB);
+    success &= writeSingleRegister(SFE_QWIIC_BUZZER_DURATION_LSB, durationLSB);
+
     return success;
 }
 
@@ -122,14 +132,19 @@ bool QwiicBuzzer::LEDon(uint8_t brightness)
     return BUZZERconfig(brightness, 0, 0);
 }
 
-bool QwiicBuzzer::on(uint16_t toneFrequency, uint8_t volume)
+bool QwiicBuzzer::on(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
-    return BUZZERconfig(toneFrequency, volume, 0);
+    return BUZZERconfig(toneFrequency, duration, volume);
 }
 
 bool QwiicBuzzer::off()
 {
     return BUZZERconfig(0, 0, 0);
+}
+
+bool QwiicBuzzer::saveSettings()
+{
+    return writeSingleRegister(SFE_QWIIC_BUZZER_SAVE_SETTINGS, 0x01);
 }
 
 /*------------------------- Internal I2C Abstraction ---------------- */

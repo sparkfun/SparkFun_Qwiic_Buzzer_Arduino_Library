@@ -75,12 +75,13 @@ public:
     unsigned long popClickedQueue();     //Returns the oldest value in the queue (milliseconds since first button click), and then removes it.
 
     //LED configuration
-    bool BUZZERconfig(uint16_t toneFrequency, uint8_t brightness, 
-                   uint16_t offTime, uint8_t granularity = 1); //Configures the LED with the given max brightness, granularity (1 is fine for most applications), cycle time, and off time.
+    bool BUZZERconfig(uint16_t toneFrequency, uint16_t duration, 
+                   uint8_t volume); //Configures the LED with the given max brightness, granularity (1 is fine for most applications), cycle time, and off time.
     bool LEDoff();                                             //Turns the onboard LED off
     bool LEDon(uint8_t brightness = 255);                      //Turns the onboard LED on with specified brightness. Set brightness to an integer between 0 and 255, where 0 is off and 255 is max brightness.
-    bool on(uint16_t toneFrequency = 2730, uint8_t brightness = 255);
+    bool on(uint16_t toneFrequency = 2730, uint16_t duration = 0, uint8_t volume = 3);
     bool off();
+    bool saveSettings(); // store settings to EEPROM
 
     //Internal I2C Abstraction
     uint8_t readSingleRegister(Qwiic_Button_Register reg);                              //Reads a single 8-bit register.
