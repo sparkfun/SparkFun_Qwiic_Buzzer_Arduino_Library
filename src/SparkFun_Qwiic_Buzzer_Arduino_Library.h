@@ -52,7 +52,7 @@ public:
     //Buzzer configuration
     bool BUZZERconfig(uint16_t toneFrequency, uint16_t duration, 
                    uint8_t volume); //Configures the LED with the given max brightness, granularity (1 is fine for most applications), cycle time, and off time.
-    bool on(uint16_t toneFrequency = 2730, uint16_t duration = 0, uint8_t volume = 3);
+    bool on(uint16_t toneFrequency = 2730, uint16_t duration = 0, uint8_t volume = 4);
     bool off();
     bool saveSettings(); // store settings to EEPROM
     bool setBuzzerActiveReg();
