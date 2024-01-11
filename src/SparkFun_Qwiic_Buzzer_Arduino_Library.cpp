@@ -1,16 +1,20 @@
 /******************************************************************************
-SparkFun_Qwiic_Button.cpp
-SparkFun Qwiic Button/Switch Library Source File
+SparkFun_Qwiic_Buzzer_Arduino_Library.cpp
+SparkFun Qwiic Buzzer Library Source File
+
+by Pete Lewis @SparkFun Electronics
+Jan 2024
+
+Based on original source code written by
 Fischer Moseley @ SparkFun Electronics
 Original Creation Date: July 24, 2019
 
-This file implements the QwiicButton class, prototyped in SparkFun_Qwiic_Button.h
+This file implements the QwiicBuzzer class, prototyped in SparkFun_Qwiic_Buzzer_Arduino_Library.h
 
 Development environment specifics:
-	IDE: Arduino 1.8.9
+	IDE: Arduino 2.2.1
 	Hardware Platform: Arduino Uno/SparkFun Redboard
-	Qwiic Button Version: 1.0.0
-    Qwiic Switch Version: 1.0.0
+	Qwiic Buzzer Version: v10
 
 This code is Lemonadeware; if you see me (or any other SparkFun employee) at the
 local, and you've found our code helpful, please buy us a round!
@@ -48,12 +52,12 @@ bool QwiicBuzzer::isConnected()
 
 uint8_t QwiicBuzzer::deviceID()
 {
-    return readSingleRegister(SFE_QWIIC_BUTTON_ID); //read and return the value in the ID register
+    return readSingleRegister(SFE_QWIIC_BUZZER_ID); //read and return the value in the ID register
 }
 
 bool QwiicBuzzer::checkDeviceID()
 {
-    return (deviceID() == SFE_QWIIC_BUTTON_DEV_ID); //Return true if the device ID matches
+    return (deviceID() == SFE_QWIIC_BUZZER_DEV_ID); //Return true if the device ID matches
 }
 
 uint8_t QwiicBuzzer::getDeviceType()
@@ -61,7 +65,7 @@ uint8_t QwiicBuzzer::getDeviceType()
     if (isConnected())
     { //only try to get the device ID if the device will acknowledge
         uint8_t id = deviceID();
-        if (id == SFE_QWIIC_BUTTON_DEV_ID)
+        if (id == SFE_QWIIC_BUZZER_DEV_ID)
             return 1;
     }
     return 0;
@@ -69,8 +73,8 @@ uint8_t QwiicBuzzer::getDeviceType()
 
 uint16_t QwiicBuzzer::getFirmwareVersion()
 {
-    uint16_t version = (readSingleRegister(SFE_QWIIC_BUTTON_FIRMWARE_MAJOR)) << 8;
-    version |= readSingleRegister(SFE_QWIIC_BUTTON_FIRMWARE_MINOR);
+    uint16_t version = (readSingleRegister(SFE_QWIIC_BUZZER_FIRMWARE_MAJOR)) << 8;
+    version |= readSingleRegister(SFE_QWIIC_BUZZER_FIRMWARE_MINOR);
     return version;
 }
 
@@ -82,7 +86,7 @@ bool QwiicBuzzer::setI2Caddress(uint8_t address)
         return 1; //error immediately if the address is out of legal range
     }
 
-    bool success = writeSingleRegister(SFE_QWIIC_BUTTON_I2C_ADDRESS, address);
+    bool success = writeSingleRegister(SFE_QWIIC_BUZZER_I2C_ADDRESS, address);
 
     if (success == true)
     {
@@ -131,16 +135,6 @@ bool QwiicBuzzer::BUZZERconfig(uint16_t toneFrequency, uint16_t duration, uint8_
     return success;
 }
 
-bool QwiicBuzzer::LEDoff()
-{
-    return BUZZERconfig(0, 0, 0);
-}
-
-bool QwiicBuzzer::LEDon(uint8_t brightness)
-{
-    return BUZZERconfig(brightness, 0, 0);
-}
-
 bool QwiicBuzzer::on(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
     return BUZZERconfig(toneFrequency, duration, volume);
@@ -168,7 +162,7 @@ bool QwiicBuzzer::clearBuzzerActiveReg()
 
 /*------------------------- Internal I2C Abstraction ---------------- */
 
-uint8_t QwiicBuzzer::readSingleRegister(Qwiic_Button_Register reg)
+uint8_t QwiicBuzzer::readSingleRegister(Qwiic_Buzzer_Register reg)
 {
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -183,7 +177,7 @@ uint8_t QwiicBuzzer::readSingleRegister(Qwiic_Button_Register reg)
     return 0;
 }
 
-uint16_t QwiicBuzzer::readDoubleRegister(Qwiic_Button_Register reg)
+uint16_t QwiicBuzzer::readDoubleRegister(Qwiic_Buzzer_Register reg)
 { //little endian
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -200,7 +194,7 @@ uint16_t QwiicBuzzer::readDoubleRegister(Qwiic_Button_Register reg)
     return 0;
 }
 
-unsigned long QwiicBuzzer::readQuadRegister(Qwiic_Button_Register reg)
+unsigned long QwiicBuzzer::readQuadRegister(Qwiic_Buzzer_Register reg)
 {
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -225,7 +219,7 @@ unsigned long QwiicBuzzer::readQuadRegister(Qwiic_Button_Register reg)
     return data.integer;
 }
 
-bool QwiicBuzzer::writeSingleRegister(Qwiic_Button_Register reg, uint8_t data)
+bool QwiicBuzzer::writeSingleRegister(Qwiic_Buzzer_Register reg, uint8_t data)
 {
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -235,7 +229,7 @@ bool QwiicBuzzer::writeSingleRegister(Qwiic_Button_Register reg, uint8_t data)
     return false;
 }
 
-bool QwiicBuzzer::writeDoubleRegister(Qwiic_Button_Register reg, uint16_t data)
+bool QwiicBuzzer::writeDoubleRegister(Qwiic_Buzzer_Register reg, uint16_t data)
 {
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -246,7 +240,7 @@ bool QwiicBuzzer::writeDoubleRegister(Qwiic_Button_Register reg, uint16_t data)
     return false;
 }
 
-uint8_t QwiicBuzzer::writeSingleRegisterWithReadback(Qwiic_Button_Register reg, uint8_t data)
+uint8_t QwiicBuzzer::writeSingleRegisterWithReadback(Qwiic_Buzzer_Register reg, uint8_t data)
 {
     if (writeSingleRegister(reg, data))
         return 1;
@@ -255,7 +249,7 @@ uint8_t QwiicBuzzer::writeSingleRegisterWithReadback(Qwiic_Button_Register reg, 
     return 0;
 }
 
-uint16_t QwiicBuzzer::writeDoubleRegisterWithReadback(Qwiic_Button_Register reg, uint16_t data)
+uint16_t QwiicBuzzer::writeDoubleRegisterWithReadback(Qwiic_Buzzer_Register reg, uint16_t data)
 {
     if (writeDoubleRegister(reg, data))
         return 1;

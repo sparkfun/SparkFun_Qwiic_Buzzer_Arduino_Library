@@ -14,10 +14,8 @@ UPDATE WHAT DOES THIS LIBRARY DO!?! =)
 
 This library allows the user to:
 
-* Determine whether or not the button/switch is pressed 
-* Set the brightness of the onboard LED
-* Configure the onboard LED's "breathing" effect
-* Use button-based interrupts
+* Turn the buzzer on and off directly
+* Optionally, set the frequency, duration, and volume of the sound
 * Adjust the device's I<sup>2</sup>C address
 
 -->
