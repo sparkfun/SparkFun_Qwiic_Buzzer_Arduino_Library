@@ -119,6 +119,15 @@ bool QwiicBuzzer::BUZZERconfig(uint16_t toneFrequency, uint16_t duration, uint8_
     success &= writeSingleRegister(SFE_QWIIC_BUZZER_DURATION_MSB, durationMSB);
     success &= writeSingleRegister(SFE_QWIIC_BUZZER_DURATION_LSB, durationLSB);
 
+    if(volume > 0)
+    {
+        success &= setBuzzerActiveReg();
+    }
+    else
+    {
+        success &= clearBuzzerActiveReg();
+    }
+
     return success;
 }
 
@@ -145,6 +154,16 @@ bool QwiicBuzzer::off()
 bool QwiicBuzzer::saveSettings()
 {
     return writeSingleRegister(SFE_QWIIC_BUZZER_SAVE_SETTINGS, 0x01);
+}
+
+bool QwiicBuzzer::setBuzzerActiveReg()
+{
+    return writeSingleRegister(SFE_QWIIC_BUZZER_ACTIVE, 0x01);
+}
+
+bool QwiicBuzzer::clearBuzzerActiveReg()
+{
+    return writeSingleRegister(SFE_QWIIC_BUZZER_ACTIVE, 0x00);
 }
 
 /*------------------------- Internal I2C Abstraction ---------------- */

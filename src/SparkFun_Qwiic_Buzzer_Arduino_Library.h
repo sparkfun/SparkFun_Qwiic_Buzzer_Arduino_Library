@@ -82,6 +82,8 @@ public:
     bool on(uint16_t toneFrequency = 2730, uint16_t duration = 0, uint8_t volume = 3);
     bool off();
     bool saveSettings(); // store settings to EEPROM
+    bool setBuzzerActiveReg();
+    bool clearBuzzerActiveReg();
 
     //Internal I2C Abstraction
     uint8_t readSingleRegister(Qwiic_Button_Register reg);                              //Reads a single 8-bit register.
