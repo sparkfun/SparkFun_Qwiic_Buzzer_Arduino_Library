@@ -1,5 +1,5 @@
 /******************************************************************************
-  Example_01_Buzz
+  Example_02_Buzz_Frequency
 
   This example shows how to adjust the frequency of the buzzer.
 

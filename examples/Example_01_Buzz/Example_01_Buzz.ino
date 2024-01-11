@@ -28,7 +28,7 @@ void setup() {
   Serial.println("Qwiic Buzzer Example_01_Buzz");
   Wire.begin(); //Join I2C bus
 
-  //check if button will acknowledge over I2C
+  //check if buzzer will acknowledge over I2C
   if (buzzer.begin() == false) {
     Serial.println("Device did not acknowledge! Freezing.");
     while (1);
