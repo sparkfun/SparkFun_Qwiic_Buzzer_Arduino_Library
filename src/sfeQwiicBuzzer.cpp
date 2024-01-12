@@ -29,9 +29,9 @@ sfeTkError_t sfeQwiicBuzzer::changeAddress(const uint8_t &address)
         return kSTkErrFail; //error immediately if the address is out of legal range
     }
 
-    //bool success = writeSingleRegister(SFE_QWIIC_BUZZER_I2C_ADDRESS, address);
+    //bool success = writeSingleRegister(kSfeQwiicBuzzerRegI2cAddress, address);
 
-    sfeTkError_t err = _theBus->writeRegisterByte(SFE_QWIIC_BUZZER_I2C_ADDRESS, address);
+    sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegI2cAddress, address);
 
     // Check whether the write was successful
     if (err != kSTkErrOk)
@@ -49,33 +49,33 @@ uint8_t sfeQwiicBuzzer::getAddress()
     return _theBus->address();
 }
 
-sfeTkError_t sfeQwiicBuzzer::BUZZERconfig(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
+sfeTkError_t sfeQwiicBuzzer::buzzerConfig(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
-    //bool success = writeSingleRegister(SFE_QWIIC_BUZZER_VOLUME, volume);
-    sfeTkError_t err = _theBus->writeRegisterByte(SFE_QWIIC_BUZZER_VOLUME, volume);
+    //bool success = writeSingleRegister(kSfeQwiicBuzzerRegVolume, volume);
+    sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegVolume, volume);
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;
 
     uint8_t toneFrequencyMSB = ((toneFrequency & 0xFF00) >> 8 );
     uint8_t toneFrequencyLSB = (toneFrequency & 0x00FF);
-    //success &= writeSingleRegister(SFE_QWIIC_BUZZER_TONE_FREQUENCY_MSB, toneFrequencyMSB);
-    err = _theBus->writeRegisterByte(SFE_QWIIC_BUZZER_TONE_FREQUENCY_MSB, toneFrequencyMSB);
+    //success &= writeSingleRegister(kSfeQwiicBuzzerRegToneFrequencyMsb, toneFrequencyMSB);
+    err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegToneFrequencyMsb, toneFrequencyMSB);
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;
 
-    //success &= writeSingleRegister(SFE_QWIIC_BUZZER_TONE_FREQUENCY_LSB, toneFrequencyLSB);
-    err = _theBus->writeRegisterByte(SFE_QWIIC_BUZZER_TONE_FREQUENCY_LSB, toneFrequencyLSB);
+    //success &= writeSingleRegister(kSfeQwiicBuzzerRegToneFrequencyLsb, toneFrequencyLSB);
+    err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegToneFrequencyLsb, toneFrequencyLSB);
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;    
 
     uint8_t durationMSB = ((duration & 0xFF00) >> 8 );
     uint8_t durationLSB = (duration & 0x00FF);
-    //success &= writeSingleRegister(SFE_QWIIC_BUZZER_DURATION_MSB, durationMSB);
-    err = _theBus->writeRegisterByte(SFE_QWIIC_BUZZER_DURATION_MSB, durationMSB);
+    //success &= writeSingleRegister(kSfeQwiicBuzzerRegDurationMsb, durationMSB);
+    err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegDurationMsb, durationMSB);
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;     
-    //success &= writeSingleRegister(SFE_QWIIC_BUZZER_DURATION_LSB, durationLSB);
-    err = _theBus->writeRegisterByte(SFE_QWIIC_BUZZER_DURATION_LSB, durationLSB);
+    //success &= writeSingleRegister(kSfeQwiicBuzzerRegDurationLsb, durationLSB);
+    err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegDurationLsb, durationLSB);
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;  
 
@@ -98,8 +98,8 @@ sfeTkError_t sfeQwiicBuzzer::BUZZERconfig(uint16_t toneFrequency, uint16_t durat
 
 sfeTkError_t sfeQwiicBuzzer::setBuzzerActiveReg()
 {
-    //return writeSingleRegister(SFE_QWIIC_BUZZER_ACTIVE, 0x01);
-    sfeTkError_t err = _theBus->writeRegisterByte(SFE_QWIIC_BUZZER_ACTIVE, 0x01);
+    //return writeSingleRegister(kSfeQwiicBuzzerRegActive, 0x01);
+    sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x01);
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;
     
@@ -109,8 +109,8 @@ sfeTkError_t sfeQwiicBuzzer::setBuzzerActiveReg()
 
 sfeTkError_t sfeQwiicBuzzer::clearBuzzerActiveReg()
 {
-    //return writeSingleRegister(SFE_QWIIC_BUZZER_ACTIVE, 0x00);
-    sfeTkError_t err = _theBus->writeRegisterByte(SFE_QWIIC_BUZZER_ACTIVE, 0x00);
+    //return writeSingleRegister(kSfeQwiicBuzzerRegActive, 0x00);
+    sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x00);
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;
     
@@ -120,7 +120,7 @@ sfeTkError_t sfeQwiicBuzzer::clearBuzzerActiveReg()
 
 sfeTkError_t sfeQwiicBuzzer::on(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
-    return BUZZERconfig(toneFrequency, duration, volume);
+    return buzzerConfig(toneFrequency, duration, volume);
 }
 
 sfeTkError_t sfeQwiicBuzzer::off()
@@ -130,8 +130,8 @@ sfeTkError_t sfeQwiicBuzzer::off()
 
 sfeTkError_t sfeQwiicBuzzer::saveSettings()
 {
-    //return writeSingleRegister(SFE_QWIIC_BUZZER_SAVE_SETTINGS, 0x01);
-    sfeTkError_t err = _theBus->writeRegisterByte(SFE_QWIIC_BUZZER_SAVE_SETTINGS, 0x01);
+    //return writeSingleRegister(kSfeQwiicBuzzerRegSaveSettings, 0x01);
+    sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegSaveSettings, 0x01);
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;
     

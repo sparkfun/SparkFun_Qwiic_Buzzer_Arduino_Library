@@ -12,13 +12,26 @@ QwiicBuzzer					KEYWORD1
 
 begin						KEYWORD2
 isConnected					KEYWORD2
-deviceID					KEYWORD2
-checkDeviceID				KEYWORD2
-getDeviceType   			KEYWORD2
-getFirmwareVersion  		KEYWORD2
-setI2Caddress   			KEYWORD2
-getI2Caddress   			KEYWORD2
-BUZZERconfig   				KEYWORD2
+changeAddress   			KEYWORD2
+getAddress   			KEYWORD2
+buzzerConfig   				KEYWORD2
 off  					KEYWORD2
 on   					KEYWORD2
 saveSettings   					KEYWORD2
+
+#########################################################
+# Constants
+#########################################################
+
+kQwiicBuzzerDefaultAddress LITERAL1
+kSfeQwiicBuzzerRegId LITERAL1
+kSfeQwiicBuzzerRegFirmwareMinor LITERAL1
+kSfeQwiicBuzzerRegFirmwareMajor LITERAL1
+kSfeQwiicBuzzerRegToneFrequencyMsb LITERAL1   
+kSfeQwiicBuzzerRegToneFrequencyLsb LITERAL1       
+kSfeQwiicBuzzerRegVolume = LITERAL1
+kSfeQwiicBuzzerRegDurationMsb = LITERAL1 
+kSfeQwiicBuzzerRegDurationLsb = LITERAL1
+kSfeQwiicBuzzerRegActive = LITERAL1
+kSfeQwiicBuzzerRegSaveSettings = LITERAL1 
+kSfeQwiicBuzzerRegI2cAddress = LITERAL1

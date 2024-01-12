@@ -31,8 +31,8 @@ int noteDurations[] = {
   4, 8, 8, 4, 4, 4, 4, 4
 };
 
-#define BUZZER_VOLUME 4 // loudest!!
-//#define BUZZER_VOLUME 3 // pretty good volume for most things
+#define kBuzzerVolume 4 // loudest!!
+//#define kBuzzerVolume 3 // pretty good volume for most things
 
 void setup() {
   Serial.begin(115200);
@@ -63,7 +63,7 @@ void play_melody()
     // to calculate the note duration, take one second divided by the note type.
     //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
     int noteDuration = 1000 / noteDurations[thisNote];
-    buzzer.on(melody[thisNote], noteDuration, BUZZER_VOLUME);
+    buzzer.on(melody[thisNote], noteDuration, kBuzzerVolume);
 
     // to distinguish the notes, set a minimum time between them.
     // the note's duration + 30% seems to work well:

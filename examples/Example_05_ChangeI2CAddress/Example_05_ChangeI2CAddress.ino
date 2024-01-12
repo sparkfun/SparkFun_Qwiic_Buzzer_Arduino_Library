@@ -55,7 +55,7 @@ void setup() {
           Serial.print("Attempting to set device address to 0x");
           Serial.println(newAddress, HEX);
   
-          if (buzzer.setI2Caddress(newAddress) == true) {
+          if (buzzer.changeAddress(newAddress) == true) {
             Serial.println("Device address set succeeded!");
           }
   

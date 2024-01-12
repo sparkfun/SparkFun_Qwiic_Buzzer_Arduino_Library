@@ -31,8 +31,6 @@ Distributed as-is; no warranty is given.
 #include "registers.h"
 #include "buzzer_pitches.h"
 
-//#define SFE_QWIIC_BUZZER_DEV_ID 0x5D          //device ID of the Qwiic Buzzer
-
 class QwiicBuzzer : public sfeQwiicBuzzer
 {
 
