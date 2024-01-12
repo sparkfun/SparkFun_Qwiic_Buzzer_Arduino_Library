@@ -9,6 +9,18 @@ Based on original source code written by
 Fischer Moseley @ SparkFun Electronics
 Original Creation Date: July 24, 2019
 
+Sound effects based on the following work:
+    Jan 21st, 2020
+    Snake In A Can Controller
+    Written by: Pete Lewis, with contributions from Jeff Haas
+    A collaboration with Mario the Maker Magician
+    https://www.mariothemagician.com/
+
+    January, 2021
+    Cry, Laugh Functions were adapted from Adafruit animal sounds
+    by Magician/hacker Jeff Haas. Thanks Jeff!!
+    https://learn.adafruit.com/adafruit-trinket-modded-stuffed-animal/animal-sounds
+
 This file implements the QwiicBuzzer class, prototyped in SparkFun_Qwiic_Buzzer_Arduino_Library.h
 
 Development environment specifics:
@@ -256,4 +268,261 @@ uint16_t QwiicBuzzer::writeDoubleRegisterWithReadback(Qwiic_Buzzer_Register reg,
     if (readDoubleRegister(reg) != data)
         return 2;
     return 0;
+}
+
+/*------------------------- Sound Effects ---------------- */
+
+void QwiicBuzzer::playSoundEffect(uint8_t soundEffectNumber, uint8_t volume)
+{
+    switch (soundEffectNumber) {
+        case 0:
+            soundEffect0(volume);
+            break;
+        case 1:
+            soundEffect1(volume);
+            break;
+        case 2:
+            soundEffect2(volume);
+            break;
+        case 3:
+            soundEffect3(volume);
+            break;
+        case 4:
+            soundEffect4(volume);
+            break;
+        case 5:
+            soundEffect5(volume);
+            break;
+        case 6:
+            soundEffect6(volume);
+            break;
+        case 7:
+            soundEffect7(volume);
+            break;   
+        case 8:
+            soundEffect8(volume);
+            break; 
+        case 9:
+            soundEffect9(volume);
+            break;                                  
+    }
+}
+
+// SIREN SLOW X1
+void QwiicBuzzer::soundEffect0(uint8_t volume)
+{
+    for (int note = 150 ; note < 4000 ; note += 150)
+    {
+        on(note, 10, volume);
+        delay(10);
+    }
+    for (int note = 4000 ; note > 150 ; note -= 150)
+    {
+        on(note, 10, volume);
+        delay(10);
+    }
+    off();
+}
+
+// SIREN FAST X3
+void QwiicBuzzer::soundEffect1(uint8_t volume)
+{
+    for (int i = 0 ; i <= 2 ; i++)
+    {
+        for (int note = 150 ; note < 4000 ; note += 150)
+        {
+            on(note, 2, volume);
+            delay(2);
+        }
+        for (int note = 4000 ; note > 150 ; note -= 150)
+        {
+            on(note, 2, volume);
+            delay(2);
+        }
+    }
+    off();
+}
+
+// YES SLOW
+void QwiicBuzzer::soundEffect2(uint8_t volume)
+{
+    for (int note = 150 ; note < 4000 ; note += 150)
+    {
+        on(note, 50, volume);
+        delay(40);
+    }
+    off();
+}
+
+// YES FAST
+void QwiicBuzzer::soundEffect3(uint8_t volume)
+{
+    for (int note = 150 ; note < 4000 ; note += 150)
+    {
+        on(note, 10, volume);
+        delay(10);
+    }
+    off();
+}
+
+// NO SLOW
+void QwiicBuzzer::soundEffect4(uint8_t volume)
+{
+    for (int note = 4000 ; note > 150 ; note -= 150)
+    {
+        on(note, 50, volume);
+        delay(40);
+    }
+    off();
+}
+
+// NO FAST
+void QwiicBuzzer::soundEffect5(uint8_t volume)
+{
+    for (int note = 4000 ; note > 150 ; note -= 150)
+    {
+        on(note, 10, volume);
+        delay(10);
+    }
+    off();
+}
+
+// LAUGH
+void QwiicBuzzer::soundEffect6(uint8_t volume)
+{
+    int laughdelay = 400;
+    int laughstep = 10;
+    uint16_t i;
+
+    //for (i = 650; i > 525; i -= 3) // vary up //1538, 1905
+    for (i = 1538; i < 1905; i += laughstep) // vary up //1538, 1905
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+        
+    delay(laughdelay);
+
+    //for (i = 800; i > 660; i -= 3) // 1250, 1515
+    for (i = 1250; i < 1515; i += laughstep) // 1250, 1515
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    delay(laughdelay);
+
+    //for (i = 900; i > 745; i -= 3) // 1111, 1342
+    for (i = 1111; i < 1342; i += laughstep) // 1111, 1342
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    delay(laughdelay);
+
+    //for (i = 990; i > 850; i -= 3) // 1010, 1176
+    for (i = 1010; i < 1176; i += laughstep) // 1010, 1176
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    off();
+}
+
+// LAUGH FAST
+void QwiicBuzzer::soundEffect7(uint8_t volume)
+{
+    int laughdelay = 200;
+    int laughstep = 15;
+    uint16_t i;
+
+    for (i = 1538; i < 1905; i += laughstep) // vary up //1538, 1905
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+        
+    delay(laughdelay);
+
+    for (i = 1250; i < 1515; i += laughstep) // 1250, 1515
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    delay(laughdelay);
+
+    for (i = 1111; i < 1342; i += laughstep) // 1111, 1342
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    delay(laughdelay);
+
+    for (i = 1010; i < 1176; i += laughstep) // 1010, 1176
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    off();
+}
+
+// CRY SLOW
+void QwiicBuzzer::soundEffect8(uint8_t volume)
+{
+    int crydelay = 500;
+    int step = 10;
+    uint16_t i;
+
+    for (i = 2000; i > 1429; i -= step) // vary down //2000, 1429
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+        
+    delay(crydelay);
+
+    for (i = 1667; i > 1250; i -= step) // 1667, 1250
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    delay(crydelay);
+
+    //for (i = 900; i > 745; i -= 3) // 1111, 1342
+    for (i = 1429; i > 1053; i -= step) // 1429, 1053
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    off();
+}
+
+// CRY FAST
+void QwiicBuzzer::soundEffect9(uint8_t volume)
+{
+    int crydelay = 200;
+    int step = 20;
+    uint16_t i;
+
+    for (i = 2000; i > 1429; i -= step) // vary down //2000, 1429
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+        
+    delay(crydelay);
+
+    for (i = 1667; i > 1250; i -= step) // 1667, 1250
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    delay(crydelay);
+
+    //for (i = 900; i > 745; i -= 3) // 1111, 1342
+    for (i = 1429; i > 1053; i -= step) // 1429, 1053
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    off();
 }

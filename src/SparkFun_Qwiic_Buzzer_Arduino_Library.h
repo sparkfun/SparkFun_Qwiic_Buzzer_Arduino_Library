@@ -59,6 +59,18 @@ public:
     bool setBuzzerActiveReg();
     bool clearBuzzerActiveReg();
 
+    void playSoundEffect(uint8_t soundEffectNumber, uint8_t volume);
+    void soundEffect0(uint8_t volume);
+    void soundEffect1(uint8_t volume);
+    void soundEffect2(uint8_t volume);
+    void soundEffect3(uint8_t volume);
+    void soundEffect4(uint8_t volume);
+    void soundEffect5(uint8_t volume);
+    void soundEffect6(uint8_t volume);
+    void soundEffect7(uint8_t volume);
+    void soundEffect8(uint8_t volume);
+    void soundEffect9(uint8_t volume);
+
     //Internal I2C Abstraction
     uint8_t readSingleRegister(Qwiic_Buzzer_Register reg);                              //Reads a single 8-bit register.
     uint16_t readDoubleRegister(Qwiic_Buzzer_Register reg);                             //Reads a 16-bit register (little endian).
