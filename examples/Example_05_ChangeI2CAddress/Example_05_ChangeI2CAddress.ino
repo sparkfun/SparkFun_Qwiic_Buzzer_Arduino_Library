@@ -24,7 +24,7 @@ void setup() {
   Wire.begin(); //Join I2C bus
 
   //check if device will acknowledge over I2C
-  if (buzzer.begin(0x5B) == false) {
+  if (buzzer.begin(0x34) == false) {
     Serial.println("Device did not acknowledge! Running scanner.");
   }
   else{
