@@ -142,7 +142,7 @@ bool QwiicBuzzer::on(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 
 bool QwiicBuzzer::off()
 {
-    return BUZZERconfig(0, 0, 0);
+    return clearBuzzerActiveReg();
 }
 
 bool QwiicBuzzer::saveSettings()
