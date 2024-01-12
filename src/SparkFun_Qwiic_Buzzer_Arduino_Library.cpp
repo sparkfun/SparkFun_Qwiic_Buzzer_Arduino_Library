@@ -1,16 +1,32 @@
 /******************************************************************************
-SparkFun_Qwiic_Button.cpp
-SparkFun Qwiic Button/Switch Library Source File
+SparkFun_Qwiic_Buzzer_Arduino_Library.cpp
+SparkFun Qwiic Buzzer Library Source File
+
+by Pete Lewis @SparkFun Electronics
+Jan 2024
+
+Based on original source code written by
 Fischer Moseley @ SparkFun Electronics
 Original Creation Date: July 24, 2019
 
-This file implements the QwiicButton class, prototyped in SparkFun_Qwiic_Button.h
+Sound effects based on the following work:
+    Jan 21st, 2020
+    Snake In A Can Controller
+    Written by: Pete Lewis, with contributions from Jeff Haas
+    A collaboration with Mario the Maker Magician
+    https://www.mariothemagician.com/
+
+    January, 2021
+    Cry, Laugh Functions were adapted from Adafruit animal sounds
+    by Magician/hacker Jeff Haas. Thanks Jeff!!
+    https://learn.adafruit.com/adafruit-trinket-modded-stuffed-animal/animal-sounds
+
+This file implements the QwiicBuzzer class, prototyped in SparkFun_Qwiic_Buzzer_Arduino_Library.h
 
 Development environment specifics:
-	IDE: Arduino 1.8.9
+	IDE: Arduino 2.2.1
 	Hardware Platform: Arduino Uno/SparkFun Redboard
-	Qwiic Button Version: 1.0.0
-    Qwiic Switch Version: 1.0.0
+	Qwiic Buzzer Version: v10
 
 This code is Lemonadeware; if you see me (or any other SparkFun employee) at the
 local, and you've found our code helpful, please buy us a round!
@@ -48,12 +64,12 @@ bool QwiicBuzzer::isConnected()
 
 uint8_t QwiicBuzzer::deviceID()
 {
-    return readSingleRegister(SFE_QWIIC_BUTTON_ID); //read and return the value in the ID register
+    return readSingleRegister(SFE_QWIIC_BUZZER_ID); //read and return the value in the ID register
 }
 
 bool QwiicBuzzer::checkDeviceID()
 {
-    return (deviceID() == SFE_QWIIC_BUTTON_DEV_ID); //Return true if the device ID matches
+    return (deviceID() == SFE_QWIIC_BUZZER_DEV_ID); //Return true if the device ID matches
 }
 
 uint8_t QwiicBuzzer::getDeviceType()
@@ -61,7 +77,7 @@ uint8_t QwiicBuzzer::getDeviceType()
     if (isConnected())
     { //only try to get the device ID if the device will acknowledge
         uint8_t id = deviceID();
-        if (id == SFE_QWIIC_BUTTON_DEV_ID)
+        if (id == SFE_QWIIC_BUZZER_DEV_ID)
             return 1;
     }
     return 0;
@@ -69,8 +85,8 @@ uint8_t QwiicBuzzer::getDeviceType()
 
 uint16_t QwiicBuzzer::getFirmwareVersion()
 {
-    uint16_t version = (readSingleRegister(SFE_QWIIC_BUTTON_FIRMWARE_MAJOR)) << 8;
-    version |= readSingleRegister(SFE_QWIIC_BUTTON_FIRMWARE_MINOR);
+    uint16_t version = (readSingleRegister(SFE_QWIIC_BUZZER_FIRMWARE_MAJOR)) << 8;
+    version |= readSingleRegister(SFE_QWIIC_BUZZER_FIRMWARE_MINOR);
     return version;
 }
 
@@ -82,7 +98,7 @@ bool QwiicBuzzer::setI2Caddress(uint8_t address)
         return 1; //error immediately if the address is out of legal range
     }
 
-    bool success = writeSingleRegister(SFE_QWIIC_BUTTON_I2C_ADDRESS, address);
+    bool success = writeSingleRegister(SFE_QWIIC_BUZZER_I2C_ADDRESS, address);
 
     if (success == true)
     {
@@ -102,198 +118,63 @@ uint8_t QwiicBuzzer::getI2Caddress()
     return _deviceAddress;
 }
 
-/*------------------------------ Button Status ---------------------- */
-bool QwiicBuzzer::isPressed()
+
+
+/*------------------------ BUZZER Configuration ------------------------ */
+bool QwiicBuzzer::BUZZERconfig(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
-    statusRegisterBitField statusRegister;
-    statusRegister.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_BUTTON_STATUS);
-    return statusRegister.isPressed;
-}
+    bool success = writeSingleRegister(SFE_QWIIC_BUZZER_VOLUME, volume);
 
-bool QwiicBuzzer::hasBeenClicked()
-{
-    statusRegisterBitField statusRegister;
-    statusRegister.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_BUTTON_STATUS);
-    return statusRegister.hasBeenClicked;
-}
+    uint8_t toneFrequencyMSB = ((toneFrequency & 0xFF00) >> 8 );
+    uint8_t toneFrequencyLSB = (toneFrequency & 0x00FF);
+    success &= writeSingleRegister(SFE_QWIIC_BUZZER_TONE_FREQUENCY_MSB, toneFrequencyMSB);
+    success &= writeSingleRegister(SFE_QWIIC_BUZZER_TONE_FREQUENCY_LSB, toneFrequencyLSB);
 
-uint16_t QwiicBuzzer::getDebounceTime()
-{
-    return readDoubleRegister(SFE_QWIIC_BUTTON_BUTTON_DEBOUNCE_TIME);
-}
+    uint8_t durationMSB = ((duration & 0xFF00) >> 8 );
+    uint8_t durationLSB = (duration & 0x00FF);
+    success &= writeSingleRegister(SFE_QWIIC_BUZZER_DURATION_MSB, durationMSB);
+    success &= writeSingleRegister(SFE_QWIIC_BUZZER_DURATION_LSB, durationLSB);
 
-uint8_t QwiicBuzzer::setDebounceTime(uint16_t time)
-{
-    return writeDoubleRegisterWithReadback(SFE_QWIIC_BUTTON_BUTTON_DEBOUNCE_TIME, time);
-}
+    if(volume > 0)
+    {
+        success &= setBuzzerActiveReg();
+    }
+    else
+    {
+        success &= clearBuzzerActiveReg();
+    }
 
-/*------------------- Interrupt Status/Configuration ---------------- */
-uint8_t QwiicBuzzer::enablePressedInterrupt()
-{
-    interruptConfigBitField interruptConfigure;
-    interruptConfigure.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG);
-    interruptConfigure.pressedEnable = 1;
-    return writeSingleRegisterWithReadback(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG, interruptConfigure.byteWrapped);
-}
-
-uint8_t QwiicBuzzer::disablePressedInterrupt()
-{
-    interruptConfigBitField interruptConfigure;
-    interruptConfigure.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG);
-    interruptConfigure.pressedEnable = 0;
-    return writeSingleRegisterWithReadback(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG, interruptConfigure.byteWrapped);
-}
-
-uint8_t QwiicBuzzer::enableClickedInterrupt()
-{
-    interruptConfigBitField interruptConfigure;
-    interruptConfigure.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG);
-    interruptConfigure.clickedEnable = 1;
-    return writeSingleRegisterWithReadback(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG, interruptConfigure.byteWrapped);
-}
-
-uint8_t QwiicBuzzer::disableClickedInterrupt()
-{
-    interruptConfigBitField interruptConfigure;
-    interruptConfigure.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG);
-    interruptConfigure.clickedEnable = 0;
-    return writeSingleRegisterWithReadback(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG, interruptConfigure.byteWrapped);
-}
-
-bool QwiicBuzzer::available()
-{
-    statusRegisterBitField buttonStatus;
-    buttonStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_BUTTON_STATUS);
-    return buttonStatus.eventAvailable;
-}
-
-uint8_t QwiicBuzzer::clearEventBits()
-{
-    statusRegisterBitField buttonStatus;
-    buttonStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_BUTTON_STATUS);
-    buttonStatus.isPressed = 0;
-    buttonStatus.hasBeenClicked = 0;
-    buttonStatus.eventAvailable = 0;
-    return writeSingleRegisterWithReadback(SFE_QWIIC_BUTTON_BUTTON_STATUS, buttonStatus.byteWrapped);
-}
-
-uint8_t QwiicBuzzer::resetInterruptConfig()
-{
-    interruptConfigBitField interruptConfigure;
-    interruptConfigure.pressedEnable = 1;
-    interruptConfigure.clickedEnable = 1;
-    return writeSingleRegisterWithReadback(SFE_QWIIC_BUTTON_INTERRUPT_CONFIG, interruptConfigure.byteWrapped);
-    statusRegisterBitField buttonStatus;
-    buttonStatus.eventAvailable = 0;
-    return writeSingleRegisterWithReadback(SFE_QWIIC_BUTTON_BUTTON_STATUS, buttonStatus.byteWrapped);
-}
-
-/*------------------------- Queue Manipulation ---------------------- */
-//pressed queue manipulation
-bool QwiicBuzzer::isPressedQueueFull()
-{
-    queueStatusBitField pressedQueueStatus;
-    pressedQueueStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_PRESSED_QUEUE_STATUS);
-    return pressedQueueStatus.isFull;
-}
-
-bool QwiicBuzzer::isPressedQueueEmpty()
-{
-    queueStatusBitField pressedQueueStatus;
-    pressedQueueStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_PRESSED_QUEUE_STATUS);
-    return pressedQueueStatus.isEmpty;
-}
-
-unsigned long QwiicBuzzer::timeSinceLastPress()
-{
-    return readQuadRegister(SFE_QWIIC_BUTTON_PRESSED_QUEUE_FRONT);
-}
-
-unsigned long QwiicBuzzer::timeSinceFirstPress()
-{
-    return readQuadRegister(SFE_QWIIC_BUTTON_PRESSED_QUEUE_BACK);
-}
-
-unsigned long QwiicBuzzer::popPressedQueue()
-{
-    unsigned long tempData = timeSinceFirstPress(); //grab the oldest value on the queue
-
-    queueStatusBitField pressedQueueStatus;
-    pressedQueueStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_PRESSED_QUEUE_STATUS);
-    pressedQueueStatus.popRequest = 1;
-    writeSingleRegister(SFE_QWIIC_BUTTON_PRESSED_QUEUE_STATUS, pressedQueueStatus.byteWrapped); //remove the oldest value from the queue
-
-    return tempData; //return the value we popped
-}
-
-//clicked queue manipulation
-bool QwiicBuzzer::isClickedQueueFull()
-{
-    queueStatusBitField clickedQueueStatus;
-    clickedQueueStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_CLICKED_QUEUE_STATUS);
-    return clickedQueueStatus.isFull;
-}
-
-bool QwiicBuzzer::isClickedQueueEmpty()
-{
-    queueStatusBitField clickedQueueStatus;
-    clickedQueueStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_CLICKED_QUEUE_STATUS);
-    return clickedQueueStatus.isEmpty;
-}
-
-unsigned long QwiicBuzzer::timeSinceLastClick()
-{
-    return readQuadRegister(SFE_QWIIC_BUTTON_CLICKED_QUEUE_FRONT);
-}
-
-unsigned long QwiicBuzzer::timeSinceFirstClick()
-{
-    return readQuadRegister(SFE_QWIIC_BUTTON_CLICKED_QUEUE_BACK);
-}
-
-unsigned long QwiicBuzzer::popClickedQueue()
-{
-    unsigned long tempData = timeSinceFirstClick();
-    queueStatusBitField clickedQueueStatus;
-    clickedQueueStatus.byteWrapped = readSingleRegister(SFE_QWIIC_BUTTON_CLICKED_QUEUE_STATUS);
-    clickedQueueStatus.popRequest = 1;
-    writeSingleRegister(SFE_QWIIC_BUTTON_CLICKED_QUEUE_STATUS, clickedQueueStatus.byteWrapped);
-    return tempData;
-}
-
-/*------------------------ LED Configuration ------------------------ */
-bool QwiicBuzzer::LEDconfig(uint8_t brightness, uint16_t cycleTime, uint16_t offTime, uint8_t granularity)
-{
-    bool success = writeSingleRegister(SFE_QWIIC_BUTTON_LED_BRIGHTNESS, brightness);
-    success &= writeSingleRegister(SFE_QWIIC_BUTTON_LED_PULSE_GRANULARITY, granularity);
-    success &= writeDoubleRegister(SFE_QWIIC_BUTTON_LED_PULSE_CYCLE_TIME, cycleTime);
-    success &= writeDoubleRegister(SFE_QWIIC_BUTTON_LED_PULSE_OFF_TIME, offTime);
     return success;
 }
 
-bool QwiicBuzzer::LEDoff()
+bool QwiicBuzzer::on(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
-    return LEDconfig(0, 0, 0);
-}
-
-bool QwiicBuzzer::LEDon(uint8_t brightness)
-{
-    return LEDconfig(brightness, 0, 0);
-}
-
-bool QwiicBuzzer::on(uint16_t cycleTime, uint8_t brightness)
-{
-    return LEDconfig(brightness, cycleTime, 0);
+    return BUZZERconfig(toneFrequency, duration, volume);
 }
 
 bool QwiicBuzzer::off()
 {
-    return LEDconfig(0, 0, 0);
+    return clearBuzzerActiveReg();
+}
+
+bool QwiicBuzzer::saveSettings()
+{
+    return writeSingleRegister(SFE_QWIIC_BUZZER_SAVE_SETTINGS, 0x01);
+}
+
+bool QwiicBuzzer::setBuzzerActiveReg()
+{
+    return writeSingleRegister(SFE_QWIIC_BUZZER_ACTIVE, 0x01);
+}
+
+bool QwiicBuzzer::clearBuzzerActiveReg()
+{
+    return writeSingleRegister(SFE_QWIIC_BUZZER_ACTIVE, 0x00);
 }
 
 /*------------------------- Internal I2C Abstraction ---------------- */
 
-uint8_t QwiicBuzzer::readSingleRegister(Qwiic_Button_Register reg)
+uint8_t QwiicBuzzer::readSingleRegister(Qwiic_Buzzer_Register reg)
 {
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -308,7 +189,7 @@ uint8_t QwiicBuzzer::readSingleRegister(Qwiic_Button_Register reg)
     return 0;
 }
 
-uint16_t QwiicBuzzer::readDoubleRegister(Qwiic_Button_Register reg)
+uint16_t QwiicBuzzer::readDoubleRegister(Qwiic_Buzzer_Register reg)
 { //little endian
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -325,7 +206,7 @@ uint16_t QwiicBuzzer::readDoubleRegister(Qwiic_Button_Register reg)
     return 0;
 }
 
-unsigned long QwiicBuzzer::readQuadRegister(Qwiic_Button_Register reg)
+unsigned long QwiicBuzzer::readQuadRegister(Qwiic_Buzzer_Register reg)
 {
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -350,7 +231,7 @@ unsigned long QwiicBuzzer::readQuadRegister(Qwiic_Button_Register reg)
     return data.integer;
 }
 
-bool QwiicBuzzer::writeSingleRegister(Qwiic_Button_Register reg, uint8_t data)
+bool QwiicBuzzer::writeSingleRegister(Qwiic_Buzzer_Register reg, uint8_t data)
 {
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -360,7 +241,7 @@ bool QwiicBuzzer::writeSingleRegister(Qwiic_Button_Register reg, uint8_t data)
     return false;
 }
 
-bool QwiicBuzzer::writeDoubleRegister(Qwiic_Button_Register reg, uint16_t data)
+bool QwiicBuzzer::writeDoubleRegister(Qwiic_Buzzer_Register reg, uint16_t data)
 {
     _i2cPort->beginTransmission(_deviceAddress);
     _i2cPort->write(reg);
@@ -371,7 +252,7 @@ bool QwiicBuzzer::writeDoubleRegister(Qwiic_Button_Register reg, uint16_t data)
     return false;
 }
 
-uint8_t QwiicBuzzer::writeSingleRegisterWithReadback(Qwiic_Button_Register reg, uint8_t data)
+uint8_t QwiicBuzzer::writeSingleRegisterWithReadback(Qwiic_Buzzer_Register reg, uint8_t data)
 {
     if (writeSingleRegister(reg, data))
         return 1;
@@ -380,11 +261,268 @@ uint8_t QwiicBuzzer::writeSingleRegisterWithReadback(Qwiic_Button_Register reg, 
     return 0;
 }
 
-uint16_t QwiicBuzzer::writeDoubleRegisterWithReadback(Qwiic_Button_Register reg, uint16_t data)
+uint16_t QwiicBuzzer::writeDoubleRegisterWithReadback(Qwiic_Buzzer_Register reg, uint16_t data)
 {
     if (writeDoubleRegister(reg, data))
         return 1;
     if (readDoubleRegister(reg) != data)
         return 2;
     return 0;
+}
+
+/*------------------------- Sound Effects ---------------- */
+
+void QwiicBuzzer::playSoundEffect(uint8_t soundEffectNumber, uint8_t volume)
+{
+    switch (soundEffectNumber) {
+        case 0:
+            soundEffect0(volume);
+            break;
+        case 1:
+            soundEffect1(volume);
+            break;
+        case 2:
+            soundEffect2(volume);
+            break;
+        case 3:
+            soundEffect3(volume);
+            break;
+        case 4:
+            soundEffect4(volume);
+            break;
+        case 5:
+            soundEffect5(volume);
+            break;
+        case 6:
+            soundEffect6(volume);
+            break;
+        case 7:
+            soundEffect7(volume);
+            break;   
+        case 8:
+            soundEffect8(volume);
+            break; 
+        case 9:
+            soundEffect9(volume);
+            break;                                  
+    }
+}
+
+// SIREN SLOW X1
+void QwiicBuzzer::soundEffect0(uint8_t volume)
+{
+    for (int note = 150 ; note < 4000 ; note += 150)
+    {
+        on(note, 10, volume);
+        delay(10);
+    }
+    for (int note = 4000 ; note > 150 ; note -= 150)
+    {
+        on(note, 10, volume);
+        delay(10);
+    }
+    off();
+}
+
+// SIREN FAST X3
+void QwiicBuzzer::soundEffect1(uint8_t volume)
+{
+    for (int i = 0 ; i <= 2 ; i++)
+    {
+        for (int note = 150 ; note < 4000 ; note += 150)
+        {
+            on(note, 2, volume);
+            delay(2);
+        }
+        for (int note = 4000 ; note > 150 ; note -= 150)
+        {
+            on(note, 2, volume);
+            delay(2);
+        }
+    }
+    off();
+}
+
+// YES SLOW
+void QwiicBuzzer::soundEffect2(uint8_t volume)
+{
+    for (int note = 150 ; note < 4000 ; note += 150)
+    {
+        on(note, 50, volume);
+        delay(40);
+    }
+    off();
+}
+
+// YES FAST
+void QwiicBuzzer::soundEffect3(uint8_t volume)
+{
+    for (int note = 150 ; note < 4000 ; note += 150)
+    {
+        on(note, 10, volume);
+        delay(10);
+    }
+    off();
+}
+
+// NO SLOW
+void QwiicBuzzer::soundEffect4(uint8_t volume)
+{
+    for (int note = 4000 ; note > 150 ; note -= 150)
+    {
+        on(note, 50, volume);
+        delay(40);
+    }
+    off();
+}
+
+// NO FAST
+void QwiicBuzzer::soundEffect5(uint8_t volume)
+{
+    for (int note = 4000 ; note > 150 ; note -= 150)
+    {
+        on(note, 10, volume);
+        delay(10);
+    }
+    off();
+}
+
+// LAUGH
+void QwiicBuzzer::soundEffect6(uint8_t volume)
+{
+    int laughdelay = 400;
+    int laughstep = 10;
+    uint16_t i;
+
+    //for (i = 650; i > 525; i -= 3) // vary up //1538, 1905
+    for (i = 1538; i < 1905; i += laughstep) // vary up //1538, 1905
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+        
+    delay(laughdelay);
+
+    //for (i = 800; i > 660; i -= 3) // 1250, 1515
+    for (i = 1250; i < 1515; i += laughstep) // 1250, 1515
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    delay(laughdelay);
+
+    //for (i = 900; i > 745; i -= 3) // 1111, 1342
+    for (i = 1111; i < 1342; i += laughstep) // 1111, 1342
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    delay(laughdelay);
+
+    //for (i = 990; i > 850; i -= 3) // 1010, 1176
+    for (i = 1010; i < 1176; i += laughstep) // 1010, 1176
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    off();
+}
+
+// LAUGH FAST
+void QwiicBuzzer::soundEffect7(uint8_t volume)
+{
+    int laughdelay = 200;
+    int laughstep = 15;
+    uint16_t i;
+
+    for (i = 1538; i < 1905; i += laughstep) // vary up //1538, 1905
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+        
+    delay(laughdelay);
+
+    for (i = 1250; i < 1515; i += laughstep) // 1250, 1515
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    delay(laughdelay);
+
+    for (i = 1111; i < 1342; i += laughstep) // 1111, 1342
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    delay(laughdelay);
+
+    for (i = 1010; i < 1176; i += laughstep) // 1010, 1176
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    off();
+}
+
+// CRY SLOW
+void QwiicBuzzer::soundEffect8(uint8_t volume)
+{
+    int crydelay = 500;
+    int step = 10;
+    uint16_t i;
+
+    for (i = 2000; i > 1429; i -= step) // vary down //2000, 1429
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+        
+    delay(crydelay);
+
+    for (i = 1667; i > 1250; i -= step) // 1667, 1250
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    delay(crydelay);
+
+    //for (i = 900; i > 745; i -= 3) // 1111, 1342
+    for (i = 1429; i > 1053; i -= step) // 1429, 1053
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    off();
+}
+
+// CRY FAST
+void QwiicBuzzer::soundEffect9(uint8_t volume)
+{
+    int crydelay = 200;
+    int step = 20;
+    uint16_t i;
+
+    for (i = 2000; i > 1429; i -= step) // vary down //2000, 1429
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+        
+    delay(crydelay);
+
+    for (i = 1667; i > 1250; i -= step) // 1667, 1250
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    delay(crydelay);
+
+    //for (i = 900; i > 745; i -= 3) // 1111, 1342
+    for (i = 1429; i > 1053; i -= step) // 1429, 1053
+    {
+        on(i, 20, volume);
+        delay(10);
+    }
+    off();
 }

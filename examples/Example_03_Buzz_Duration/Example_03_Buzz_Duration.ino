@@ -1,14 +1,16 @@
 /******************************************************************************
-  Example_01_Buzz
+  Example_03_Buzz_Duration
 
-  This example shows how to turn the buzzer on and off.
+  This example shows how to control the buzzer using frequency and duration.
+
+  It turns the buzzer on and off.
   Much like the classic "blink LED sketch" this will buzz
-  the buzzer once every second.
+  the buzzer once every second at a different frequency and duration.
 
   By Pete Lewis @ SparkFun Electronics
   December 2023
 
-  Based on code orginally written by Fischer Moseley @ SparkFun Electronics
+  Based on code originally written by Fischer Moseley @ SparkFun Electronics
   Original Creation Date: June 28, 2019
 
   This code is Lemonadeware; if you see me (or any other SparkFun employee) at the
@@ -25,7 +27,7 @@ QwiicBuzzer buzzer;
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Qwiic Buzzer Example_01_Buzz");
+  Serial.println("Qwiic Buzzer Example_03_Buzz_Duration");
   Wire.begin(); //Join I2C bus
 
   //check if buzzer will acknowledge over I2C
@@ -37,11 +39,12 @@ void setup() {
 }
 
 void loop() {
-  buzzer.on();
-  
+  buzzer.on(2730, 100); // frequency: 2.73KHz, duration: 100ms
   delay(1000);
-  
-  buzzer.off();
-  
+
+  buzzer.on(1000, 500); // frequency: 1K, duration: 500ms
   delay(1000);
+
+  // Note, we dont' have to call buzzer.off(), because it will automatically turn
+  // off after the duration of each tone is completed.
 }
