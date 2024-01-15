@@ -51,8 +51,6 @@ sfeTkError_t sfeQwiicBuzzer::changeAddress(const uint8_t &address)
         return kSTkErrFail; //error immediately if the address is out of legal range
     }
 
-    //bool success = writeSingleRegister(kSfeQwiicBuzzerRegI2cAddress, address);
-
     sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegI2cAddress, address);
 
     // Check whether the write was successful
@@ -116,7 +114,6 @@ sfeTkError_t sfeQwiicBuzzer::buzzerConfig(uint16_t toneFrequency, uint16_t durat
 
 sfeTkError_t sfeQwiicBuzzer::setBuzzerActiveReg()
 {
-    //return writeSingleRegister(kSfeQwiicBuzzerRegActive, 0x01);
     sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x01);
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;
@@ -127,7 +124,6 @@ sfeTkError_t sfeQwiicBuzzer::setBuzzerActiveReg()
 
 sfeTkError_t sfeQwiicBuzzer::clearBuzzerActiveReg()
 {
-    //return writeSingleRegister(kSfeQwiicBuzzerRegActive, 0x00);
     sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x00);
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;
@@ -148,7 +144,6 @@ sfeTkError_t sfeQwiicBuzzer::off()
 
 sfeTkError_t sfeQwiicBuzzer::saveSettings()
 {
-    //return writeSingleRegister(kSfeQwiicBuzzerRegSaveSettings, 0x01);
     sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegSaveSettings, 0x01);
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;
