@@ -1,5 +1,10 @@
 /******************************************************************************
 registers.h
+
+by Pete Lewis @SparkFun Electronics
+January 2024
+
+Based on original source code written by
 Fischer Moseley @ SparkFun Electronics
 Original Creation Date: July 24, 2019
 

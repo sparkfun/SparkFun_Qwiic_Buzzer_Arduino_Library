@@ -3,7 +3,7 @@ SparkFun_Qwiic_Buzzer_Arduino_Library.h
 SparkFun Qwiic Buzzer Library header file
 
 by Pete Lewis @SparkFun Electronics
-Jan 2024
+January 2024
 
 Based on original source code written by
 Fischer Moseley @ SparkFun Electronics
