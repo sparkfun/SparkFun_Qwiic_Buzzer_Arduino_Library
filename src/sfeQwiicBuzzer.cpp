@@ -22,7 +22,7 @@ Distributed as-is; no warranty is given.
 
 #include "sfeQwiicBuzzer.h"
 #include "Arduino.h"
-#include "registers.h"
+#include "sfeQwiicBuzzerRegisters.h"
 
 sfeTkError_t sfeQwiicBuzzer::begin(sfeTkII2C *theBus)
 {

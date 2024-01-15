@@ -28,8 +28,8 @@ Distributed as-is; no warranty is given.
 #include "sfeQwiicBuzzer.h"
 #include <Wire.h>
 
-#include "registers.h"
-#include "buzzer_pitches.h"
+#include "sfeQwiicBuzzerRegisters.h"
+#include "sfeQwiicBuzzerPitches.h"
 
 class QwiicBuzzer : public sfeQwiicBuzzer
 {

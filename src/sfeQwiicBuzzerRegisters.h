@@ -1,5 +1,5 @@
 /******************************************************************************
-registers.h
+sfeQwiicBuzzerRegisters.h
 
 by Pete Lewis @SparkFun Electronics
 January 2024

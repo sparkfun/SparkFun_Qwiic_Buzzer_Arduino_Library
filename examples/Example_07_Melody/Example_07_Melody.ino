@@ -6,6 +6,10 @@
   By Pete Lewis @ SparkFun Electronics
   December 2023
 
+  Based on original source code written by Tom Igeo in Jan 2010:
+  https://www.arduino.cc/en/Tutorial/BuiltInExamples/toneMelody
+  http://www.arduino.cc/en/Tutorial/Tone
+
   Based on code originally written by Fischer Moseley @ SparkFun Electronics
   Original Creation Date: June 28, 2019
 
@@ -23,7 +27,14 @@ QwiicBuzzer buzzer;
 
 // notes in the melody:
 int melody[] = {
-  NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4
+  kSfeQwiicBuzzerNoteC4, 
+  kSfeQwiicBuzzerNoteG3, 
+  kSfeQwiicBuzzerNoteG3, 
+  kSfeQwiicBuzzerNoteA3, 
+  kSfeQwiicBuzzerNoteG3, 
+  0, 
+  kSfeQwiicBuzzerNoteB3, 
+  kSfeQwiicBuzzerNoteC4
 };
 
 // note durations: 4 = quarter note, 8 = eighth note, etc.:
