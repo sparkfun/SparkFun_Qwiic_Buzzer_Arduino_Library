@@ -202,7 +202,6 @@ void sfeQwiicBuzzerArdI2C::soundEffect0(uint8_t volume)
         on(note, 10, volume);
         delay(10);
     }
-    off();
 }
 
 // SIREN FAST X3
@@ -221,7 +220,6 @@ void sfeQwiicBuzzerArdI2C::soundEffect1(uint8_t volume)
             delay(2);
         }
     }
-    off();
 }
 
 // YES SLOW
@@ -232,7 +230,6 @@ void sfeQwiicBuzzerArdI2C::soundEffect2(uint8_t volume)
         on(note, 40, volume);
         delay(40);
     }
-    off();
 }
 
 // YES FAST
@@ -243,7 +240,6 @@ void sfeQwiicBuzzerArdI2C::soundEffect3(uint8_t volume)
         on(note, 10, volume);
         delay(10);
     }
-    off();
 }
 
 // NO SLOW
@@ -254,7 +250,6 @@ void sfeQwiicBuzzerArdI2C::soundEffect4(uint8_t volume)
         on(note, 40, volume);
         delay(40);
     }
-    off();
 }
 
 // NO FAST
@@ -265,7 +260,6 @@ void sfeQwiicBuzzerArdI2C::soundEffect5(uint8_t volume)
         on(note, 10, volume);
         delay(10);
     }
-    off();
 }
 
 // LAUGH
@@ -306,7 +300,6 @@ void sfeQwiicBuzzerArdI2C::soundEffect6(uint8_t volume)
         on(i, 10, volume);
         delay(10);
     }
-    off();
 }
 
 // LAUGH FAST
@@ -343,7 +336,6 @@ void sfeQwiicBuzzerArdI2C::soundEffect7(uint8_t volume)
         on(i, 10, volume);
         delay(10);
     }
-    off();
 }
 
 // CRY SLOW
@@ -374,7 +366,6 @@ void sfeQwiicBuzzerArdI2C::soundEffect8(uint8_t volume)
         on(i, 10, volume);
         delay(10);
     }
-    off();
 }
 
 // CRY FAST
@@ -405,5 +396,4 @@ void sfeQwiicBuzzerArdI2C::soundEffect9(uint8_t volume)
         on(i, 10, volume);
         delay(10);
     }
-    off();
 }
