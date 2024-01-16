@@ -1,19 +1,20 @@
 /******************************************************************************
-sfeQwiicBuzzerPitches.h
-SparkFun Qwiic Buzzer Library header file
-This file contains a list of commonly found notes on a piano.
+  sfeQwiicBuzzerPitches.h
+  SparkFun Qwiic Buzzer Library header file
+  This file contains a list of commonly found notes on a piano.
 
-by Pete Lewis @SparkFun Electronics
-January 2024
+  by Pete Lewis @SparkFun Electronics
+  January 2024
 
-Based on original source code written by Tom Igeo in Jan 2010:
-https://www.arduino.cc/en/Tutorial/BuiltInExamples/toneMelody
-http://www.arduino.cc/en/Tutorial/Tone
+  Based on original source code written by Tom Igeo in Jan 2010:
+  https://www.arduino.cc/en/Tutorial/BuiltInExamples/toneMelody
+  http://www.arduino.cc/en/Tutorial/Tone
 
-This code is Lemonadeware; if you see me (or any other SparkFun employee) at the
-local, and you've found our code helpful, please buy us a round!
+  SPDX-License-Identifier: MIT
 
-Distributed as-is; no warranty is given.
+  Copyright (c) 2023 SparkFun Electronics
+
+  Distributed as-is; no warranty is given.
 ******************************************************************************/
 
 /*************************************************

@@ -1,25 +1,26 @@
 /******************************************************************************
-sfeQwiicBuzzer.h
-SparkFun Qwiic Buzzer Library header file
+  sfeQwiicBuzzer.h
+  SparkFun Qwiic Buzzer Library header file
 
-by Pete Lewis @SparkFun Electronics
-January 2024 
+  by Pete Lewis @SparkFun Electronics
+  January 2024 
 
-Based on original source code written by
-Fischer Moseley @ SparkFun Electronics
-Original Creation Date: July 24, 2019
+  Based on original source code written by
+  Fischer Moseley @ SparkFun Electronics
+  Original Creation Date: July 24, 2019
 
-This file implements the QwiicBuzzer class, prototyped in SparkFun_Qwiic_Buzzer_Arduino_Library.h
+  This file implements the QwiicBuzzer class, prototyped in SparkFun_Qwiic_Buzzer_Arduino_Library.h
 
-Development environment specifics:
-	IDE: Arduino 2.2.1
-	Hardware Platform: Arduino Uno/SparkFun Redboard
-	Qwiic Buzzer Version: v10
+  Development environment specifics:
+  IDE: Arduino 2.2.1
+  Hardware Platform: Arduino Uno/SparkFun Redboard
+  Qwiic Buzzer Version: v10
 
-This code is Lemonadeware; if you see me (or any other SparkFun employee) at the
-local, and you've found our code helpful, please buy us a round!
+  SPDX-License-Identifier: MIT
 
-Distributed as-is; no warranty is given.
+  Copyright (c) 2023 SparkFun Electronics
+
+  Distributed as-is; no warranty is given.
 ******************************************************************************/
 
 #pragma once

@@ -1,26 +1,27 @@
 /******************************************************************************
-sfeQwiicBuzzerRegisters.h
+    sfeQwiicBuzzerRegisters.h
 
-by Pete Lewis @SparkFun Electronics
-January 2024
+    by Pete Lewis @SparkFun Electronics
+    January 2024
 
-Based on original source code written by
-Fischer Moseley @ SparkFun Electronics
-Original Creation Date: July 24, 2019
+    Based on original source code written by
+    Fischer Moseley @ SparkFun Electronics
+    Original Creation Date: July 24, 2019
 
-This file defines the virtual memory map on the Qwiic Buzzer. The enum
-provides a set of pointers for the various registers on the Qwiic
-Buzzer.
+    This file defines the virtual memory map on the Qwiic Buzzer. The enum
+    provides a set of pointers for the various registers on the Qwiic
+    Buzzer.
 
-Development environment specifics:
-	IDE: Arduino 2.2.1
-	Hardware Platform: Arduino Uno/SparkFun Redboard
-	Qwiic Buzzer Version: v10
+    Development environment specifics:
+    IDE: Arduino 2.2.1
+    Hardware Platform: Arduino Uno/SparkFun Redboard
+    Qwiic Buzzer Version: v10
 
-This code is Lemonadeware; if you see me (or any other SparkFun employee) at the
-local, and you've found our code helpful, please buy us a round!
+    SPDX-License-Identifier: MIT
 
-Distributed as-is; no warranty is given.
+    Copyright (c) 2023 SparkFun Electronics
+
+    Distributed as-is; no warranty is given.
 ******************************************************************************/
 
 //Register Pointer Map

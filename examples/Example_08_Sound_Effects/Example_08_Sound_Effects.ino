@@ -21,8 +21,8 @@
     by Magician/hacker Jeff Haas. Thanks Jeff!!
     https://learn.adafruit.com/adafruit-trinket-modded-stuffed-animal/animal-sounds
 
-  This code is Lemonadeware; if you see me (or any other SparkFun employee) at the
-  local, and you've found our code helpful, please buy us a round!
+  SparkFun code, firmware, and software is released under the MIT License.
+	Please see LICENSE.md for further details.
 
   Hardware Connections:
   Connect QWIIC cable from Arduino to Qwiic Buzzer
