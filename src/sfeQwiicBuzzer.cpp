@@ -10,9 +10,9 @@
     Original Creation Date: July 24, 2019
 
     Development environment specifics:
-        IDE: Arduino 2.2.1
-        Hardware Platform: Arduino Uno/SparkFun Redboard
-        Qwiic Buzzer Version: v10
+    IDE: Arduino 2.2.1
+    Hardware Platform: Arduino Uno/SparkFun Redboard
+    Qwiic Buzzer Version: v10
 
     SPDX-License-Identifier: MIT
 
