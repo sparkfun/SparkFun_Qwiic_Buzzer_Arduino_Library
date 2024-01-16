@@ -25,12 +25,7 @@
 
 #pragma once
 
-#include "Arduino.h"
 #include "sfeQwiicBuzzer.h"
-#include <Wire.h>
-
-#include "sfeQwiicBuzzerRegisters.h"
-#include "sfeQwiicBuzzerPitches.h"
 
 class QwiicBuzzer : public sfeQwiicBuzzer
 {

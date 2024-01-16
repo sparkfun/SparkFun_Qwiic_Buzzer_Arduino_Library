@@ -25,8 +25,11 @@
 
 #pragma once
 
-#include "SparkFun_Toolkit.h"
+#include <SparkFun_Toolkit.h>
 #include <stdint.h>
+#include <Arduino.h>
+#include "sfeQwiicBuzzerRegisters.h"
+#include "sfeQwiicBuzzerPitches.h"
 
 const uint8_t kQwiicBuzzerDefaultAddress = 0x34;
 

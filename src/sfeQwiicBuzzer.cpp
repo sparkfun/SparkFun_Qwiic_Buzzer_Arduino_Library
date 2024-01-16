@@ -22,8 +22,6 @@
 ******************************************************************************/
 
 #include "sfeQwiicBuzzer.h"
-#include "Arduino.h"
-#include "sfeQwiicBuzzerRegisters.h"
 
 sfeTkError_t sfeQwiicBuzzer::begin(sfeTkII2C *theBus)
 {
