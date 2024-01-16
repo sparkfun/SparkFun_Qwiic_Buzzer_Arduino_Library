@@ -1,7 +1,7 @@
 SparkFun Qwiic Buzzer Arduino Library [![Build Status](https://travis-ci.org/sparkfun/SparkFun_Qwiic_Buzzer_Arduino_Library.svg?branch=master)](https://travis-ci.org/sparkfun/SparkFun_Qwiic_Buzzer_Arduino_Library)
 ========================================
 
-[![SparkFun Qwiic Buzzer](URL for picture of part)](https://www.sparkfun.com/products/24474)
+[![SparkFun Qwiic Buzzer](https://cdn.sparkfun.com/r/600-600/assets/parts/2/4/8/3/2/BOB-24474-Qwiic-Buzzer-Feature.jpg)](https://www.sparkfun.com/products/24474)
 
 [*SparkFun Qwiic Buzzer (BOB-24474)*]([URL for product on Sparkfun.com](https://www.sparkfun.com/products/24474))
 
@@ -33,6 +33,7 @@ Documentation
 
 * **[Installing an Arduino Library Guide](https://learn.sparkfun.com/tutorials/installing-an-arduino-library)** - Basic information on how to install an Arduino library.
 * **[Product Repository](https://github.com/sparkfun/SparkFun_Qwiic_Buzzer)** - Main repository (including hardware files) for the SparkFun Qwiic Buzzer Breakout Board.
+* **[Hookup Guide](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer)** - Basic hookup guide for the  Qwiic Buzzer.
 
 Products that use this Library 
 ---------------------------------
