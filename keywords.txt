@@ -4,124 +4,124 @@
 # Class
 ######################################################################
 
-QwiicBuzzer					KEYWORD1
+QwiicBuzzer					        KEYWORD1
 
 ######################################################################
 # Methods and Functions
 ######################################################################
 
-begin						KEYWORD2
-isConnected					KEYWORD2
-changeAddress   			KEYWORD2
-getAddress   			KEYWORD2
-buzzerConfig   				KEYWORD2
-off  					KEYWORD2
-on   					KEYWORD2
-saveSettings   					KEYWORD2
+begin						        KEYWORD2
+isConnected					        KEYWORD2
+changeAddress   			        KEYWORD2
+getAddress   			            KEYWORD2
+buzzerConfig   				        KEYWORD2
+off  					            KEYWORD2
+on   					            KEYWORD2
+saveSettings   				        KEYWORD2
 
 #########################################################
 # Constants
 #########################################################
 
-kQwiicBuzzerDefaultAddress LITERAL1
-kSfeQwiicBuzzerRegId LITERAL1
-kSfeQwiicBuzzerRegFirmwareMinor LITERAL1
-kSfeQwiicBuzzerRegFirmwareMajor LITERAL1
-kSfeQwiicBuzzerRegToneFrequencyMsb LITERAL1   
-kSfeQwiicBuzzerRegToneFrequencyLsb LITERAL1       
-kSfeQwiicBuzzerRegVolume = LITERAL1
-kSfeQwiicBuzzerRegDurationMsb = LITERAL1 
-kSfeQwiicBuzzerRegDurationLsb = LITERAL1
-kSfeQwiicBuzzerRegActive = LITERAL1
-kSfeQwiicBuzzerRegSaveSettings = LITERAL1 
-kSfeQwiicBuzzerRegI2cAddress = LITERAL1
+kQwiicBuzzerDefaultAddress          LITERAL1
+kSfeQwiicBuzzerRegId                LITERAL1
+kSfeQwiicBuzzerRegFirmwareMinor     LITERAL1
+kSfeQwiicBuzzerRegFirmwareMajor     LITERAL1
+kSfeQwiicBuzzerRegToneFrequencyMsb  LITERAL1   
+kSfeQwiicBuzzerRegToneFrequencyLsb  LITERAL1       
+kSfeQwiicBuzzerRegVolume	        LITERAL1
+kSfeQwiicBuzzerRegDurationMsb	    LITERAL1 
+kSfeQwiicBuzzerRegDurationLsb	    LITERAL1
+kSfeQwiicBuzzerRegActive	        LITERAL1
+kSfeQwiicBuzzerRegSaveSettings	    LITERAL1 
+kSfeQwiicBuzzerRegI2cAddress	    LITERAL1
 
-kSfeQwiicBuzzerNoteB0 = LITERAL1
-kSfeQwiicBuzzerNoteC1 = LITERAL1
-kSfeQwiicBuzzerNoteCS1 = LITERAL1
-kSfeQwiicBuzzerNoteD1 = LITERAL1
-kSfeQwiicBuzzerNoteDS1 = LITERAL1
-kSfeQwiicBuzzerNoteE1 = LITERAL1
-kSfeQwiicBuzzerNoteF1 = LITERAL1
-kSfeQwiicBuzzerNoteFS1 = LITERAL1
-kSfeQwiicBuzzerNoteG1 = LITERAL1
-kSfeQwiicBuzzerNoteGS1 = LITERAL1
-kSfeQwiicBuzzerNoteA1 = LITERAL1
-kSfeQwiicBuzzerNoteAS1 = LITERAL1
-kSfeQwiicBuzzerNoteB1 = LITERAL1
-kSfeQwiicBuzzerNoteC2 = LITERAL1
-kSfeQwiicBuzzerNoteCS2 = LITERAL1
-kSfeQwiicBuzzerNoteD2 = LITERAL1
-kSfeQwiicBuzzerNoteDS2 = LITERAL1
-kSfeQwiicBuzzerNoteE2 = LITERAL1
-kSfeQwiicBuzzerNoteF2 = LITERAL1
-kSfeQwiicBuzzerNoteFS2 = LITERAL1
-kSfeQwiicBuzzerNoteG2 = LITERAL1
-kSfeQwiicBuzzerNoteGS2 = LITERAL1
-kSfeQwiicBuzzerNoteA2 = LITERAL1
-kSfeQwiicBuzzerNoteAS2 = LITERAL1
-kSfeQwiicBuzzerNoteB2 = LITERAL1
-kSfeQwiicBuzzerNoteC3 = LITERAL1
-kSfeQwiicBuzzerNoteCS3 = LITERAL1
-kSfeQwiicBuzzerNoteD3 = LITERAL1
-kSfeQwiicBuzzerNoteDS3 = LITERAL1
-kSfeQwiicBuzzerNoteE3 = LITERAL1
-kSfeQwiicBuzzerNoteF3 = LITERAL1
-kSfeQwiicBuzzerNoteFS3 = LITERAL1
-kSfeQwiicBuzzerNoteG3 = LITERAL1
-kSfeQwiicBuzzerNoteGS3 = LITERAL1
-kSfeQwiicBuzzerNoteA3 = LITERAL1
-kSfeQwiicBuzzerNoteAS3 = LITERAL1
-kSfeQwiicBuzzerNoteB3 = LITERAL1
-kSfeQwiicBuzzerNoteC4 = LITERAL1
-kSfeQwiicBuzzerNoteCS4 = LITERAL1
-kSfeQwiicBuzzerNoteD4 = LITERAL1
-kSfeQwiicBuzzerNoteDS4 = LITERAL1
-kSfeQwiicBuzzerNoteE4 = LITERAL1
-kSfeQwiicBuzzerNoteF4 = LITERAL1
-kSfeQwiicBuzzerNoteFS4 = LITERAL1
-kSfeQwiicBuzzerNoteG4 = LITERAL1
-kSfeQwiicBuzzerNoteGS4 = LITERAL1
-kSfeQwiicBuzzerNoteA4 = LITERAL1
-kSfeQwiicBuzzerNoteAS4 = LITERAL1
-kSfeQwiicBuzzerNoteB4 = LITERAL1
-kSfeQwiicBuzzerNoteC5 = LITERAL1
-kSfeQwiicBuzzerNoteCS5 = LITERAL1
-kSfeQwiicBuzzerNoteD5 = LITERAL1
-kSfeQwiicBuzzerNoteDS5 = LITERAL1
-kSfeQwiicBuzzerNoteE5 = LITERAL1
-kSfeQwiicBuzzerNoteF5 = LITERAL1
-kSfeQwiicBuzzerNoteFS5 = LITERAL1
-kSfeQwiicBuzzerNoteG5 = LITERAL1
-kSfeQwiicBuzzerNoteGS5 = LITERAL1
-kSfeQwiicBuzzerNoteA5 = LITERAL1
-kSfeQwiicBuzzerNoteAS5 = LITERAL1
-kSfeQwiicBuzzerNoteB5 = LITERAL1
-kSfeQwiicBuzzerNoteC6 = LITERAL1
-kSfeQwiicBuzzerNoteCS6 = LITERAL1
-kSfeQwiicBuzzerNoteD6 = LITERAL1
-kSfeQwiicBuzzerNoteDS6 = LITERAL1
-kSfeQwiicBuzzerNoteE6 = LITERAL1
-kSfeQwiicBuzzerNoteF6 = LITERAL1
-kSfeQwiicBuzzerNoteFS6 = LITERAL1
-kSfeQwiicBuzzerNoteG6 = LITERAL1
-kSfeQwiicBuzzerNoteGS6 = LITERAL1
-kSfeQwiicBuzzerNoteA6 = LITERAL1
-kSfeQwiicBuzzerNoteAS6 = LITERAL1
-kSfeQwiicBuzzerNoteB6 = LITERAL1
-kSfeQwiicBuzzerNoteC7 = LITERAL1
-kSfeQwiicBuzzerNoteCS7 = LITERAL1
-kSfeQwiicBuzzerNoteD7 = LITERAL1
-kSfeQwiicBuzzerNoteDS7 = LITERAL1
-kSfeQwiicBuzzerNoteE7 = LITERAL1
-kSfeQwiicBuzzerNoteF7 = LITERAL1
-kSfeQwiicBuzzerNoteFS7 = LITERAL1
-kSfeQwiicBuzzerNoteG7 = LITERAL1
-kSfeQwiicBuzzerNoteGS7 = LITERAL1
-kSfeQwiicBuzzerNoteA7 = LITERAL1
-kSfeQwiicBuzzerNoteAS7 = LITERAL1
-kSfeQwiicBuzzerNoteB7 = LITERAL1
-kSfeQwiicBuzzerNoteC8 = LITERAL1
-kSfeQwiicBuzzerNoteCS8 = LITERAL1
-kSfeQwiicBuzzerNoteD8 = LITERAL1
-kSfeQwiicBuzzerNoteDS8 = LITERAL1
+kSfeQwiicBuzzerNoteB0	            LITERAL1
+kSfeQwiicBuzzerNoteC1	            LITERAL1
+kSfeQwiicBuzzerNoteCS1	            LITERAL1
+kSfeQwiicBuzzerNoteD1	            LITERAL1
+kSfeQwiicBuzzerNoteDS1	            LITERAL1
+kSfeQwiicBuzzerNoteE1	            LITERAL1
+kSfeQwiicBuzzerNoteF1	            LITERAL1
+kSfeQwiicBuzzerNoteFS1	            LITERAL1
+kSfeQwiicBuzzerNoteG1	            LITERAL1
+kSfeQwiicBuzzerNoteGS1	            LITERAL1
+kSfeQwiicBuzzerNoteA1	            LITERAL1
+kSfeQwiicBuzzerNoteAS1	            LITERAL1
+kSfeQwiicBuzzerNoteB1	            LITERAL1
+kSfeQwiicBuzzerNoteC2	            LITERAL1
+kSfeQwiicBuzzerNoteCS2	            LITERAL1
+kSfeQwiicBuzzerNoteD2	            LITERAL1
+kSfeQwiicBuzzerNoteDS2	            LITERAL1
+kSfeQwiicBuzzerNoteE2	            LITERAL1
+kSfeQwiicBuzzerNoteF2	            LITERAL1
+kSfeQwiicBuzzerNoteFS2	            LITERAL1
+kSfeQwiicBuzzerNoteG2	            LITERAL1
+kSfeQwiicBuzzerNoteGS2	            LITERAL1
+kSfeQwiicBuzzerNoteA2	            LITERAL1
+kSfeQwiicBuzzerNoteAS2	            LITERAL1
+kSfeQwiicBuzzerNoteB2	            LITERAL1
+kSfeQwiicBuzzerNoteC3	            LITERAL1
+kSfeQwiicBuzzerNoteCS3	            LITERAL1
+kSfeQwiicBuzzerNoteD3	            LITERAL1
+kSfeQwiicBuzzerNoteDS3	            LITERAL1
+kSfeQwiicBuzzerNoteE3	            LITERAL1
+kSfeQwiicBuzzerNoteF3	            LITERAL1
+kSfeQwiicBuzzerNoteFS3	            LITERAL1
+kSfeQwiicBuzzerNoteG3	            LITERAL1
+kSfeQwiicBuzzerNoteGS3	            LITERAL1
+kSfeQwiicBuzzerNoteA3	            LITERAL1
+kSfeQwiicBuzzerNoteAS3	            LITERAL1
+kSfeQwiicBuzzerNoteB3	            LITERAL1
+kSfeQwiicBuzzerNoteC4	            LITERAL1
+kSfeQwiicBuzzerNoteCS4	            LITERAL1
+kSfeQwiicBuzzerNoteD4	            LITERAL1
+kSfeQwiicBuzzerNoteDS4	            LITERAL1
+kSfeQwiicBuzzerNoteE4	            LITERAL1
+kSfeQwiicBuzzerNoteF4	            LITERAL1
+kSfeQwiicBuzzerNoteFS4	            LITERAL1
+kSfeQwiicBuzzerNoteG4	            LITERAL1
+kSfeQwiicBuzzerNoteGS4	            LITERAL1
+kSfeQwiicBuzzerNoteA4	            LITERAL1
+kSfeQwiicBuzzerNoteAS4	            LITERAL1
+kSfeQwiicBuzzerNoteB4	            LITERAL1
+kSfeQwiicBuzzerNoteC5	            LITERAL1
+kSfeQwiicBuzzerNoteCS5	            LITERAL1
+kSfeQwiicBuzzerNoteD5	            LITERAL1
+kSfeQwiicBuzzerNoteDS5	            LITERAL1
+kSfeQwiicBuzzerNoteE5	            LITERAL1
+kSfeQwiicBuzzerNoteF5	            LITERAL1
+kSfeQwiicBuzzerNoteFS5	            LITERAL1
+kSfeQwiicBuzzerNoteG5	            LITERAL1
+kSfeQwiicBuzzerNoteGS5	            LITERAL1
+kSfeQwiicBuzzerNoteA5	            LITERAL1
+kSfeQwiicBuzzerNoteAS5	            LITERAL1
+kSfeQwiicBuzzerNoteB5	            LITERAL1
+kSfeQwiicBuzzerNoteC6	            LITERAL1
+kSfeQwiicBuzzerNoteCS6	            LITERAL1
+kSfeQwiicBuzzerNoteD6	            LITERAL1
+kSfeQwiicBuzzerNoteDS6	            LITERAL1
+kSfeQwiicBuzzerNoteE6	            LITERAL1
+kSfeQwiicBuzzerNoteF6	            LITERAL1
+kSfeQwiicBuzzerNoteFS6	            LITERAL1
+kSfeQwiicBuzzerNoteG6	            LITERAL1
+kSfeQwiicBuzzerNoteGS6	            LITERAL1
+kSfeQwiicBuzzerNoteA6	            LITERAL1
+kSfeQwiicBuzzerNoteAS6	            LITERAL1
+kSfeQwiicBuzzerNoteB6	            LITERAL1
+kSfeQwiicBuzzerNoteC7	            LITERAL1
+kSfeQwiicBuzzerNoteCS7	            LITERAL1
+kSfeQwiicBuzzerNoteD7	            LITERAL1
+kSfeQwiicBuzzerNoteDS7	            LITERAL1
+kSfeQwiicBuzzerNoteE7	            LITERAL1
+kSfeQwiicBuzzerNoteF7	            LITERAL1
+kSfeQwiicBuzzerNoteFS7	            LITERAL1
+kSfeQwiicBuzzerNoteG7	            LITERAL1
+kSfeQwiicBuzzerNoteGS7	            LITERAL1
+kSfeQwiicBuzzerNoteA7	            LITERAL1
+kSfeQwiicBuzzerNoteAS7	            LITERAL1
+kSfeQwiicBuzzerNoteB7	            LITERAL1
+kSfeQwiicBuzzerNoteC8	            LITERAL1
+kSfeQwiicBuzzerNoteCS8	            LITERAL1
+kSfeQwiicBuzzerNoteD8	            LITERAL1
+kSfeQwiicBuzzerNoteDS8	            LITERAL1
