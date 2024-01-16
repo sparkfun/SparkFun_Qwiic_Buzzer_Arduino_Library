@@ -229,7 +229,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect2(uint8_t volume)
 {
     for (int note = 150 ; note < 4000 ; note += 150)
     {
-        on(note, 50, volume);
+        on(note, 40, volume);
         delay(40);
     }
     off();
@@ -251,7 +251,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect4(uint8_t volume)
 {
     for (int note = 4000 ; note > 150 ; note -= 150)
     {
-        on(note, 50, volume);
+        on(note, 40, volume);
         delay(40);
     }
     off();
@@ -278,7 +278,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect6(uint8_t volume)
     //for (i = 650; i > 525; i -= 3) // vary up //1538, 1905
     for (i = 1538; i < 1905; i += laughstep) // vary up //1538, 1905
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
         
@@ -287,7 +287,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect6(uint8_t volume)
     //for (i = 800; i > 660; i -= 3) // 1250, 1515
     for (i = 1250; i < 1515; i += laughstep) // 1250, 1515
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
     delay(laughdelay);
@@ -295,7 +295,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect6(uint8_t volume)
     //for (i = 900; i > 745; i -= 3) // 1111, 1342
     for (i = 1111; i < 1342; i += laughstep) // 1111, 1342
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
     delay(laughdelay);
@@ -303,7 +303,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect6(uint8_t volume)
     //for (i = 990; i > 850; i -= 3) // 1010, 1176
     for (i = 1010; i < 1176; i += laughstep) // 1010, 1176
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
     off();
@@ -318,7 +318,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect7(uint8_t volume)
 
     for (i = 1538; i < 1905; i += laughstep) // vary up //1538, 1905
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
         
@@ -326,21 +326,21 @@ void sfeQwiicBuzzerArdI2C::soundEffect7(uint8_t volume)
 
     for (i = 1250; i < 1515; i += laughstep) // 1250, 1515
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
     delay(laughdelay);
 
     for (i = 1111; i < 1342; i += laughstep) // 1111, 1342
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
     delay(laughdelay);
 
     for (i = 1010; i < 1176; i += laughstep) // 1010, 1176
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
     off();
@@ -355,7 +355,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect8(uint8_t volume)
 
     for (i = 2000; i > 1429; i -= step) // vary down //2000, 1429
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
         
@@ -363,7 +363,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect8(uint8_t volume)
 
     for (i = 1667; i > 1250; i -= step) // 1667, 1250
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
     delay(crydelay);
@@ -371,7 +371,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect8(uint8_t volume)
     //for (i = 900; i > 745; i -= 3) // 1111, 1342
     for (i = 1429; i > 1053; i -= step) // 1429, 1053
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
     off();
@@ -386,7 +386,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect9(uint8_t volume)
 
     for (i = 2000; i > 1429; i -= step) // vary down //2000, 1429
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
         
@@ -394,7 +394,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect9(uint8_t volume)
 
     for (i = 1667; i > 1250; i -= step) // 1667, 1250
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
     delay(crydelay);
@@ -402,7 +402,7 @@ void sfeQwiicBuzzerArdI2C::soundEffect9(uint8_t volume)
     //for (i = 900; i > 745; i -= 3) // 1111, 1342
     for (i = 1429; i > 1053; i -= step) // 1429, 1053
     {
-        on(i, 20, volume);
+        on(i, 10, volume);
         delay(10);
     }
     off();
