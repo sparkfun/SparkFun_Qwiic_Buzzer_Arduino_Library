@@ -23,7 +23,7 @@
 
 #include "sfeQwiicBuzzer.h"
 
-sfeTkError_t sfeQwiicBuzzer::begin(sfeTkII2C *theBus)
+sfeTkError_t sfeQwiicBuzzerArdI2C::begin(sfeTkII2C *theBus)
 {
     // Nullptr check
     if (theBus == nullptr)
@@ -36,13 +36,13 @@ sfeTkError_t sfeQwiicBuzzer::begin(sfeTkII2C *theBus)
     return isConnected();
 }
 
-sfeTkError_t sfeQwiicBuzzer::isConnected()
+sfeTkError_t sfeQwiicBuzzerArdI2C::isConnected()
 {
     // Just ping the device address
     return _theBus->ping();
 }
 
-sfeTkError_t sfeQwiicBuzzer::changeAddress(const uint8_t &address)
+sfeTkError_t sfeQwiicBuzzerArdI2C::changeAddress(const uint8_t &address)
 {
     if (address < 0x08 || address > 0x77)
     {
@@ -63,12 +63,12 @@ sfeTkError_t sfeQwiicBuzzer::changeAddress(const uint8_t &address)
     return kSTkErrOk;
 }
 
-uint8_t sfeQwiicBuzzer::getAddress()
+uint8_t sfeQwiicBuzzerArdI2C::getAddress()
 {
     return _theBus->address();
 }
 
-sfeTkError_t sfeQwiicBuzzer::buzzerConfig(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::buzzerConfig(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
     sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegVolume, volume);
     if (err != kSTkErrOk) // Check whether the write was successful
@@ -111,7 +111,7 @@ sfeTkError_t sfeQwiicBuzzer::buzzerConfig(uint16_t toneFrequency, uint16_t durat
     return kSTkErrOk;  
 }
 
-sfeTkError_t sfeQwiicBuzzer::setBuzzerActiveReg()
+sfeTkError_t sfeQwiicBuzzerArdI2C::setBuzzerActiveReg()
 {
     sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x01);
     if (err != kSTkErrOk) // Check whether the write was successful
@@ -121,7 +121,7 @@ sfeTkError_t sfeQwiicBuzzer::setBuzzerActiveReg()
     return kSTkErrOk;    
 }
 
-sfeTkError_t sfeQwiicBuzzer::clearBuzzerActiveReg()
+sfeTkError_t sfeQwiicBuzzerArdI2C::clearBuzzerActiveReg()
 {
     sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x00);
     if (err != kSTkErrOk) // Check whether the write was successful
@@ -131,17 +131,17 @@ sfeTkError_t sfeQwiicBuzzer::clearBuzzerActiveReg()
     return kSTkErrOk;     
 }
 
-sfeTkError_t sfeQwiicBuzzer::on(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::on(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
     return buzzerConfig(toneFrequency, duration, volume);
 }
 
-sfeTkError_t sfeQwiicBuzzer::off()
+sfeTkError_t sfeQwiicBuzzerArdI2C::off()
 {
     return clearBuzzerActiveReg();
 }
 
-sfeTkError_t sfeQwiicBuzzer::saveSettings()
+sfeTkError_t sfeQwiicBuzzerArdI2C::saveSettings()
 {
     sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegSaveSettings, 0x01);
     if (err != kSTkErrOk) // Check whether the write was successful
@@ -153,7 +153,7 @@ sfeTkError_t sfeQwiicBuzzer::saveSettings()
 
 /*------------------------- Sound Effects ---------------- */
 
-void sfeQwiicBuzzer::playSoundEffect(uint8_t soundEffectNumber, uint8_t volume)
+void sfeQwiicBuzzerArdI2C::playSoundEffect(uint8_t soundEffectNumber, uint8_t volume)
 {
     switch (soundEffectNumber) {
         case 0:
@@ -190,7 +190,7 @@ void sfeQwiicBuzzer::playSoundEffect(uint8_t soundEffectNumber, uint8_t volume)
 }
 
 // SIREN SLOW X1
-void sfeQwiicBuzzer::soundEffect0(uint8_t volume)
+void sfeQwiicBuzzerArdI2C::soundEffect0(uint8_t volume)
 {
     for (int note = 150 ; note < 4000 ; note += 150)
     {
@@ -206,7 +206,7 @@ void sfeQwiicBuzzer::soundEffect0(uint8_t volume)
 }
 
 // SIREN FAST X3
-void sfeQwiicBuzzer::soundEffect1(uint8_t volume)
+void sfeQwiicBuzzerArdI2C::soundEffect1(uint8_t volume)
 {
     for (int i = 0 ; i <= 2 ; i++)
     {
@@ -225,7 +225,7 @@ void sfeQwiicBuzzer::soundEffect1(uint8_t volume)
 }
 
 // YES SLOW
-void sfeQwiicBuzzer::soundEffect2(uint8_t volume)
+void sfeQwiicBuzzerArdI2C::soundEffect2(uint8_t volume)
 {
     for (int note = 150 ; note < 4000 ; note += 150)
     {
@@ -236,7 +236,7 @@ void sfeQwiicBuzzer::soundEffect2(uint8_t volume)
 }
 
 // YES FAST
-void sfeQwiicBuzzer::soundEffect3(uint8_t volume)
+void sfeQwiicBuzzerArdI2C::soundEffect3(uint8_t volume)
 {
     for (int note = 150 ; note < 4000 ; note += 150)
     {
@@ -247,7 +247,7 @@ void sfeQwiicBuzzer::soundEffect3(uint8_t volume)
 }
 
 // NO SLOW
-void sfeQwiicBuzzer::soundEffect4(uint8_t volume)
+void sfeQwiicBuzzerArdI2C::soundEffect4(uint8_t volume)
 {
     for (int note = 4000 ; note > 150 ; note -= 150)
     {
@@ -258,7 +258,7 @@ void sfeQwiicBuzzer::soundEffect4(uint8_t volume)
 }
 
 // NO FAST
-void sfeQwiicBuzzer::soundEffect5(uint8_t volume)
+void sfeQwiicBuzzerArdI2C::soundEffect5(uint8_t volume)
 {
     for (int note = 4000 ; note > 150 ; note -= 150)
     {
@@ -269,7 +269,7 @@ void sfeQwiicBuzzer::soundEffect5(uint8_t volume)
 }
 
 // LAUGH
-void sfeQwiicBuzzer::soundEffect6(uint8_t volume)
+void sfeQwiicBuzzerArdI2C::soundEffect6(uint8_t volume)
 {
     int laughdelay = 400;
     int laughstep = 10;
@@ -310,7 +310,7 @@ void sfeQwiicBuzzer::soundEffect6(uint8_t volume)
 }
 
 // LAUGH FAST
-void sfeQwiicBuzzer::soundEffect7(uint8_t volume)
+void sfeQwiicBuzzerArdI2C::soundEffect7(uint8_t volume)
 {
     int laughdelay = 200;
     int laughstep = 15;
@@ -347,7 +347,7 @@ void sfeQwiicBuzzer::soundEffect7(uint8_t volume)
 }
 
 // CRY SLOW
-void sfeQwiicBuzzer::soundEffect8(uint8_t volume)
+void sfeQwiicBuzzerArdI2C::soundEffect8(uint8_t volume)
 {
     int crydelay = 500;
     int step = 10;
@@ -378,7 +378,7 @@ void sfeQwiicBuzzer::soundEffect8(uint8_t volume)
 }
 
 // CRY FAST
-void sfeQwiicBuzzer::soundEffect9(uint8_t volume)
+void sfeQwiicBuzzerArdI2C::soundEffect9(uint8_t volume)
 {
     int crydelay = 200;
     int step = 20;

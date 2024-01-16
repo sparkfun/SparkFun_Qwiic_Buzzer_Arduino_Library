@@ -33,11 +33,11 @@
 
 const uint8_t kQwiicBuzzerDefaultAddress = 0x34;
 
-class sfeQwiicBuzzer
+class sfeQwiicBuzzerArdI2C
 {
     public:
         /// @brief Default constructor
-        sfeQwiicBuzzer() : _theBus(nullptr)
+        sfeQwiicBuzzerArdI2C() : _theBus(nullptr)
         {
         }
 

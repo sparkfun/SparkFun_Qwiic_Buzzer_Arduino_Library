@@ -27,7 +27,7 @@
 
 #include "sfeQwiicBuzzer.h"
 
-class QwiicBuzzer : public sfeQwiicBuzzer
+class QwiicBuzzer : public sfeQwiicBuzzerArdI2C
 {
 
 
@@ -42,14 +42,14 @@ class QwiicBuzzer : public sfeQwiicBuzzer
             _theI2CBus.init(wirePort, address);
 
             // Begin the sensor
-            return sfeQwiicBuzzer::begin(&_theI2CBus) == kSTkErrOk;
+            return sfeQwiicBuzzerArdI2C::begin(&_theI2CBus) == kSTkErrOk;
         }
         
         /// @brief Checks if the Qwiic Buzzer is connected
         /// @return True if the sensor is connected, false otherwise
         bool isConnected()
         {
-            return sfeQwiicBuzzer::isConnected() == kSTkErrOk;
+            return sfeQwiicBuzzerArdI2C::isConnected() == kSTkErrOk;
         }
 
     private:
