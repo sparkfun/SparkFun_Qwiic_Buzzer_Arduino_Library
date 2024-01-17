@@ -96,32 +96,17 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::buzzerConfig(uint16_t toneFrequency, uint16_t
     data[3] = durationMSB; // kSfeQwiicBuzzerRegDurationMsb
     data[4] = durationLSB; // kSfeQwiicBuzzerRegDurationLsb
 
-    sfeTkError_t err = _theBus->writeRegisterRegion(kSfeQwiicBuzzerRegToneFrequencyMsb, data, dataLength);
-    if (err != kSTkErrOk) // Check whether the write was successful
-        return err;
-
-    // Done!
-    return kSTkErrOk;  
+    return _theBus->writeRegisterRegion(kSfeQwiicBuzzerRegToneFrequencyMsb, data, dataLength);
 }
 
 sfeTkError_t sfeQwiicBuzzerArdI2C::setBuzzerActiveReg()
 {
-    sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x01);
-    if (err != kSTkErrOk) // Check whether the write was successful
-        return err;
-    
-    // Done!
-    return kSTkErrOk;    
+    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x01);
 }
 
 sfeTkError_t sfeQwiicBuzzerArdI2C::clearBuzzerActiveReg()
 {
-    sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x00);
-    if (err != kSTkErrOk) // Check whether the write was successful
-        return err;
-    
-    // Done!
-    return kSTkErrOk;     
+    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x00);
 }
 
 sfeTkError_t sfeQwiicBuzzerArdI2C::on(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
@@ -130,12 +115,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::on(uint16_t toneFrequency, uint16_t duration,
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;
 
-    err = setBuzzerActiveReg();
-    if (err != kSTkErrOk) // Check whether the write was successful
-        return err;        
-    
-    // Done!
-    return kSTkErrOk;     
+    return setBuzzerActiveReg();
 }
 
 sfeTkError_t sfeQwiicBuzzerArdI2C::off()
@@ -145,12 +125,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::off()
 
 sfeTkError_t sfeQwiicBuzzerArdI2C::saveSettings()
 {
-    sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegSaveSettings, 0x01);
-    if (err != kSTkErrOk) // Check whether the write was successful
-        return err;
-    
-    // Done!
-    return kSTkErrOk;      
+    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegSaveSettings, 0x01);
 }
 
 /*------------------------- Sound Effects ---------------- */
