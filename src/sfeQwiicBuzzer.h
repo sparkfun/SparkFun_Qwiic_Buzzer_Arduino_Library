@@ -83,57 +83,46 @@ class sfeQwiicBuzzerArdI2C
         /// @brief Plays one of the sound effects included in this library
         /// @param soundEffectNumber The sound effect you with to play
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        /// @return 0 for succuss, negative for errors, positive for warnings
         void playSoundEffect(uint8_t soundEffectNumber, uint8_t volume);
 
         /// @brief Plays sound effect 0
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        /// @return 0 for succuss, negative for errors, positive for warnings
         void soundEffect0(uint8_t volume);
 
         /// @brief Plays sound effect 1
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        /// @return 0 for succuss, negative for errors, positive for warnings
         void soundEffect1(uint8_t volume);
 
         /// @brief Plays sound effect 2
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        /// @return 0 for succuss, negative for errors, positive for warnings
         void soundEffect2(uint8_t volume);
 
         /// @brief Plays sound effect 3
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        /// @return 0 for succuss, negative for errors, positive for warnings
         void soundEffect3(uint8_t volume);
 
         /// @brief Plays sound effect 4
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        /// @return 0 for succuss, negative for errors, positive for warnings
         void soundEffect4(uint8_t volume);
 
         /// @brief Plays sound effect 5
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        /// @return 0 for succuss, negative for errors, positive for warnings
         void soundEffect5(uint8_t volume);
 
         /// @brief Plays sound effect 6
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        /// @return 0 for succuss, negative for errors, positive for warnings
         void soundEffect6(uint8_t volume);
 
         /// @brief Plays sound effect 7
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        /// @return 0 for succuss, negative for errors, positive for warnings
         void soundEffect7(uint8_t volume);
 
         /// @brief Plays sound effect 8
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        /// @return 0 for succuss, negative for errors, positive for warnings
         void soundEffect8(uint8_t volume);
 
         /// @brief Plays sound effect 9
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        /// @return 0 for succuss, negative for errors, positive for warnings
         void soundEffect9(uint8_t volume);    
 
         /// @brief Changes the I2C address of the Qwiic Buzzer
