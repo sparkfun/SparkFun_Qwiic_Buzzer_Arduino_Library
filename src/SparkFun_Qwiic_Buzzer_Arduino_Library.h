@@ -29,8 +29,6 @@
 
 class QwiicBuzzer : public sfeQwiicBuzzerArdI2C
 {
-
-
     public:
         /// @brief Begins the Qwiic Buzzer
         /// @param address I2C device address to use for the sensor
