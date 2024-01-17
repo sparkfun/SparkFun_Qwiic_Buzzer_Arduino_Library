@@ -40,6 +40,7 @@ void setup() {
   Serial.begin(115200);
   Serial.println("Qwiic Buzzer Example_08_Sound_Effects");
   Wire.begin(); //Join I2C bus
+  Wire.setClock(400000); // sound effects require changing configuration quickly
 
   //check if buzzer will acknowledge over I2C
   if (buzzer.begin() == false) {

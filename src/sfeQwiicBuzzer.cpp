@@ -70,42 +70,35 @@ uint8_t sfeQwiicBuzzerArdI2C::getAddress()
 
 sfeTkError_t sfeQwiicBuzzerArdI2C::buzzerConfig(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
-    sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegVolume, volume);
-    if (err != kSTkErrOk) // Check whether the write was successful
-        return err;
+    // All of the necessary configuration register address are in sequencial order
+    // starting at "kSfeQwiicBuzzerRegToneFrequencyMsb":
+    // We can write all of them in a single use of "writeRegisterRegion()".
 
+    // kSfeQwiicBuzzerRegToneFrequencyMsb = 0x03,   
+    // kSfeQwiicBuzzerRegToneFrequencyLsb = 0x04,       
+    // kSfeQwiicBuzzerRegVolume = 0x05, 
+    // kSfeQwiicBuzzerRegDurationMsb = 0x06, 
+    // kSfeQwiicBuzzerRegDurationLsb = 0x07, 
+    // kSfeQwiicBuzzerRegActive = 0x08, 
+
+    // extract MSBs and LSBs from user passed in arguments
     uint8_t toneFrequencyMSB = ((toneFrequency & 0xFF00) >> 8 );
     uint8_t toneFrequencyLSB = (toneFrequency & 0x00FF);
-    err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegToneFrequencyMsb, toneFrequencyMSB);
-    if (err != kSTkErrOk) // Check whether the write was successful
-        return err;
-
-    err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegToneFrequencyLsb, toneFrequencyLSB);
-    if (err != kSTkErrOk) // Check whether the write was successful
-        return err;    
-
     uint8_t durationMSB = ((duration & 0xFF00) >> 8 );
     uint8_t durationLSB = (duration & 0x00FF);
-    err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegDurationMsb, durationMSB);
-    if (err != kSTkErrOk) // Check whether the write was successful
-        return err;     
 
-    err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegDurationLsb, durationLSB);
-    if (err != kSTkErrOk) // Check whether the write was successful
-        return err;  
+    uint8_t data[5];
+    size_t dataLength = 5;
 
-    if(volume > 0)
-    {
-        err = setBuzzerActiveReg();
-        if (err != kSTkErrOk) // Check whether the write was successful
-        return err;  
-    }
-    else
-    {
-        err = clearBuzzerActiveReg();
-        if (err != kSTkErrOk) // Check whether the write was successful
-        return err; 
-    }
+    data[0] = toneFrequencyMSB; // kSfeQwiicBuzzerRegToneFrequencyMsb
+    data[1] = toneFrequencyLSB; // kSfeQwiicBuzzerRegToneFrequencyLsb
+    data[2] = volume; // kSfeQwiicBuzzerRegVolume
+    data[3] = durationMSB; // kSfeQwiicBuzzerRegDurationMsb
+    data[4] = durationLSB; // kSfeQwiicBuzzerRegDurationLsb
+
+    sfeTkError_t err = _theBus->writeRegisterRegion(kSfeQwiicBuzzerRegToneFrequencyMsb, data, dataLength);
+    if (err != kSTkErrOk) // Check whether the write was successful
+        return err;
 
     // Done!
     return kSTkErrOk;  
@@ -133,7 +126,16 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::clearBuzzerActiveReg()
 
 sfeTkError_t sfeQwiicBuzzerArdI2C::on(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
-    return buzzerConfig(toneFrequency, duration, volume);
+    sfeTkError_t err = buzzerConfig(toneFrequency, duration, volume);
+    if (err != kSTkErrOk) // Check whether the write was successful
+        return err;
+
+    err = setBuzzerActiveReg();
+    if (err != kSTkErrOk) // Check whether the write was successful
+        return err;        
+    
+    // Done!
+    return kSTkErrOk;     
 }
 
 sfeTkError_t sfeQwiicBuzzerArdI2C::off()
