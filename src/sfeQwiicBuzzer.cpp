@@ -164,6 +164,8 @@ sfeTkError_t sfeQwiicBuzzer::playSoundEffect(const uint8_t &soundEffectNumber, c
         case 9:
             err = soundEffect9(volume);
             break;
+        default:
+            err = kSTkErrFail;
     }
 
     return err;
