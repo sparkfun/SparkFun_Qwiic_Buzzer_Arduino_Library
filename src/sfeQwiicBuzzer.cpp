@@ -130,258 +130,373 @@ uint8_t sfeQwiicBuzzerArdI2C::getAddress()
 
 /*------------------------- Sound Effects ---------------- */
 
-void sfeQwiicBuzzerArdI2C::playSoundEffect(uint8_t soundEffectNumber, uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::playSoundEffect(uint8_t soundEffectNumber, uint8_t volume)
 {
+    sfeTkError_t err;
+
     switch (soundEffectNumber) {
         case 0:
-            soundEffect0(volume);
+            err = soundEffect0(volume);
             break;
         case 1:
-            soundEffect1(volume);
+            err = soundEffect1(volume);
             break;
         case 2:
-            soundEffect2(volume);
+            err = soundEffect2(volume);
             break;
         case 3:
-            soundEffect3(volume);
+            err = soundEffect3(volume);
             break;
         case 4:
-            soundEffect4(volume);
+            err = soundEffect4(volume);
             break;
         case 5:
-            soundEffect5(volume);
+            err = soundEffect5(volume);
             break;
         case 6:
-            soundEffect6(volume);
+            err = soundEffect6(volume);
             break;
         case 7:
-            soundEffect7(volume);
-            break;   
+            err = soundEffect7(volume);
+            break;
         case 8:
-            soundEffect8(volume);
-            break; 
+            err = soundEffect8(volume);
+            break;
         case 9:
-            soundEffect9(volume);
-            break;                                  
+            err = soundEffect9(volume);
+            break;
     }
+
+    return err;
 }
 
 // SIREN SLOW X1
-void sfeQwiicBuzzerArdI2C::soundEffect0(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect0(uint8_t volume)
 {
+    sfeTkError_t err;
     for (int note = 150 ; note < 4000 ; note += 150)
     {
-        on(note, 0, volume);
+        err = on(note, 0, volume);
+        
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
+
         delay(10);
     }
     for (int note = 4000 ; note > 150 ; note -= 150)
     {
-        on(note, 0, volume);
+        err = on(note, 0, volume);
+                
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
+
         delay(10);
     }
-    off();
+    return off();
 }
 
 // SIREN FAST X3
-void sfeQwiicBuzzerArdI2C::soundEffect1(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect1(uint8_t volume)
 {
+    sfeTkError_t err;
     for (int i = 0 ; i <= 2 ; i++)
     {
         for (int note = 150 ; note < 4000 ; note += 150)
         {
-            on(note, 0, volume);
+            err = on(note, 0, volume);
+            // Check whether the write was successful
+            if (err != kSTkErrOk)
+                return err; 
             delay(2);
         }
         for (int note = 4000 ; note > 150 ; note -= 150)
         {
-            on(note, 0, volume);
+            err = on(note, 0, volume);
+            // Check whether the write was successful
+            if (err != kSTkErrOk)
+                return err;  
             delay(2);
         }
     }
-    off();
+    return off();
 }
 
 // YES SLOW
-void sfeQwiicBuzzerArdI2C::soundEffect2(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect2(uint8_t volume)
 {
+    sfeTkError_t err;
     for (int note = 150 ; note < 4000 ; note += 150)
     {
-        on(note, 0, volume);
+        err = on(note, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(40);
     }
-    off();
+    return off();
 }
 
 // YES FAST
-void sfeQwiicBuzzerArdI2C::soundEffect3(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect3(uint8_t volume)
 {
+    sfeTkError_t err;
     for (int note = 150 ; note < 4000 ; note += 150)
     {
-        on(note, 0, volume);
+        err = on(note, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    return off();
 }
 
 // NO SLOW
-void sfeQwiicBuzzerArdI2C::soundEffect4(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect4(uint8_t volume)
 {
+    sfeTkError_t err;
     for (int note = 4000 ; note > 150 ; note -= 150)
     {
-        on(note, 0, volume);
+        err = on(note, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(40);
     }
-    off();
+    return off();
 }
 
 // NO FAST
-void sfeQwiicBuzzerArdI2C::soundEffect5(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect5(uint8_t volume)
 {
+    sfeTkError_t err;
     for (int note = 4000 ; note > 150 ; note -= 150)
     {
-        on(note, 0, volume);
+        err = on(note, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    return off();
 }
 
 // LAUGH
-void sfeQwiicBuzzerArdI2C::soundEffect6(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect6(uint8_t volume)
 {
+    sfeTkError_t err;
     int laughdelay = 400;
     int laughstep = 10;
     uint16_t i;
 
     for (i = 1538; i < 1905; i += laughstep) // vary up //1538, 1905
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    err = off();
+    // Check whether the write was successful
+    if (err != kSTkErrOk)
+        return err; 
+
     delay(laughdelay);
 
     for (i = 1250; i < 1515; i += laughstep) // 1250, 1515
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    err = off();
+    // Check whether the write was successful
+    if (err != kSTkErrOk)
+        return err; 
     delay(laughdelay);
 
     for (i = 1111; i < 1342; i += laughstep) // 1111, 1342
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    err = off();
+    // Check whether the write was successful
+    if (err != kSTkErrOk)
+        return err; 
     delay(laughdelay);
 
     for (i = 1010; i < 1176; i += laughstep) // 1010, 1176
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    return off();
 }
 
 // LAUGH FAST
-void sfeQwiicBuzzerArdI2C::soundEffect7(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect7(uint8_t volume)
 {
+    sfeTkError_t err;
     int laughdelay = 200;
     int laughstep = 15;
     uint16_t i;
 
     for (i = 1538; i < 1905; i += laughstep) // vary up //1538, 1905
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    err = off();
+    // Check whether the write was successful
+    if (err != kSTkErrOk)
+        return err; 
     delay(laughdelay);
 
     for (i = 1250; i < 1515; i += laughstep) // 1250, 1515
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    err = off();
+    // Check whether the write was successful
+    if (err != kSTkErrOk)
+        return err; 
     delay(laughdelay);
 
     for (i = 1111; i < 1342; i += laughstep) // 1111, 1342
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    err = off();
+    // Check whether the write was successful
+    if (err != kSTkErrOk)
+        return err; 
     delay(laughdelay);
 
     for (i = 1010; i < 1176; i += laughstep) // 1010, 1176
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    return off();
 }
 
 // CRY SLOW
-void sfeQwiicBuzzerArdI2C::soundEffect8(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect8(uint8_t volume)
 {
+    sfeTkError_t err;
     int crydelay = 500;
     int step = 10;
     uint16_t i;
 
     for (i = 2000; i > 1429; i -= step) // vary down //2000, 1429
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();   
+    err = off();
+    // Check whether the write was successful
+    if (err != kSTkErrOk)
+        return err;
     delay(crydelay);
 
     for (i = 1667; i > 1250; i -= step) // 1667, 1250
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    err = off();
+    // Check whether the write was successful
+    if (err != kSTkErrOk)
+        return err; 
     delay(crydelay);
 
     for (i = 1429; i > 1053; i -= step) // 1429, 1053
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    return off();
 }
 
 // CRY FAST
-void sfeQwiicBuzzerArdI2C::soundEffect9(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect9(uint8_t volume)
 {
+    sfeTkError_t err;
     int crydelay = 200;
     int step = 20;
     uint16_t i;
 
     for (i = 2000; i > 1429; i -= step) // vary down //2000, 1429
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    err = off();
+    // Check whether the write was successful
+    if (err != kSTkErrOk)
+        return err; 
         
     delay(crydelay);
 
     for (i = 1667; i > 1250; i -= step) // 1667, 1250
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    err = off();
+    // Check whether the write was successful
+    if (err != kSTkErrOk)
+        return err; 
     delay(crydelay);
 
     for (i = 1429; i > 1053; i -= step) // 1429, 1053
     {
-        on(i, 0, volume);
+        err = on(i, 0, volume);
+        // Check whether the write was successful
+        if (err != kSTkErrOk)
+            return err;
         delay(10);
     }
-    off();
+    return off();
 }

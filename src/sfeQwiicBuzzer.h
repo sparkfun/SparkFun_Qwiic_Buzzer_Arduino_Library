@@ -88,51 +88,51 @@ class sfeQwiicBuzzerArdI2C
         /// @brief Gets the current I2C address of the Qwiic Buzzer
         /// @return The current I2C address, 7-bit unshifted
         uint8_t getAddress();
-        
+
         /// @brief Plays one of the sound effects included in this library
         /// @param soundEffectNumber The sound effect you with to play
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        void playSoundEffect(uint8_t soundEffectNumber, uint8_t volume);
+        sfeTkError_t playSoundEffect(uint8_t soundEffectNumber, uint8_t volume);
 
         /// @brief Plays sound effect 0
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        void soundEffect0(uint8_t volume);
+        sfeTkError_t soundEffect0(uint8_t volume);
 
         /// @brief Plays sound effect 1
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        void soundEffect1(uint8_t volume);
+        sfeTkError_t soundEffect1(uint8_t volume);
 
         /// @brief Plays sound effect 2
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        void soundEffect2(uint8_t volume);
+        sfeTkError_t soundEffect2(uint8_t volume);
 
         /// @brief Plays sound effect 3
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        void soundEffect3(uint8_t volume);
+        sfeTkError_t soundEffect3(uint8_t volume);
 
         /// @brief Plays sound effect 4
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        void soundEffect4(uint8_t volume);
+        sfeTkError_t soundEffect4(uint8_t volume);
 
         /// @brief Plays sound effect 5
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        void soundEffect5(uint8_t volume);
+        sfeTkError_t soundEffect5(uint8_t volume);
 
         /// @brief Plays sound effect 6
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        void soundEffect6(uint8_t volume);
+        sfeTkError_t soundEffect6(uint8_t volume);
 
         /// @brief Plays sound effect 7
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        void soundEffect7(uint8_t volume);
+        sfeTkError_t soundEffect7(uint8_t volume);
 
         /// @brief Plays sound effect 8
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        void soundEffect8(uint8_t volume);
+        sfeTkError_t soundEffect8(uint8_t volume);
 
         /// @brief Plays sound effect 9
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-        void soundEffect9(uint8_t volume);    
+        sfeTkError_t soundEffect9(uint8_t volume);    
 
     protected:
         sfeTkII2C *_theBus;

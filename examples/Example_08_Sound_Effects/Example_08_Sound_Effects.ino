@@ -35,6 +35,7 @@ QwiicBuzzer buzzer;
 
 #define kBuzzerVolume 4 // loudest!!
 //#define kBuzzerVolume 3 // pretty good volume for most things
+sfeTkError_t err; // used for checking for errors
 
 void setup() {
   Serial.begin(115200);
@@ -53,7 +54,14 @@ void setup() {
   {
     Serial.print("Sound Effect: ");
     Serial.println(i);
-    buzzer.playSoundEffect(i, kBuzzerVolume);
+    err = buzzer.playSoundEffect(i, kBuzzerVolume);
+
+    // Check whether the playSoundEffect() was successful
+    if (err != kSTkErrOk)
+    {
+      Serial.println("error!");
+      break;
+    }
     delay(2000);
   }
 }
