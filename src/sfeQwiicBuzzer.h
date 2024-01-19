@@ -31,8 +31,13 @@
 #include "sfeQwiicBuzzerRegisters.h"
 #include "sfeQwiicBuzzerPitches.h"
 
-const uint8_t kQwiicBuzzerDefaultAddress = 0x34;
+const uint8_t kSfeQwiicBuzzerDefaultAddress = 0x34;
 const uint16_t kSfeQwiicBuzzerResonantFrequency = 2730;
+#define SFE_QWIIC_BUZZER_VOLUME_OFF = 0;
+#define SFE_QWIIC_BUZZER_VOLUME_MIN = 1;
+#define SFE_QWIIC_BUZZER_VOLUME_LOW = 2;
+#define SFE_QWIIC_BUZZER_VOLUME_MID = 3;
+#define SFE_QWIIC_BUZZER_VOLUME_MAX = 4;
 
 class sfeQwiicBuzzer
 {

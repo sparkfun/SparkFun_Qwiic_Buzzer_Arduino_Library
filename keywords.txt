@@ -23,7 +23,7 @@ saveSettings   				        KEYWORD2
 # Constants
 #########################################################
 
-kQwiicBuzzerDefaultAddress          LITERAL1
+kSfeQwiicBuzzerDefaultAddress          LITERAL1
 kSfeQwiicBuzzerRegId                LITERAL1
 kSfeQwiicBuzzerRegFirmwareMinor     LITERAL1
 kSfeQwiicBuzzerRegFirmwareMajor     LITERAL1
@@ -35,6 +35,11 @@ kSfeQwiicBuzzerRegDurationLsb	    LITERAL1
 kSfeQwiicBuzzerRegActive	        LITERAL1
 kSfeQwiicBuzzerRegSaveSettings	    LITERAL1 
 kSfeQwiicBuzzerRegI2cAddress	    LITERAL1
+SFE_QWIIC_BUZZER_VOLUME_OFF	        LITERAL1
+SFE_QWIIC_BUZZER_VOLUME_MIN	        LITERAL1
+SFE_QWIIC_BUZZER_VOLUME_LOW	        LITERAL1
+SFE_QWIIC_BUZZER_VOLUME_MID	        LITERAL1
+SFE_QWIIC_BUZZER_VOLUME_MAX	        LITERAL1
 
 kSfeQwiicBuzzerNoteB0	            LITERAL1
 kSfeQwiicBuzzerNoteC1	            LITERAL1

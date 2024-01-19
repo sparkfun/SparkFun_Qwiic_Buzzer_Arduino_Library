@@ -44,20 +44,20 @@ void setup() {
 }
 
 void loop() {
-  Serial.println("Volume: Quietest (1)");
-  buzzer.on(2730, 100, 1); // frequency: 2.73KHz, duration: 100ms, volume: 1
+  Serial.println("Volume: MIN (1)");
+  buzzer.on(2730, 100, SFE_QWIIC_BUZZER_VOLUME_MIN); // frequency: 2.73KHz, duration: 100ms, volume: MIN
   delay(1000);
 
-  Serial.println("Volume: Mid-low (2)");
-  buzzer.on(2730, 100, 2); // frequency: 2.73KHz, duration: 100ms, volume: 2
+  Serial.println("Volume: LOW (2)");
+  buzzer.on(2730, 100, SFE_QWIIC_BUZZER_VOLUME_LOW); // frequency: 2.73KHz, duration: 100ms, volume: LOW
   delay(1000);
 
-  Serial.println("Volume: Mid-high (3)");
-  buzzer.on(2730, 100, 3); // frequency: 2.73KHz, duration: 100ms, volume: 3
+  Serial.println("Volume: MID (3)");
+  buzzer.on(2730, 100, SFE_QWIIC_BUZZER_VOLUME_MID); // frequency: 2.73KHz, duration: 100ms, volume: MID
   delay(1000);
 
-  Serial.println("Volume: Loudest (4)");
-  buzzer.on(2730, 100, 4); // frequency: 2.73KHz, duration: 100ms, volume: 4
+  Serial.println("Volume: MAX (4)");
+  buzzer.on(2730, 100, SFE_QWIIC_BUZZER_VOLUME_MAX); // frequency: 2.73KHz, duration: 100ms, volume: MAX
   delay(1000);
 
   // Note, we dont' have to use buzzer.off(), because it will automatically turn
