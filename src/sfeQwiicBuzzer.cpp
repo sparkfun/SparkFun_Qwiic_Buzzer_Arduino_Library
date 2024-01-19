@@ -130,7 +130,7 @@ uint8_t sfeQwiicBuzzerArdI2C::getAddress()
 
 /*------------------------- Sound Effects ---------------- */
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::playSoundEffect(uint8_t soundEffectNumber, uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::playSoundEffect(const uint8_t &soundEffectNumber, const uint8_t &volume)
 {
     sfeTkError_t err;
 
@@ -171,7 +171,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::playSoundEffect(uint8_t soundEffectNumber, ui
 }
 
 // SIREN SLOW X1
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect0(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect0(const uint8_t &volume)
 {
     sfeTkError_t err;
     for (int note = 150 ; note < 4000 ; note += 150)
@@ -198,7 +198,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect0(uint8_t volume)
 }
 
 // SIREN FAST X3
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect1(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect1(const uint8_t &volume)
 {
     sfeTkError_t err;
     for (int i = 0 ; i <= 2 ; i++)
@@ -224,7 +224,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect1(uint8_t volume)
 }
 
 // YES SLOW
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect2(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect2(const uint8_t &volume)
 {
     sfeTkError_t err;
     for (int note = 150 ; note < 4000 ; note += 150)
@@ -239,7 +239,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect2(uint8_t volume)
 }
 
 // YES FAST
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect3(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect3(const uint8_t &volume)
 {
     sfeTkError_t err;
     for (int note = 150 ; note < 4000 ; note += 150)
@@ -254,7 +254,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect3(uint8_t volume)
 }
 
 // NO SLOW
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect4(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect4(const uint8_t &volume)
 {
     sfeTkError_t err;
     for (int note = 4000 ; note > 150 ; note -= 150)
@@ -269,7 +269,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect4(uint8_t volume)
 }
 
 // NO FAST
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect5(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect5(const uint8_t &volume)
 {
     sfeTkError_t err;
     for (int note = 4000 ; note > 150 ; note -= 150)
@@ -284,7 +284,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect5(uint8_t volume)
 }
 
 // LAUGH
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect6(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect6(const uint8_t &volume)
 {
     sfeTkError_t err;
     int laughdelay = 400;
@@ -346,7 +346,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect6(uint8_t volume)
 }
 
 // LAUGH FAST
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect7(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect7(const uint8_t &volume)
 {
     sfeTkError_t err;
     int laughdelay = 200;
@@ -407,7 +407,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect7(uint8_t volume)
 }
 
 // CRY SLOW
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect8(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect8(const uint8_t &volume)
 {
     sfeTkError_t err;
     int crydelay = 500;
@@ -454,7 +454,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect8(uint8_t volume)
 }
 
 // CRY FAST
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect9(uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect9(const uint8_t &volume)
 {
     sfeTkError_t err;
     int crydelay = 200;

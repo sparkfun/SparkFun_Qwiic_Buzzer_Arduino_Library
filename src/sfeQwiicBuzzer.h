@@ -93,57 +93,57 @@ class sfeQwiicBuzzerArdI2C
         /// @param soundEffectNumber The sound effect you with to play
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
-        sfeTkError_t playSoundEffect(uint8_t soundEffectNumber, uint8_t volume);
+        sfeTkError_t playSoundEffect(const uint8_t &soundEffectNumber, const uint8_t &volume);
 
         /// @brief Plays sound effect 0
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
-        sfeTkError_t soundEffect0(uint8_t volume);
+        sfeTkError_t soundEffect0(const uint8_t &volume);
 
         /// @brief Plays sound effect 1
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
-        sfeTkError_t soundEffect1(uint8_t volume);
+        sfeTkError_t soundEffect1(const uint8_t &volume);
 
         /// @brief Plays sound effect 2
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
-        sfeTkError_t soundEffect2(uint8_t volume);
+        sfeTkError_t soundEffect2(const uint8_t &volume);
 
         /// @brief Plays sound effect 3
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
-        sfeTkError_t soundEffect3(uint8_t volume);
+        sfeTkError_t soundEffect3(const uint8_t &volume);
 
         /// @brief Plays sound effect 4
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
-        sfeTkError_t soundEffect4(uint8_t volume);
+        sfeTkError_t soundEffect4(const uint8_t &volume);
 
         /// @brief Plays sound effect 5
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
-        sfeTkError_t soundEffect5(uint8_t volume);
+        sfeTkError_t soundEffect5(const uint8_t &volume);
 
         /// @brief Plays sound effect 6
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
-        sfeTkError_t soundEffect6(uint8_t volume);
+        sfeTkError_t soundEffect6(const uint8_t &volume);
 
         /// @brief Plays sound effect 7
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
-        sfeTkError_t soundEffect7(uint8_t volume);
+        sfeTkError_t soundEffect7(const uint8_t &volume);
 
         /// @brief Plays sound effect 8
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
-        sfeTkError_t soundEffect8(uint8_t volume);
+        sfeTkError_t soundEffect8(const uint8_t &volume);
 
         /// @brief Plays sound effect 9
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
-        sfeTkError_t soundEffect9(uint8_t volume);    
+        sfeTkError_t soundEffect9(const uint8_t &volume);    
 
     protected:
         sfeTkII2C *_theBus;
