@@ -37,7 +37,7 @@ class sfeQwiicBuzzerArdI2C
 {
     public:
         /// @brief Default constructor
-        sfeQwiicBuzzerArdI2C() : _theBus(nullptr)
+        sfeQwiicBuzzerArdI2C() : _theBus{nullptr}
         {
         }
 
@@ -80,6 +80,15 @@ class sfeQwiicBuzzerArdI2C
         /// @return 0 for succuss, negative for errors, positive for warnings    
         sfeTkError_t clearBuzzerActiveReg();    
 
+        /// @brief Changes the I2C address of the Qwiic Buzzer
+        /// @param address New address, must be in the range 0x20 to 0x2F
+        /// @return 0 for succuss, negative for errors, positive for warnings
+        sfeTkError_t setAddress(const uint8_t &address);
+
+        /// @brief Gets the current I2C address of the Qwiic Buzzer
+        /// @return The current I2C address, 7-bit unshifted
+        uint8_t getAddress();
+        
         /// @brief Plays one of the sound effects included in this library
         /// @param soundEffectNumber The sound effect you with to play
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
@@ -124,15 +133,6 @@ class sfeQwiicBuzzerArdI2C
         /// @brief Plays sound effect 9
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         void soundEffect9(uint8_t volume);    
-
-        /// @brief Changes the I2C address of the Qwiic Buzzer
-        /// @param address New address, must be in the range 0x20 to 0x2F
-        /// @return 0 for succuss, negative for errors, positive for warnings
-        sfeTkError_t changeAddress(const uint8_t &address);
-
-        /// @brief Gets the current I2C address of the Qwiic Buzzer
-        /// @return The current I2C address, 7-bit unshifted
-        uint8_t getAddress();
 
     protected:
         sfeTkII2C *_theBus;

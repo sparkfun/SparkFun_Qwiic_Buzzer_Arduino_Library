@@ -55,7 +55,7 @@ void setup() {
           Serial.print("Attempting to set device address to 0x");
           Serial.println(newAddress, HEX);
   
-          if (buzzer.changeAddress(newAddress) == true) {
+          if (buzzer.setAddress(newAddress) == true) {
             Serial.println("Device address set succeeded!");
           }
   

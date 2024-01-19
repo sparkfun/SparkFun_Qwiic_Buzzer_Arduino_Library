@@ -42,32 +42,6 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::isConnected()
     return _theBus->ping();
 }
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::changeAddress(const uint8_t &address)
-{
-    if (address < 0x08 || address > 0x77)
-    {
-        Serial.println("Address out of legal range");
-        return kSTkErrFail; //error immediately if the address is out of legal range
-    }
-
-    sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegI2cAddress, address);
-
-    // Check whether the write was successful
-    if (err != kSTkErrOk)
-        return err;
-
-    // Update the address in the bus
-    _theBus->setAddress(address);
-
-    // Done!
-    return kSTkErrOk;
-}
-
-uint8_t sfeQwiicBuzzerArdI2C::getAddress()
-{
-    return _theBus->address();
-}
-
 sfeTkError_t sfeQwiicBuzzerArdI2C::buzzerConfig(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
     // All of the necessary configuration register address are in sequencial order
@@ -99,16 +73,6 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::buzzerConfig(uint16_t toneFrequency, uint16_t
     return _theBus->writeRegisterRegion(kSfeQwiicBuzzerRegToneFrequencyMsb, data, dataLength);
 }
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::setBuzzerActiveReg()
-{
-    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x01);
-}
-
-sfeTkError_t sfeQwiicBuzzerArdI2C::clearBuzzerActiveReg()
-{
-    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x00);
-}
-
 sfeTkError_t sfeQwiicBuzzerArdI2C::on(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
     sfeTkError_t err = buzzerConfig(toneFrequency, duration, volume);
@@ -126,6 +90,42 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::off()
 sfeTkError_t sfeQwiicBuzzerArdI2C::saveSettings()
 {
     return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegSaveSettings, 0x01);
+}
+
+sfeTkError_t sfeQwiicBuzzerArdI2C::setBuzzerActiveReg()
+{
+    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x01);
+}
+
+sfeTkError_t sfeQwiicBuzzerArdI2C::clearBuzzerActiveReg()
+{
+    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x00);
+}
+
+sfeTkError_t sfeQwiicBuzzerArdI2C::setAddress(const uint8_t &address)
+{
+    if (address < 0x08 || address > 0x77)
+    {
+        Serial.println("Address out of legal range");
+        return kSTkErrFail; //error immediately if the address is out of legal range
+    }
+
+    sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegI2cAddress, address);
+
+    // Check whether the write was successful
+    if (err != kSTkErrOk)
+        return err;
+
+    // Update the address in the bus
+    _theBus->setAddress(address);
+
+    // Done!
+    return kSTkErrOk;
+}
+
+uint8_t sfeQwiicBuzzerArdI2C::getAddress()
+{
+    return _theBus->address();
 }
 
 /*------------------------- Sound Effects ---------------- */

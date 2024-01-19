@@ -25,6 +25,7 @@
 
 #pragma once
 
+#include <SparkFun_Toolkit.h>
 #include "sfeQwiicBuzzer.h"
 
 class QwiicBuzzer : public sfeQwiicBuzzerArdI2C
