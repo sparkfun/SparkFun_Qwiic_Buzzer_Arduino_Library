@@ -15,9 +15,14 @@ isConnected					        KEYWORD2
 setAddress   			            KEYWORD2
 getAddress   			            KEYWORD2
 configureBuzzer   				    KEYWORD2
-off  					            KEYWORD2
-on   					            KEYWORD2
+on  					            KEYWORD2
+off   					            KEYWORD2
 saveSettings   				        KEYWORD2
+setBuzzerActiveReg   				KEYWORD2
+clearBuzzerActiveReg   				KEYWORD2
+setAddress   				        KEYWORD2
+getAddress   				        KEYWORD2
+playSoundEffect                     KEYWORD2
 
 #########################################################
 # Constants
