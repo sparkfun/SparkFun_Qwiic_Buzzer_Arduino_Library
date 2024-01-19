@@ -55,7 +55,7 @@ class sfeQwiicBuzzerArdI2C
         /// @param duration Duration in milliseconds
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings
-        sfeTkError_t buzzerConfig(uint16_t toneFrequency, uint16_t duration, uint8_t volume);
+        sfeTkError_t configureBuzzer(uint16_t toneFrequency, uint16_t duration, uint8_t volume);
         
         /// @brief Configures the Qwiic Buzzer with default values
         /// @param toneFrequency Frequency of buzzer tone

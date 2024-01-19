@@ -42,7 +42,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::isConnected()
     return _theBus->ping();
 }
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::buzzerConfig(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
+sfeTkError_t sfeQwiicBuzzerArdI2C::configureBuzzer(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
     // All of the necessary configuration register address are in sequencial order
     // starting at "kSfeQwiicBuzzerRegToneFrequencyMsb":
@@ -75,7 +75,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::buzzerConfig(uint16_t toneFrequency, uint16_t
 
 sfeTkError_t sfeQwiicBuzzerArdI2C::on(uint16_t toneFrequency, uint16_t duration, uint8_t volume)
 {
-    sfeTkError_t err = buzzerConfig(toneFrequency, duration, volume);
+    sfeTkError_t err = configureBuzzer(toneFrequency, duration, volume);
     if (err != kSTkErrOk) // Check whether the write was successful
         return err;
 
