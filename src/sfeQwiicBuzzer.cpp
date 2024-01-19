@@ -23,7 +23,7 @@
 
 #include "sfeQwiicBuzzer.h"
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::begin(sfeTkII2C *theBus)
+sfeTkError_t sfeQwiicBuzzer::begin(sfeTkII2C *theBus)
 {
     // Nullptr check
     if (theBus == nullptr)
@@ -36,13 +36,13 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::begin(sfeTkII2C *theBus)
     return isConnected();
 }
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::isConnected()
+sfeTkError_t sfeQwiicBuzzer::isConnected()
 {
     // Just ping the device address
     return _theBus->ping();
 }
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::configureBuzzer(const uint16_t toneFrequency, const uint16_t duration, const uint8_t volume)
+sfeTkError_t sfeQwiicBuzzer::configureBuzzer(const uint16_t toneFrequency, const uint16_t duration, const uint8_t volume)
 {
     // All of the necessary configuration register address are in sequencial order
     // starting at "kSfeQwiicBuzzerRegToneFrequencyMsb":
@@ -73,7 +73,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::configureBuzzer(const uint16_t toneFrequency,
     return _theBus->writeRegisterRegion(kSfeQwiicBuzzerRegToneFrequencyMsb, data, dataLength);
 }
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::on(const uint16_t toneFrequency, const uint16_t duration, const uint8_t volume)
+sfeTkError_t sfeQwiicBuzzer::on(const uint16_t toneFrequency, const uint16_t duration, const uint8_t volume)
 {
     sfeTkError_t err = configureBuzzer(toneFrequency, duration, volume);
     if (err != kSTkErrOk) // Check whether the write was successful
@@ -82,27 +82,27 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::on(const uint16_t toneFrequency, const uint16
     return setBuzzerActiveReg();
 }
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::off()
+sfeTkError_t sfeQwiicBuzzer::off()
 {
     return clearBuzzerActiveReg();
 }
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::saveSettings()
+sfeTkError_t sfeQwiicBuzzer::saveSettings()
 {
     return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegSaveSettings, 0x01);
 }
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::setBuzzerActiveReg()
+sfeTkError_t sfeQwiicBuzzer::setBuzzerActiveReg()
 {
     return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x01);
 }
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::clearBuzzerActiveReg()
+sfeTkError_t sfeQwiicBuzzer::clearBuzzerActiveReg()
 {
     return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0x00);
 }
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::setAddress(const uint8_t &address)
+sfeTkError_t sfeQwiicBuzzer::setAddress(const uint8_t &address)
 {
     if (address < 0x08 || address > 0x77)
     {
@@ -123,14 +123,14 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::setAddress(const uint8_t &address)
     return kSTkErrOk;
 }
 
-uint8_t sfeQwiicBuzzerArdI2C::getAddress()
+uint8_t sfeQwiicBuzzer::getAddress()
 {
     return _theBus->address();
 }
 
 /*------------------------- Sound Effects ---------------- */
 
-sfeTkError_t sfeQwiicBuzzerArdI2C::playSoundEffect(const uint8_t &soundEffectNumber, const uint8_t &volume)
+sfeTkError_t sfeQwiicBuzzer::playSoundEffect(const uint8_t &soundEffectNumber, const uint8_t &volume)
 {
     sfeTkError_t err;
 
@@ -171,7 +171,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::playSoundEffect(const uint8_t &soundEffectNum
 }
 
 // SIREN SLOW X1
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect0(const uint8_t &volume)
+sfeTkError_t sfeQwiicBuzzer::soundEffect0(const uint8_t &volume)
 {
     sfeTkError_t err;
     for (int note = 150 ; note < 4000 ; note += 150)
@@ -198,7 +198,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect0(const uint8_t &volume)
 }
 
 // SIREN FAST X3
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect1(const uint8_t &volume)
+sfeTkError_t sfeQwiicBuzzer::soundEffect1(const uint8_t &volume)
 {
     sfeTkError_t err;
     for (int i = 0 ; i <= 2 ; i++)
@@ -224,7 +224,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect1(const uint8_t &volume)
 }
 
 // YES SLOW
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect2(const uint8_t &volume)
+sfeTkError_t sfeQwiicBuzzer::soundEffect2(const uint8_t &volume)
 {
     sfeTkError_t err;
     for (int note = 150 ; note < 4000 ; note += 150)
@@ -239,7 +239,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect2(const uint8_t &volume)
 }
 
 // YES FAST
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect3(const uint8_t &volume)
+sfeTkError_t sfeQwiicBuzzer::soundEffect3(const uint8_t &volume)
 {
     sfeTkError_t err;
     for (int note = 150 ; note < 4000 ; note += 150)
@@ -254,7 +254,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect3(const uint8_t &volume)
 }
 
 // NO SLOW
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect4(const uint8_t &volume)
+sfeTkError_t sfeQwiicBuzzer::soundEffect4(const uint8_t &volume)
 {
     sfeTkError_t err;
     for (int note = 4000 ; note > 150 ; note -= 150)
@@ -269,7 +269,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect4(const uint8_t &volume)
 }
 
 // NO FAST
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect5(const uint8_t &volume)
+sfeTkError_t sfeQwiicBuzzer::soundEffect5(const uint8_t &volume)
 {
     sfeTkError_t err;
     for (int note = 4000 ; note > 150 ; note -= 150)
@@ -284,7 +284,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect5(const uint8_t &volume)
 }
 
 // LAUGH
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect6(const uint8_t &volume)
+sfeTkError_t sfeQwiicBuzzer::soundEffect6(const uint8_t &volume)
 {
     sfeTkError_t err;
     int laughdelay = 400;
@@ -346,7 +346,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect6(const uint8_t &volume)
 }
 
 // LAUGH FAST
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect7(const uint8_t &volume)
+sfeTkError_t sfeQwiicBuzzer::soundEffect7(const uint8_t &volume)
 {
     sfeTkError_t err;
     int laughdelay = 200;
@@ -407,7 +407,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect7(const uint8_t &volume)
 }
 
 // CRY SLOW
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect8(const uint8_t &volume)
+sfeTkError_t sfeQwiicBuzzer::soundEffect8(const uint8_t &volume)
 {
     sfeTkError_t err;
     int crydelay = 500;
@@ -454,7 +454,7 @@ sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect8(const uint8_t &volume)
 }
 
 // CRY FAST
-sfeTkError_t sfeQwiicBuzzerArdI2C::soundEffect9(const uint8_t &volume)
+sfeTkError_t sfeQwiicBuzzer::soundEffect9(const uint8_t &volume)
 {
     sfeTkError_t err;
     int crydelay = 200;

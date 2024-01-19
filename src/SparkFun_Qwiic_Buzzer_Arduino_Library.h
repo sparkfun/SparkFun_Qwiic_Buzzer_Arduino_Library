@@ -28,7 +28,7 @@
 #include <SparkFun_Toolkit.h>
 #include "sfeQwiicBuzzer.h"
 
-class QwiicBuzzer : public sfeQwiicBuzzerArdI2C
+class QwiicBuzzer : public sfeQwiicBuzzer
 {
     public:
         /// @brief Begins the Qwiic Buzzer
@@ -41,14 +41,14 @@ class QwiicBuzzer : public sfeQwiicBuzzerArdI2C
             _theI2CBus.init(wirePort, address);
 
             // Begin the sensor
-            return sfeQwiicBuzzerArdI2C::begin(&_theI2CBus) == kSTkErrOk;
+            return sfeQwiicBuzzer::begin(&_theI2CBus) == kSTkErrOk;
         }
         
         /// @brief Checks if the Qwiic Buzzer is connected
         /// @return True if the sensor is connected, false otherwise
         bool isConnected()
         {
-            return sfeQwiicBuzzerArdI2C::isConnected() == kSTkErrOk;
+            return sfeQwiicBuzzer::isConnected() == kSTkErrOk;
         }
 
     private:
