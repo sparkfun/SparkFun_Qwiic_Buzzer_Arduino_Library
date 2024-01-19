@@ -61,10 +61,10 @@ void setup() {
   // Comment/Un-Comment the following "buzzer.on()" example lines to try different settings:
   
   // "MOMENTARY" SETUP
-  buzzer.on(1000, 0, 3); // frequency: 1KHz, duration: 0 (aka forever), volume: 3
+  buzzer.on(1000, 0, SFE_QWIIC_BUZZER_VOLUME_MID); // frequency: 1KHz, duration: 0 (aka forever), volume: MID
 
   // "ONE-SHOT" Setup (aka adding in a duration amount).
-  // buzzer.on(1000, 100, 3); // frequency: 1KHz, duration: 100ms, volume: 3
+  // buzzer.on(1000, 100, SFE_QWIIC_BUZZER_VOLUME_MID); // frequency: 1KHz, duration: 100ms, volume: MID
 
   delay(1000);
 
