@@ -61,8 +61,8 @@ sfeTkError_t sfeQwiicBuzzer::configureBuzzer(const uint16_t toneFrequency, const
     uint8_t durationMSB = ((duration & 0xFF00) >> 8 );
     uint8_t durationLSB = (duration & 0x00FF);
 
-    uint8_t data[5];
     size_t dataLength = 5;
+    uint8_t data[dataLength];
 
     data[0] = toneFrequencyMSB; // kSfeQwiicBuzzerRegToneFrequencyMsb
     data[1] = toneFrequencyLSB; // kSfeQwiicBuzzerRegToneFrequencyLsb
@@ -106,7 +106,6 @@ sfeTkError_t sfeQwiicBuzzer::setAddress(const uint8_t &address)
 {
     if (address < 0x08 || address > 0x77)
     {
-        Serial.println("Address out of legal range");
         return kSTkErrFail; //error immediately if the address is out of legal range
     }
 

@@ -1,16 +1,17 @@
 /******************************************************************************
-  Example_03_Buzz_Duration
+  Example_09_SilentConfiguration
 
-  This example shows how to control the buzzer using frequency and duration.
-
-  It turns the buzzer on and off.
+  This example shows how to configure the buzzer silently.
+  
+  It then turns the buzzer on and off using setBuzzerActiveReg() and off().
+  
   Much like the classic "blink LED sketch" this will buzz
-  the buzzer once every second at a different frequency and duration.
+  the buzzer once every second.
 
   By Pete Lewis @ SparkFun Electronics
   December 2023
 
-  Based on code originally written by Fischer Moseley @ SparkFun Electronics
+  Based on code orginally written by Fischer Moseley @ SparkFun Electronics
   Original Creation Date: June 28, 2019
 
   SparkFun code, firmware, and software is released under the MIT License.
@@ -27,7 +28,7 @@ QwiicBuzzer buzzer;
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Qwiic Buzzer Example_03_Buzz_Duration");
+  Serial.println("Qwiic Buzzer Example_09_SilentConfiguration");
   Wire.begin(); //Join I2C bus
 
   //check if buzzer will connect over I2C
@@ -36,15 +37,21 @@ void setup() {
     while (1);
   }
   Serial.println("Buzzer connected.");
+
+  // Configure with desired settings
+  // Note, the buzzer will remain silent here
+  buzzer.configureBuzzer(1000, 2000, 3);
+  Serial.println("Buzzer configured (silently).");
+
+  delay(1000); // Allow some silence
 }
 
 void loop() {
-  buzzer.on(2730, 100); // frequency: 2.73KHz, duration: 100ms
+  buzzer.setBuzzerActiveReg(); // turn on Buzzer with current settings
+  
   delay(1000);
 
-  buzzer.on(1000, 500); // frequency: 1K, duration: 500ms
-  delay(1000);
+  buzzer.off();
 
-  // Note, we dont' have to call buzzer.off(), because it will automatically turn
-  // off after the duration of each tone is completed.
+  delay(1000);
 }

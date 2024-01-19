@@ -43,12 +43,12 @@ void setup() {
   Wire.begin(); //Join I2C bus
   Wire.setClock(400000); // sound effects require changing configuration quickly
 
-  //check if buzzer will acknowledge over I2C
+  //check if buzzer will connect over I2C
   if (buzzer.begin() == false) {
-    Serial.println("Device did not acknowledge! Freezing.");
+    Serial.println("Device did not connect! Freezing.");
     while (1);
   }
-  Serial.println("Buzzer acknowledged.");
+  Serial.println("Buzzer connected.");
 
   for(int i = 0 ; i <= 9 ; i++)
   {

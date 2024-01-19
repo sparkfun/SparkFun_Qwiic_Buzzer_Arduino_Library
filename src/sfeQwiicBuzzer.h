@@ -86,7 +86,7 @@ class sfeQwiicBuzzer
         sfeTkError_t clearBuzzerActiveReg();    
 
         /// @brief Changes the I2C address of the Qwiic Buzzer
-        /// @param address New address, must be in the range 0x20 to 0x2F
+        /// @param address New address, must be in the range 0x08 to 0x77
         /// @return 0 for succuss, negative for errors, positive for warnings
         sfeTkError_t setAddress(const uint8_t &address);
 

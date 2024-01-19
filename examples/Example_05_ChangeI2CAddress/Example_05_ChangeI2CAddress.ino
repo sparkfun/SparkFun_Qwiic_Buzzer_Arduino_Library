@@ -18,17 +18,20 @@
 #include <SparkFun_Qwiic_Buzzer_Arduino_Library.h>
 QwiicBuzzer buzzer;
 
+// The default address is 0x34, change this if your buzzer currently has a different address!
+uint8_t initialAddress = kQwiicBuzzerDefaultAddress;
+
 void setup() {
   Serial.begin(115200);
   Serial.println("Qwiic Buzzer example - I2C Address Change");
   Wire.begin(); //Join I2C bus
 
-  //check if device will acknowledge over I2C
-  if (buzzer.begin(0x34) == false) {
-    Serial.println("Device did not acknowledge! Running scanner.");
+  //check if device will connect over I2C
+  if (buzzer.begin(initialAddress) == false) {
+    Serial.println("Device did not connect! Running scanner.");
   }
   else{
-    Serial.println("Device acknowledged!");
+    Serial.println("Device connected!");
   
     Serial.println();
     Serial.println("Enter a new I2C address for the Qwiic Buzzer to use!");
@@ -66,16 +69,16 @@ void setup() {
           delay(100); //give the hardware time to do whatever configuration it needs to do
   
           if (buzzer.isConnected()) {
-            Serial.println("Device will acknowledge on new I2C address!");
+            Serial.println("Device will connect on new I2C address!");
           }
   
           else {
-            Serial.println("Device will not acknowledge on new I2C address.");
+            Serial.println("Device will not connect on new I2C address.");
           }
         }
   
         else {
-          Serial.println("Address out of range! Try an adress between 0x08 and 0x77");
+          Serial.println("Address out of range! Try an address between 0x08 and 0x77");
         }
       }
   
