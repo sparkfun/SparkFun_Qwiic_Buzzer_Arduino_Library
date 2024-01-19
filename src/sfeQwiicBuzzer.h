@@ -50,7 +50,12 @@ class sfeQwiicBuzzer
         /// @return 0 for succuss, negative for errors, positive for warnings
         sfeTkError_t isConnected();
 
-        /// @brief Configures the Qwiic Buzzer
+        /// @brief Configures the Qwiic Buzzer without causing the buzzer to buzz.
+        /// This allows configuration in silence (before you may want to buzz).
+        /// It is also useful in combination with saveSettings(), and then later 
+        /// causing buzzing by using the physical TRIGGER pin.
+        /// To start buzzing (via Qwiic) with your desired configuration, use this
+        /// function, then call setBuzzerActiveReg().
         /// @param toneFrequency Frequency of buzzer tone
         /// @param duration Duration in milliseconds
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
