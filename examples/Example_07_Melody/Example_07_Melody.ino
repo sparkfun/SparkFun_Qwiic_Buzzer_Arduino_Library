@@ -27,23 +27,20 @@ QwiicBuzzer buzzer;
 
 // notes in the melody:
 int melody[] = {
-  kSfeQwiicBuzzerNoteC4, 
-  kSfeQwiicBuzzerNoteG3, 
-  kSfeQwiicBuzzerNoteG3, 
-  kSfeQwiicBuzzerNoteA3, 
-  kSfeQwiicBuzzerNoteG3, 
-  0, 
-  kSfeQwiicBuzzerNoteB3, 
-  kSfeQwiicBuzzerNoteC4
+  SFE_QWIIC_BUZZER_NOTE_C4, 
+  SFE_QWIIC_BUZZER_NOTE_G3, 
+  SFE_QWIIC_BUZZER_NOTE_G3, 
+  SFE_QWIIC_BUZZER_NOTE_A3, 
+  SFE_QWIIC_BUZZER_NOTE_G3, 
+  0,                        // silence (aka "rest")
+  SFE_QWIIC_BUZZER_NOTE_B3, 
+  SFE_QWIIC_BUZZER_NOTE_C4
 };
 
 // note durations: 4 = quarter note, 8 = eighth note, etc.:
 int noteDurations[] = {
   4, 8, 8, 4, 4, 4, 4, 4
 };
-
-#define kBuzzerVolume 4 // loudest!!
-//#define kBuzzerVolume 3 // pretty good volume for most things
 
 void setup() {
   Serial.begin(115200);
@@ -74,7 +71,7 @@ void play_melody()
     // to calculate the note duration, take one second divided by the note type.
     //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
     int noteDuration = 1000 / noteDurations[thisNote];
-    buzzer.on(melody[thisNote], noteDuration, kBuzzerVolume);
+    buzzer.on(melody[thisNote], noteDuration, SFE_QWIIC_BUZZER_VOLUME_MAX);
 
     // to distinguish the notes, set a minimum time between them.
     // the note's duration + 30% seems to work well:

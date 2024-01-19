@@ -31,13 +31,13 @@
 #include "sfeQwiicBuzzerRegisters.h"
 #include "sfeQwiicBuzzerPitches.h"
 
-const uint8_t kSfeQwiicBuzzerDefaultAddress = 0x34;
-const uint16_t kSfeQwiicBuzzerResonantFrequency = 2730;
-#define SFE_QWIIC_BUZZER_VOLUME_OFF = 0;
-#define SFE_QWIIC_BUZZER_VOLUME_MIN = 1;
-#define SFE_QWIIC_BUZZER_VOLUME_LOW = 2;
-#define SFE_QWIIC_BUZZER_VOLUME_MID = 3;
-#define SFE_QWIIC_BUZZER_VOLUME_MAX = 4;
+#define SFE_QWIIC_BUZZER_DEFAULT_ADDRESS 0x34
+#define SFE_QWIIC_BUZZER_RESONANT_FREQUENCY 2730
+#define SFE_QWIIC_BUZZER_VOLUME_OFF 0
+#define SFE_QWIIC_BUZZER_VOLUME_MIN 1
+#define SFE_QWIIC_BUZZER_VOLUME_LOW 2
+#define SFE_QWIIC_BUZZER_VOLUME_MID 3
+#define SFE_QWIIC_BUZZER_VOLUME_MAX 4
 
 class sfeQwiicBuzzer
 {
@@ -73,7 +73,7 @@ class sfeQwiicBuzzer
         /// @param duration Duration in milliseconds
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings
-        sfeTkError_t on(const uint16_t toneFrequency = kSfeQwiicBuzzerResonantFrequency, const uint16_t duration = 0, const uint8_t volume = 4);
+        sfeTkError_t on(const uint16_t toneFrequency = SFE_QWIIC_BUZZER_RESONANT_FREQUENCY, const uint16_t duration = 0, const uint8_t volume = 4);
 
         /// @brief Turns off buzzer
         /// @return 0 for succuss, negative for errors, positive for warnings

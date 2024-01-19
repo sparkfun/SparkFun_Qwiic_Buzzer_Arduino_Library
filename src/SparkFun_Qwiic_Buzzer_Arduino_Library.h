@@ -35,7 +35,7 @@ class QwiicBuzzer : public sfeQwiicBuzzer
         /// @param address I2C device address to use for the sensor
         /// @param wirePort Wire port to use for I2C communication
         /// @return True if successful, false otherwise
-        bool begin(uint8_t address = kSfeQwiicBuzzerDefaultAddress, TwoWire &wirePort = Wire)
+        bool begin(uint8_t address = SFE_QWIIC_BUZZER_DEFAULT_ADDRESS, TwoWire &wirePort = Wire)
         {
             // Setup Arudino I2C bus
             _theI2CBus.init(wirePort, address);

@@ -19,7 +19,7 @@
 QwiicBuzzer buzzer;
 
 // The default address is 0x34, change this if your buzzer currently has a different address!
-uint8_t initialAddress = kSfeQwiicBuzzerDefaultAddress;
+uint8_t initialAddress = SFE_QWIIC_BUZZER_DEFAULT_ADDRESS;
 
 void setup() {
   Serial.begin(115200);
