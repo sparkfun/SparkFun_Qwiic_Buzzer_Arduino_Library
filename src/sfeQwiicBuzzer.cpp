@@ -115,7 +115,7 @@ sfeTkError_t sfeQwiicBuzzer::off()
 
 sfeTkError_t sfeQwiicBuzzer::saveSettings()
 {
-    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegSaveSettings, 0x01);
+    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegSaveSettings, 1);
 }
 
 sfeTkError_t sfeQwiicBuzzer::setAddress(const uint8_t &address)
