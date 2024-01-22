@@ -107,52 +107,82 @@ class sfeQwiicBuzzer
         sfeTkError_t playSoundEffect(const uint8_t &soundEffectNumber, const uint8_t &volume);
 
     private:
-        /// @brief Plays sound effect 0
+        /// @brief Plays sound effect 0 (aka "Siren")
+        /// Intended to sound like a siren, starting at a low frequency, and then
+        /// increasing rapidly up and then back down. This sound effect does a
+        /// single "up and down" cycle.
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
         sfeTkError_t soundEffect0(const uint8_t &volume);
 
-        /// @brief Plays sound effect 1
+        /// @brief Plays sound effect 1 (aka "3 Fast Sirens")
+        /// Intended to sound like a siren, starting at a low frequency, and then
+        /// increasing rapidly up and then back down. This sound effect does this
+        /// cycle of "up and down" three times rapidly.    
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
         sfeTkError_t soundEffect1(const uint8_t &volume);
 
-        /// @brief Plays sound effect 2
+        /// @brief Plays sound effect 2 (aka "robot saying 'Yes'")
+        /// Intended to sound like a robot saying the word "yes".
+        /// It starts at a low frequency and quickly ramps up to a high frequency, 
+        /// then stops. This can be interpreted by most to be an affirmative
+        /// sound to any question you may ask your buzzing robot.      
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
         sfeTkError_t soundEffect2(const uint8_t &volume);
 
-        /// @brief Plays sound effect 3
+        /// @brief Plays sound effect (aka "robot yelling 'YES!'" - faster)
+        /// Intended to sound like a robot saying the word "yes".
+        /// It starts at a low frequency and quickly ramps up to a high frequency, 
+        /// then stops. This can be interpreted by most to be an affirmative
+        /// sound to any question you may ask your buzzing robot. As this sound
+        /// is done more quickly, it can add enthusiasm to the buzzing sound.
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
         sfeTkError_t soundEffect3(const uint8_t &volume);
 
-        /// @brief Plays sound effect 4
+        /// @brief Plays sound effect (aka "robot saying 'No'")
+        /// Intended to sound like a robot saying the word "no".
+        /// It starts at a high frequency and quickly ramps down to a low frequency, 
+        /// then stops. This can be interpreted by most to be an negative
+        /// sound to any question you may ask your buzzing robot. 
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
         sfeTkError_t soundEffect4(const uint8_t &volume);
 
-        /// @brief Plays sound effect 5
+        /// @brief Plays sound effect 5 (aka "robot yelling 'NO!'" - faster)
+        /// Intended to sound like a robot saying the word "no".
+        /// It starts at a high frequency and quickly ramps down to a low frequency, 
+        /// then stops. This can be interpreted by most to be an negative
+        /// sound to any question you may ask your buzzing robot. As this sound
+        /// is done more quickly, it can add enthusiasm to the buzzing sound.
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
         sfeTkError_t soundEffect5(const uint8_t &volume);
 
-        /// @brief Plays sound effect 6
+        /// @brief Plays sound effect 6 (aka "Laughing Robot")
+        /// Intended to sound like your robot is laughing at you.
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
         sfeTkError_t soundEffect6(const uint8_t &volume);
 
-        /// @brief Plays sound effect 7
+        /// @brief Plays sound effect 7 (aka "Laughing Robot Faster")
+        /// Intended to sound like your robot is laughing at you. As this sound
+        /// is done more quickly, it can add enthusiasm to the buzzing sound.
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
         sfeTkError_t soundEffect7(const uint8_t &volume);
 
-        /// @brief Plays sound effect 8
+        /// @brief Plays sound effect 8 (aka "Crying Robot")
+        /// Intended to sound like a robot is crying and sad.
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
         sfeTkError_t soundEffect8(const uint8_t &volume);
 
-        /// @brief Plays sound effect 9
+        /// @brief Plays sound effect 9 (aka "Crying Robot Faster")
+        /// Intended to sound like a robot is crying and sad. As this sound
+        /// is done more quickly, it can add enthusiasm to the buzzing sound.
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings        
         sfeTkError_t soundEffect9(const uint8_t &volume);    

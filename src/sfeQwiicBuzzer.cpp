@@ -127,8 +127,6 @@ uint8_t sfeQwiicBuzzer::address()
     return _theBus->address();
 }
 
-/*------------------------- Sound Effects ---------------- */
-
 sfeTkError_t sfeQwiicBuzzer::playSoundEffect(const uint8_t &soundEffectNumber, const uint8_t &volume)
 {
     sfeTkError_t err;
@@ -171,7 +169,6 @@ sfeTkError_t sfeQwiicBuzzer::playSoundEffect(const uint8_t &soundEffectNumber, c
     return err;
 }
 
-// SIREN SLOW X1
 sfeTkError_t sfeQwiicBuzzer::soundEffect0(const uint8_t &volume)
 {
     sfeTkError_t err;
@@ -198,7 +195,6 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect0(const uint8_t &volume)
     return off();
 }
 
-// SIREN FAST X3
 sfeTkError_t sfeQwiicBuzzer::soundEffect1(const uint8_t &volume)
 {
     sfeTkError_t err;
@@ -224,7 +220,6 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect1(const uint8_t &volume)
     return off();
 }
 
-// YES SLOW
 sfeTkError_t sfeQwiicBuzzer::soundEffect2(const uint8_t &volume)
 {
     sfeTkError_t err;
@@ -239,7 +234,6 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect2(const uint8_t &volume)
     return off();
 }
 
-// YES FAST
 sfeTkError_t sfeQwiicBuzzer::soundEffect3(const uint8_t &volume)
 {
     sfeTkError_t err;
@@ -254,7 +248,6 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect3(const uint8_t &volume)
     return off();
 }
 
-// NO SLOW
 sfeTkError_t sfeQwiicBuzzer::soundEffect4(const uint8_t &volume)
 {
     sfeTkError_t err;
@@ -269,7 +262,6 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect4(const uint8_t &volume)
     return off();
 }
 
-// NO FAST
 sfeTkError_t sfeQwiicBuzzer::soundEffect5(const uint8_t &volume)
 {
     sfeTkError_t err;
@@ -284,7 +276,6 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect5(const uint8_t &volume)
     return off();
 }
 
-// LAUGH
 sfeTkError_t sfeQwiicBuzzer::soundEffect6(const uint8_t &volume)
 {
     sfeTkError_t err;
@@ -346,7 +337,6 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect6(const uint8_t &volume)
     return off();
 }
 
-// LAUGH FAST
 sfeTkError_t sfeQwiicBuzzer::soundEffect7(const uint8_t &volume)
 {
     sfeTkError_t err;
@@ -407,7 +397,6 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect7(const uint8_t &volume)
     return off();
 }
 
-// CRY SLOW
 sfeTkError_t sfeQwiicBuzzer::soundEffect8(const uint8_t &volume)
 {
     sfeTkError_t err;
@@ -454,7 +443,6 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect8(const uint8_t &volume)
     return off();
 }
 
-// CRY FAST
 sfeTkError_t sfeQwiicBuzzer::soundEffect9(const uint8_t &volume)
 {
     sfeTkError_t err;
