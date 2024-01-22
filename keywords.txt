@@ -25,6 +25,7 @@ playSoundEffect                     KEYWORD2
 #########################################################
 
 SFE_QWIIC_BUZZER_DEFAULT_ADDRESS    LITERAL1
+SFE_QWIIC_BUZZER_DEVICE_ID          LITERAL1
 kSfeQwiicBuzzerRegId                LITERAL1
 kSfeQwiicBuzzerRegFirmwareMinor     LITERAL1
 kSfeQwiicBuzzerRegFirmwareMajor     LITERAL1

@@ -32,14 +32,35 @@ sfeTkError_t sfeQwiicBuzzer::begin(sfeTkII2C *theBus)
     // Set bus pointer
     _theBus = theBus;
 
-    // Just check if the device is connected, no other setup is needed
-    return isConnected();
+    sfeTkError_t err;
+    err = isConnected();
+    // Check whether the ping was successful
+    if (err != kSTkErrOk)
+        return err;
+
+    uint8_t readDeviceId;
+    err = deviceId(readDeviceId);
+    // Check whether the read was successful
+    if (err != kSTkErrOk)
+        return err;
+
+    // check that device ID matches
+    if (readDeviceId != SFE_QWIIC_BUZZER_DEVICE_ID)
+        return kSTkErrFail;
+
+    // Done!
+    return kSTkErrOk;
 }
 
 sfeTkError_t sfeQwiicBuzzer::isConnected()
 {
     // Just ping the device address
     return _theBus->ping();
+}
+
+sfeTkError_t sfeQwiicBuzzer::deviceId(uint8_t &deviceId)
+{
+    return _theBus->readRegisterByte(kSfeQwiicBuzzerRegId, deviceId);
 }
 
 sfeTkError_t sfeQwiicBuzzer::configureBuzzer(const uint16_t toneFrequency, const uint16_t duration, const uint8_t volume)

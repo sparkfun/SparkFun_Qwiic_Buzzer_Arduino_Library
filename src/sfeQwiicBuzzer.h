@@ -32,6 +32,7 @@
 #include "sfeQwiicBuzzerPitches.h"
 
 #define SFE_QWIIC_BUZZER_DEFAULT_ADDRESS 0x34
+#define SFE_QWIIC_BUZZER_DEVICE_ID 0x5E
 #define SFE_QWIIC_BUZZER_RESONANT_FREQUENCY 2730
 #define SFE_QWIIC_BUZZER_VOLUME_OFF 0
 #define SFE_QWIIC_BUZZER_VOLUME_MIN 1
@@ -55,6 +56,11 @@ class sfeQwiicBuzzer
         /// @brief Checks if the Qwiic Buzzer is connected
         /// @return 0 for succuss, negative for errors, positive for warnings
         sfeTkError_t isConnected();
+
+        /// @brief Reads the Device ID of the Qwiic Buzzer
+        /// @param deviceId uint8_t variable where the read results will be stored
+        /// @return 0 for succuss, negative for errors, positive for warnings
+        sfeTkError_t deviceId(uint8_t &deviceId);        
 
         /// @brief Configures the Qwiic Buzzer without causing the buzzer to buzz.
         /// This allows configuration in silence (before you may want to buzz).
