@@ -23,8 +23,8 @@
   Qwiic buzzer up. Then you can use the TRIGGER header to cause the buzzer to 
   buzz at your saved settings.
 
-  Note, the "on()" function accepts three arguments:
-  on(frequency, duration, volume);
+  Note, the "configureBuzzer()" function accepts three arguments:
+  configureBuzzer(frequency, duration, volume);
 
   By Pete Lewis @ SparkFun Electronics
   December 2023
@@ -61,11 +61,12 @@ void setup() {
   // Comment/Un-Comment the following "buzzer.on()" example lines to try different settings:
   
   // "MOMENTARY" SETUP
-  buzzer.on(1000, 0, SFE_QWIIC_BUZZER_VOLUME_MID); // frequency: 1KHz, duration: 0 (aka forever), volume: MID
+  buzzer.configureBuzzer(1000, 0, SFE_QWIIC_BUZZER_VOLUME_MID); // frequency: 1KHz, duration: 0 (aka forever), volume: MID
 
   // "ONE-SHOT" Setup (aka adding in a duration amount).
-  // buzzer.on(1000, 100, SFE_QWIIC_BUZZER_VOLUME_MID); // frequency: 1KHz, duration: 100ms, volume: MID
+  // buzzer.configureBuzzer(1000, 100, SFE_QWIIC_BUZZER_VOLUME_MID); // frequency: 1KHz, duration: 100ms, volume: MID
 
+  buzzer.on();
   delay(1000);
 
   Serial.println("Buzzer OFF");

@@ -61,19 +61,16 @@ class sfeQwiicBuzzer
         /// It is also useful in combination with saveSettings(), and then later 
         /// causing buzzing by using the physical TRIGGER pin.
         /// To start buzzing (via Qwiic) with your desired configuration, use this
-        /// function, then call setBuzzerActiveReg().
+        /// function, then call on().
         /// @param toneFrequency Frequency in Hz of buzzer tone
         /// @param duration Duration in milliseconds (0 = forever)
         /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
         /// @return 0 for succuss, negative for errors, positive for warnings
-        sfeTkError_t configureBuzzer(const uint16_t toneFrequency, const uint16_t duration, const uint8_t volume);
+        sfeTkError_t configureBuzzer(const uint16_t toneFrequency = SFE_QWIIC_BUZZER_RESONANT_FREQUENCY, const uint16_t duration = 0, const uint8_t volume = 4);
         
-        /// @brief Configures the Qwiic Buzzer with default values
-        /// @param toneFrequency Frequency in Hz of buzzer tone
-        /// @param duration Duration in milliseconds
-        /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
+        /// @brief Turns on buzzer
         /// @return 0 for succuss, negative for errors, positive for warnings
-        sfeTkError_t on(const uint16_t toneFrequency = SFE_QWIIC_BUZZER_RESONANT_FREQUENCY, const uint16_t duration = 0, const uint8_t volume = 4);
+        sfeTkError_t on();
 
         /// @brief Turns off buzzer
         /// @return 0 for succuss, negative for errors, positive for warnings
@@ -82,14 +79,6 @@ class sfeQwiicBuzzer
         /// @brief Stores settings to EEPROM
         /// @return 0 for succuss, negative for errors, positive for warnings
         sfeTkError_t saveSettings();
-
-        /// @brief Sets register to "command" Buzzer to buzz
-        /// @return 0 for succuss, negative for errors, positive for warnings    
-        sfeTkError_t setBuzzerActiveReg();
-
-        /// @brief Clears register to "command" Buzzer to stop buzzing
-        /// @return 0 for succuss, negative for errors, positive for warnings    
-        sfeTkError_t clearBuzzerActiveReg();    
 
         /// @brief Changes the I2C address of the Qwiic Buzzer
         /// @param address New address, must be in the range 0x08 to 0x77

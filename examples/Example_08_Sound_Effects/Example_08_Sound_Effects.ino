@@ -76,8 +76,8 @@
 #include <SparkFun_Qwiic_Buzzer_Arduino_Library.h>
 QwiicBuzzer buzzer;
 
-#define kBuzzerVolume 4 // loudest!!
-//#define kBuzzerVolume 3 // pretty good volume for most things
+#define BUZZER_VOLUME 4 // loudest!!
+//#define BUZZER_VOLUME 3 // pretty good volume for most things
 sfeTkError_t err; // used for checking for errors
 
 void setup() {
@@ -97,7 +97,7 @@ void setup() {
   {
     Serial.print("Sound Effect: ");
     Serial.println(i);
-    err = buzzer.playSoundEffect(i, kBuzzerVolume);
+    err = buzzer.playSoundEffect(i, BUZZER_VOLUME);
 
     // Check whether the playSoundEffect() was successful
     if (err != kSTkErrOk)

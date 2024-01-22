@@ -3,10 +3,10 @@
 
   This example shows how to control the buzzer to sound at different volumes.
 
-  Note, the "on()" function accepts three arguments, and you must send all three
+  Note, the "configureBuzzer()" function accepts three arguments, and you must send all three
   in order to access the volume control.
 
-  on(frequency, duration, volume);
+  configureBuzzer(frequency, duration, volume);
 
   It turns the buzzer on and off.
   Much like the classic "blink LED sketch" this will buzz
@@ -45,19 +45,23 @@ void setup() {
 
 void loop() {
   Serial.println("Volume: MIN (1)");
-  buzzer.on(2730, 100, SFE_QWIIC_BUZZER_VOLUME_MIN); // frequency: 2.73KHz, duration: 100ms, volume: MIN
+  buzzer.configureBuzzer(2730, 100, SFE_QWIIC_BUZZER_VOLUME_MIN); // frequency: 2.73KHz, duration: 100ms, volume: MIN
+  buzzer.on();
   delay(1000);
 
   Serial.println("Volume: LOW (2)");
-  buzzer.on(2730, 100, SFE_QWIIC_BUZZER_VOLUME_LOW); // frequency: 2.73KHz, duration: 100ms, volume: LOW
+  buzzer.configureBuzzer(2730, 100, SFE_QWIIC_BUZZER_VOLUME_LOW); // frequency: 2.73KHz, duration: 100ms, volume: LOW
+  buzzer.on();
   delay(1000);
 
   Serial.println("Volume: MID (3)");
-  buzzer.on(2730, 100, SFE_QWIIC_BUZZER_VOLUME_MID); // frequency: 2.73KHz, duration: 100ms, volume: MID
+  buzzer.configureBuzzer(2730, 100, SFE_QWIIC_BUZZER_VOLUME_MID); // frequency: 2.73KHz, duration: 100ms, volume: MID
+  buzzer.on();
   delay(1000);
 
   Serial.println("Volume: MAX (4)");
-  buzzer.on(2730, 100, SFE_QWIIC_BUZZER_VOLUME_MAX); // frequency: 2.73KHz, duration: 100ms, volume: MAX
+  buzzer.configureBuzzer(2730, 100, SFE_QWIIC_BUZZER_VOLUME_MAX); // frequency: 2.73KHz, duration: 100ms, volume: MAX
+  buzzer.on();
   delay(1000);
 
   // Note, we dont' have to use buzzer.off(), because it will automatically turn

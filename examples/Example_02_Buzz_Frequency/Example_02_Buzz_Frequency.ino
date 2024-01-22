@@ -39,13 +39,17 @@ void setup() {
 }
 
 void loop() {
-  buzzer.on(2730); // resonant frequency is 2.73KHz
+  // Configure with desired settings
+  // Resonant frequency is 2.73KHz
+  buzzer.configureBuzzer(SFE_QWIIC_BUZZER_RESONANT_FREQUENCY); 
+  buzzer.on(); 
   delay(100);
   
   buzzer.off();
   delay(1000);
 
-  buzzer.on(1000); // try out 1KHz for fun
+  buzzer.configureBuzzer(1000); // set frequency to 1KHz
+  buzzer.on(); 
   delay(100);
   
   buzzer.off();

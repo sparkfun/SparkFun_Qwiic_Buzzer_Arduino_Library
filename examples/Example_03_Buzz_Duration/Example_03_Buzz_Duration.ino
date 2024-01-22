@@ -39,10 +39,12 @@ void setup() {
 }
 
 void loop() {
-  buzzer.on(2730, 100); // frequency: 2.73KHz, duration: 100ms
+  buzzer.configureBuzzer(2730, 100); // frequency: 2.73KHz, duration: 100ms
+  buzzer.on();
   delay(1000);
 
-  buzzer.on(1000, 500); // frequency: 1K, duration: 500ms
+  buzzer.configureBuzzer(1000, 500); // frequency: 1K, duration: 500ms
+  buzzer.on();
   delay(1000);
 
   // Note, we dont' have to call buzzer.off(), because it will automatically turn
