@@ -14,6 +14,8 @@ begin						        KEYWORD2
 isConnected					        KEYWORD2
 setAddress   			            KEYWORD2
 address   			                KEYWORD2
+firmwareVersionMajor                KEYWORD2
+firmwareVersionMinor                KEYWORD2
 configureBuzzer   				    KEYWORD2
 on  					            KEYWORD2
 off   					            KEYWORD2

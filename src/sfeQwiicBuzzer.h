@@ -62,6 +62,16 @@ class sfeQwiicBuzzer
         /// @return 0 for succuss, negative for errors, positive for warnings
         sfeTkError_t deviceId(uint8_t &deviceId);        
 
+        /// @brief Reads the Firmware Version Major of the Qwiic Buzzer
+        /// @param versionMajor Variable where the read results will be stored
+        /// @return 0 for succuss, negative for errors, positive for warnings
+        sfeTkError_t firmwareVersionMajor(uint8_t &versionMajor);      
+
+        /// @brief Reads the Firmware Version Minor of the Qwiic Buzzer
+        /// @param versionMinor Variable where the read results will be stored
+        /// @return 0 for succuss, negative for errors, positive for warnings
+        sfeTkError_t firmwareVersionMinor(uint8_t &versionMinor);                  
+
         /// @brief Configures the Qwiic Buzzer without causing the buzzer to buzz.
         /// This allows configuration in silence (before you may want to buzz).
         /// It is also useful in combination with saveSettings(), and then later 
