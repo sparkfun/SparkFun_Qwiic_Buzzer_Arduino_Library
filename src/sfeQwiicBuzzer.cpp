@@ -122,7 +122,7 @@ sfeTkError_t sfeQwiicBuzzer::setAddress(const uint8_t &address)
     return kSTkErrOk;
 }
 
-uint8_t sfeQwiicBuzzer::getAddress()
+uint8_t sfeQwiicBuzzer::address()
 {
     return _theBus->address();
 }

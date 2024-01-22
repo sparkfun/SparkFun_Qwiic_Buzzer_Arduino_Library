@@ -98,7 +98,7 @@ class sfeQwiicBuzzer
 
         /// @brief Gets the current I2C address of the Qwiic Buzzer
         /// @return The current I2C address, 7-bit unshifted
-        uint8_t getAddress();
+        uint8_t address();
 
         /// @brief Plays one of the sound effects included in this library
         /// @param soundEffectNumber The sound effect you with to play
