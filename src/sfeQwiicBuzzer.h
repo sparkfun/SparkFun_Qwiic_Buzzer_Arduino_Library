@@ -132,7 +132,7 @@ class sfeQwiicBuzzer
         /// @return 0 for succuss, negative for errors, positive for warnings        
         sfeTkError_t soundEffect2(const uint8_t &volume);
 
-        /// @brief Plays sound effect (aka "robot yelling 'YES!'" - faster)
+        /// @brief Plays sound effect 3 (aka "robot yelling 'YES!'" - faster)
         /// Intended to sound like a robot saying the word "yes".
         /// It starts at a low frequency and quickly ramps up to a high frequency, 
         /// then stops. This can be interpreted by most to be an affirmative
@@ -142,7 +142,7 @@ class sfeQwiicBuzzer
         /// @return 0 for succuss, negative for errors, positive for warnings        
         sfeTkError_t soundEffect3(const uint8_t &volume);
 
-        /// @brief Plays sound effect (aka "robot saying 'No'")
+        /// @brief Plays sound effect 4 (aka "robot saying 'No'")
         /// Intended to sound like a robot saying the word "no".
         /// It starts at a high frequency and quickly ramps down to a low frequency, 
         /// then stops. This can be interpreted by most to be an negative
