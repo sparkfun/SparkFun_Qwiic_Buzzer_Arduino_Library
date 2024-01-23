@@ -78,6 +78,5 @@ void play_melody()
     // the note's duration + 30% seems to work well:
     int pauseBetweenNotes = noteDuration * 1.30;
     delay(pauseBetweenNotes);
-    // stop the tone playing:
   }
 }
