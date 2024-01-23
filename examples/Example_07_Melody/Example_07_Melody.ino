@@ -79,6 +79,5 @@ void play_melody()
     int pauseBetweenNotes = noteDuration * 1.30;
     delay(pauseBetweenNotes);
     // stop the tone playing:
-    buzzer.off();
   }
 }
