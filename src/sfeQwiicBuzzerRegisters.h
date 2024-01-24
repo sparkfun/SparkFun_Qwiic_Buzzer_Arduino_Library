@@ -24,6 +24,8 @@
     Distributed as-is; no warranty is given.
 ******************************************************************************/
 
+#pragma once
+
 // Register Pointer Map
 enum Qwiic_Buzzer_Register : uint8_t
 {

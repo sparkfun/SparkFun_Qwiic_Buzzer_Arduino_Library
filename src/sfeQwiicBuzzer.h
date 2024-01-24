@@ -25,10 +25,10 @@
 
 #pragma once
 
-#include "sfeQwiicBuzzerPitches.h"
-#include "sfeQwiicBuzzerRegisters.h"
 #include <SparkFun_Toolkit.h>
 #include <stdint.h>
+#include "sfeQwiicBuzzerRegisters.h"
+#include "sfeQwiicBuzzerPitches.h"
 
 #define SFE_QWIIC_BUZZER_DEFAULT_ADDRESS 0x34
 #define SFE_QWIIC_BUZZER_DEVICE_ID 0x5E
