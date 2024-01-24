@@ -8,7 +8,7 @@
   By Pete Lewis @ SparkFun Electronics
   December 2023
 
-  Based on code orginally written by Fischer Moseley @ SparkFun Electronics
+  Based on code originally written by Fischer Moseley @ SparkFun Electronics
   Original Creation Date: June 28, 2019
 
   SparkFun code, firmware, and software is released under the MIT License.

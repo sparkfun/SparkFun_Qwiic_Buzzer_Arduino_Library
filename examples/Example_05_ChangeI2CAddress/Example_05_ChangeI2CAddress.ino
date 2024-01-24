@@ -54,7 +54,7 @@ void setup() {
   
       if (success) {
         if (newAddress > 0x08 && newAddress < 0x77) {
-          Serial.println("Character recieved, and device address is valid!");
+          Serial.println("Character received, and device address is valid!");
           Serial.print("Attempting to set device address to 0x");
           Serial.println(newAddress, HEX);
   
@@ -102,7 +102,7 @@ void loop() {
   for (address = 1; address < 127; address++ )
   {
     // The i2c_scanner uses the return value of
-    // the Write.endTransmisstion to see if
+    // the Write.endTransmission to see if
     // a device did acknowledge to the address.
     Wire.beginTransmission(address);
     error = Wire.endTransmission();
