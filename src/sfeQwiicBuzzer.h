@@ -25,10 +25,10 @@
 
 #pragma once
 
+#include "sfeQwiicBuzzerPitches.h"
+#include "sfeQwiicBuzzerRegisters.h"
 #include <SparkFun_Toolkit.h>
 #include <stdint.h>
-#include "sfeQwiicBuzzerRegisters.h"
-#include "sfeQwiicBuzzerPitches.h"
 
 #define SFE_QWIIC_BUZZER_DEFAULT_ADDRESS 0x34
 #define SFE_QWIIC_BUZZER_DEVICE_ID 0x5E
@@ -41,7 +41,7 @@
 
 class sfeQwiicBuzzer
 {
-public:
+  public:
     /// @brief Default constructor
     sfeQwiicBuzzer() : _theBus{nullptr}
     {
@@ -81,7 +81,8 @@ public:
     /// @param duration Duration in milliseconds (0 = forever)
     /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
     /// @return 0 for succuss, negative for errors, positive for warnings
-    sfeTkError_t configureBuzzer(const uint16_t toneFrequency = SFE_QWIIC_BUZZER_RESONANT_FREQUENCY, const uint16_t duration = 0, const uint8_t volume = 4);
+    sfeTkError_t configureBuzzer(const uint16_t toneFrequency = SFE_QWIIC_BUZZER_RESONANT_FREQUENCY,
+                                 const uint16_t duration = 0, const uint8_t volume = 4);
 
     /// @brief Turns on buzzer
     /// @return 0 for succuss, negative for errors, positive for warnings
@@ -110,7 +111,7 @@ public:
     /// @return 0 for succuss, negative for errors, positive for warnings
     sfeTkError_t playSoundEffect(const uint8_t &soundEffectNumber, const uint8_t &volume);
 
-private:
+  private:
     /// @brief Plays sound effect 0 (aka "Siren")
     /// Intended to sound like a siren, starting at a low frequency, and then
     /// increasing rapidly up and then back down. This sound effect does a
@@ -191,6 +192,6 @@ private:
     /// @return 0 for succuss, negative for errors, positive for warnings
     sfeTkError_t soundEffect9(const uint8_t &volume);
 
-protected:
+  protected:
     sfeTkII2C *_theBus;
 };

@@ -73,7 +73,8 @@ sfeTkError_t sfeQwiicBuzzer::firmwareVersionMinor(uint8_t &versionMinor)
     return _theBus->readRegisterByte(kSfeQwiicBuzzerRegFirmwareMinor, versionMinor);
 }
 
-sfeTkError_t sfeQwiicBuzzer::configureBuzzer(const uint16_t toneFrequency, const uint16_t duration, const uint8_t volume)
+sfeTkError_t sfeQwiicBuzzer::configureBuzzer(const uint16_t toneFrequency, const uint16_t duration,
+                                             const uint8_t volume)
 {
     // All of the necessary configuration register address are in sequencial order
     // starting at "kSfeQwiicBuzzerRegToneFrequencyMsb":

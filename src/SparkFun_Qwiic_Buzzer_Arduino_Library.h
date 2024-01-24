@@ -25,12 +25,12 @@
 
 #pragma once
 
-#include <SparkFun_Toolkit.h>
 #include "sfeQwiicBuzzer.h"
+#include <SparkFun_Toolkit.h>
 
 class QwiicBuzzer : public sfeQwiicBuzzer
 {
-public:
+  public:
     /// @brief Begins the Qwiic Buzzer
     /// @param address I2C device address to use for the sensor
     /// @param wirePort Wire port to use for I2C communication
@@ -51,6 +51,6 @@ public:
         return sfeQwiicBuzzer::isConnected() == kSTkErrOk;
     }
 
-private:
+  private:
     sfeTkArdI2C _theI2CBus;
 };
