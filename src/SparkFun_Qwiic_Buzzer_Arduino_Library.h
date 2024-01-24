@@ -30,27 +30,27 @@
 
 class QwiicBuzzer : public sfeQwiicBuzzer
 {
-    public:
-        /// @brief Begins the Qwiic Buzzer
-        /// @param address I2C device address to use for the sensor
-        /// @param wirePort Wire port to use for I2C communication
-        /// @return True if successful, false otherwise
-        bool begin(const uint8_t address = SFE_QWIIC_BUZZER_DEFAULT_ADDRESS, TwoWire &wirePort = Wire)
-        {
-            // Setup Arudino I2C bus
-            _theI2CBus.init(wirePort, address);
+public:
+    /// @brief Begins the Qwiic Buzzer
+    /// @param address I2C device address to use for the sensor
+    /// @param wirePort Wire port to use for I2C communication
+    /// @return True if successful, false otherwise
+    bool begin(const uint8_t address = SFE_QWIIC_BUZZER_DEFAULT_ADDRESS, TwoWire &wirePort = Wire)
+    {
+        // Setup Arudino I2C bus
+        _theI2CBus.init(wirePort, address);
 
-            // Begin the sensor
-            return sfeQwiicBuzzer::begin(&_theI2CBus) == kSTkErrOk;
-        }
-        
-        /// @brief Checks if the Qwiic Buzzer is connected
-        /// @return True if the sensor is connected, false otherwise
-        bool isConnected()
-        {
-            return sfeQwiicBuzzer::isConnected() == kSTkErrOk;
-        }
+        // Begin the sensor
+        return sfeQwiicBuzzer::begin(&_theI2CBus) == kSTkErrOk;
+    }
 
-    private:
-        sfeTkArdI2C _theI2CBus;
+    /// @brief Checks if the Qwiic Buzzer is connected
+    /// @return True if the sensor is connected, false otherwise
+    bool isConnected()
+    {
+        return sfeQwiicBuzzer::isConnected() == kSTkErrOk;
+    }
+
+private:
+    sfeTkArdI2C _theI2CBus;
 };

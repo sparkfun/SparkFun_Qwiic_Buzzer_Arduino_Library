@@ -24,18 +24,18 @@
     Distributed as-is; no warranty is given.
 ******************************************************************************/
 
-//Register Pointer Map
+// Register Pointer Map
 enum Qwiic_Buzzer_Register : uint8_t
 {
     kSfeQwiicBuzzerRegId = 0x00,
     kSfeQwiicBuzzerRegFirmwareMinor = 0x01,
     kSfeQwiicBuzzerRegFirmwareMajor = 0x02,
-    kSfeQwiicBuzzerRegToneFrequencyMsb = 0x03,   
-    kSfeQwiicBuzzerRegToneFrequencyLsb = 0x04,       
-    kSfeQwiicBuzzerRegVolume = 0x05, 
-    kSfeQwiicBuzzerRegDurationMsb = 0x06, 
-    kSfeQwiicBuzzerRegDurationLsb = 0x07, 
-    kSfeQwiicBuzzerRegActive = 0x08, 
-    kSfeQwiicBuzzerRegSaveSettings = 0x09, 
+    kSfeQwiicBuzzerRegToneFrequencyMsb = 0x03,
+    kSfeQwiicBuzzerRegToneFrequencyLsb = 0x04,
+    kSfeQwiicBuzzerRegVolume = 0x05,
+    kSfeQwiicBuzzerRegDurationMsb = 0x06,
+    kSfeQwiicBuzzerRegDurationLsb = 0x07,
+    kSfeQwiicBuzzerRegActive = 0x08,
+    kSfeQwiicBuzzerRegSaveSettings = 0x09,
     kSfeQwiicBuzzerRegI2cAddress = 0x0A,
 };

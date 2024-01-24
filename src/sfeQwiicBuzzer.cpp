@@ -79,16 +79,16 @@ sfeTkError_t sfeQwiicBuzzer::configureBuzzer(const uint16_t toneFrequency, const
     // starting at "kSfeQwiicBuzzerRegToneFrequencyMsb":
     // We can write all of them in a single use of "writeRegisterRegion()".
 
-    // kSfeQwiicBuzzerRegToneFrequencyMsb = 0x03,   
-    // kSfeQwiicBuzzerRegToneFrequencyLsb = 0x04,       
-    // kSfeQwiicBuzzerRegVolume = 0x05, 
-    // kSfeQwiicBuzzerRegDurationMsb = 0x06, 
-    // kSfeQwiicBuzzerRegDurationLsb = 0x07, 
+    // kSfeQwiicBuzzerRegToneFrequencyMsb = 0x03,
+    // kSfeQwiicBuzzerRegToneFrequencyLsb = 0x04,
+    // kSfeQwiicBuzzerRegVolume = 0x05,
+    // kSfeQwiicBuzzerRegDurationMsb = 0x06,
+    // kSfeQwiicBuzzerRegDurationLsb = 0x07,
 
     // extract MSBs and LSBs from user passed in arguments
-    uint8_t toneFrequencyMSB = ((toneFrequency & 0xFF00) >> 8 );
+    uint8_t toneFrequencyMSB = ((toneFrequency & 0xFF00) >> 8);
     uint8_t toneFrequencyLSB = (toneFrequency & 0x00FF);
-    uint8_t durationMSB = ((duration & 0xFF00) >> 8 );
+    uint8_t durationMSB = ((duration & 0xFF00) >> 8);
     uint8_t durationLSB = (duration & 0x00FF);
 
     size_t dataLength = 5;
@@ -96,9 +96,9 @@ sfeTkError_t sfeQwiicBuzzer::configureBuzzer(const uint16_t toneFrequency, const
 
     data[0] = toneFrequencyMSB; // kSfeQwiicBuzzerRegToneFrequencyMsb
     data[1] = toneFrequencyLSB; // kSfeQwiicBuzzerRegToneFrequencyLsb
-    data[2] = volume; // kSfeQwiicBuzzerRegVolume
-    data[3] = durationMSB; // kSfeQwiicBuzzerRegDurationMsb
-    data[4] = durationLSB; // kSfeQwiicBuzzerRegDurationLsb
+    data[2] = volume;           // kSfeQwiicBuzzerRegVolume
+    data[3] = durationMSB;      // kSfeQwiicBuzzerRegDurationMsb
+    data[4] = durationLSB;      // kSfeQwiicBuzzerRegDurationLsb
 
     return _theBus->writeRegisterRegion(kSfeQwiicBuzzerRegToneFrequencyMsb, data, dataLength);
 }
@@ -122,7 +122,7 @@ sfeTkError_t sfeQwiicBuzzer::setAddress(const uint8_t &address)
 {
     if (address < 0x08 || address > 0x77)
     {
-        return kSTkErrFail; //error immediately if the address is out of legal range
+        return kSTkErrFail; // error immediately if the address is out of legal range
     }
 
     sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegI2cAddress, address);
@@ -147,39 +147,40 @@ sfeTkError_t sfeQwiicBuzzer::playSoundEffect(const uint8_t &soundEffectNumber, c
 {
     sfeTkError_t err;
 
-    switch (soundEffectNumber) {
-        case 0:
-            err = soundEffect0(volume);
-            break;
-        case 1:
-            err = soundEffect1(volume);
-            break;
-        case 2:
-            err = soundEffect2(volume);
-            break;
-        case 3:
-            err = soundEffect3(volume);
-            break;
-        case 4:
-            err = soundEffect4(volume);
-            break;
-        case 5:
-            err = soundEffect5(volume);
-            break;
-        case 6:
-            err = soundEffect6(volume);
-            break;
-        case 7:
-            err = soundEffect7(volume);
-            break;
-        case 8:
-            err = soundEffect8(volume);
-            break;
-        case 9:
-            err = soundEffect9(volume);
-            break;
-        default:
-            err = kSTkErrFail;
+    switch (soundEffectNumber)
+    {
+    case 0:
+        err = soundEffect0(volume);
+        break;
+    case 1:
+        err = soundEffect1(volume);
+        break;
+    case 2:
+        err = soundEffect2(volume);
+        break;
+    case 3:
+        err = soundEffect3(volume);
+        break;
+    case 4:
+        err = soundEffect4(volume);
+        break;
+    case 5:
+        err = soundEffect5(volume);
+        break;
+    case 6:
+        err = soundEffect6(volume);
+        break;
+    case 7:
+        err = soundEffect7(volume);
+        break;
+    case 8:
+        err = soundEffect8(volume);
+        break;
+    case 9:
+        err = soundEffect9(volume);
+        break;
+    default:
+        err = kSTkErrFail;
     }
 
     return err;
@@ -188,7 +189,7 @@ sfeTkError_t sfeQwiicBuzzer::playSoundEffect(const uint8_t &soundEffectNumber, c
 sfeTkError_t sfeQwiicBuzzer::soundEffect0(const uint8_t &volume)
 {
     sfeTkError_t err;
-    for (int note = 150 ; note < 4000 ; note += 150)
+    for (int note = 150; note < 4000; note += 150)
     {
         err = configureBuzzer(note, 0, volume);
         // Check whether the write was successful
@@ -198,11 +199,11 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect0(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;            
+            return err;
 
         delay(10);
     }
-    for (int note = 4000 ; note > 150 ; note -= 150)
+    for (int note = 4000; note > 150; note -= 150)
     {
         err = configureBuzzer(note, 0, volume);
         // Check whether the write was successful
@@ -212,7 +213,7 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect0(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;             
+            return err;
 
         delay(10);
     }
@@ -222,34 +223,34 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect0(const uint8_t &volume)
 sfeTkError_t sfeQwiicBuzzer::soundEffect1(const uint8_t &volume)
 {
     sfeTkError_t err;
-    for (int i = 0 ; i <= 2 ; i++)
+    for (int i = 0; i <= 2; i++)
     {
-        for (int note = 150 ; note < 4000 ; note += 150)
+        for (int note = 150; note < 4000; note += 150)
         {
             err = configureBuzzer(note, 0, volume);
             // Check whether the write was successful
             if (err != kSTkErrOk)
-                return err; 
+                return err;
 
             err = on();
             // Check whether the write was successful
             if (err != kSTkErrOk)
-                return err;      
+                return err;
 
             delay(2);
         }
-        for (int note = 4000 ; note > 150 ; note -= 150)
+        for (int note = 4000; note > 150; note -= 150)
         {
             err = configureBuzzer(note, 0, volume);
             // Check whether the write was successful
             if (err != kSTkErrOk)
-                return err;  
+                return err;
 
             err = on();
             // Check whether the write was successful
             if (err != kSTkErrOk)
-                return err;      
-                                  
+                return err;
+
             delay(2);
         }
     }
@@ -259,18 +260,18 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect1(const uint8_t &volume)
 sfeTkError_t sfeQwiicBuzzer::soundEffect2(const uint8_t &volume)
 {
     sfeTkError_t err;
-    for (int note = 150 ; note < 4000 ; note += 150)
+    for (int note = 150; note < 4000; note += 150)
     {
         err = configureBuzzer(note, 0, volume);
         // Check whether the write was successful
         if (err != kSTkErrOk)
             return err;
-            
+
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                
+            return err;
+
         delay(40);
     }
     return off();
@@ -279,18 +280,18 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect2(const uint8_t &volume)
 sfeTkError_t sfeQwiicBuzzer::soundEffect3(const uint8_t &volume)
 {
     sfeTkError_t err;
-    for (int note = 150 ; note < 4000 ; note += 150)
+    for (int note = 150; note < 4000; note += 150)
     {
         err = configureBuzzer(note, 0, volume);
         // Check whether the write was successful
         if (err != kSTkErrOk)
             return err;
-            
+
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                
+            return err;
+
         delay(10);
     }
     return off();
@@ -299,7 +300,7 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect3(const uint8_t &volume)
 sfeTkError_t sfeQwiicBuzzer::soundEffect4(const uint8_t &volume)
 {
     sfeTkError_t err;
-    for (int note = 4000 ; note > 150 ; note -= 150)
+    for (int note = 4000; note > 150; note -= 150)
     {
         err = configureBuzzer(note, 0, volume);
         // Check whether the write was successful
@@ -309,8 +310,8 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect4(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                            
+            return err;
+
         delay(40);
     }
     return off();
@@ -319,7 +320,7 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect4(const uint8_t &volume)
 sfeTkError_t sfeQwiicBuzzer::soundEffect5(const uint8_t &volume)
 {
     sfeTkError_t err;
-    for (int note = 4000 ; note > 150 ; note -= 150)
+    for (int note = 4000; note > 150; note -= 150)
     {
         err = configureBuzzer(note, 0, volume);
         // Check whether the write was successful
@@ -329,8 +330,8 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect5(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                            
+            return err;
+
         delay(10);
     }
     return off();
@@ -353,14 +354,14 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect6(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     err = off();
     // Check whether the write was successful
     if (err != kSTkErrOk)
-        return err; 
+        return err;
 
     delay(laughdelay);
 
@@ -374,14 +375,14 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect6(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     err = off();
     // Check whether the write was successful
     if (err != kSTkErrOk)
-        return err; 
+        return err;
     delay(laughdelay);
 
     for (i = 1111; i < 1342; i += laughstep) // 1111, 1342
@@ -394,14 +395,14 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect6(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     err = off();
     // Check whether the write was successful
     if (err != kSTkErrOk)
-        return err; 
+        return err;
     delay(laughdelay);
 
     for (i = 1010; i < 1176; i += laughstep) // 1010, 1176
@@ -414,8 +415,8 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect6(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     return off();
@@ -438,14 +439,14 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect7(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     err = off();
     // Check whether the write was successful
     if (err != kSTkErrOk)
-        return err; 
+        return err;
     delay(laughdelay);
 
     for (i = 1250; i < 1515; i += laughstep) // 1250, 1515
@@ -458,14 +459,14 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect7(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     err = off();
     // Check whether the write was successful
     if (err != kSTkErrOk)
-        return err; 
+        return err;
     delay(laughdelay);
 
     for (i = 1111; i < 1342; i += laughstep) // 1111, 1342
@@ -478,14 +479,14 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect7(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     err = off();
     // Check whether the write was successful
     if (err != kSTkErrOk)
-        return err; 
+        return err;
     delay(laughdelay);
 
     for (i = 1010; i < 1176; i += laughstep) // 1010, 1176
@@ -498,8 +499,8 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect7(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     return off();
@@ -522,8 +523,8 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect8(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     err = off();
@@ -542,14 +543,14 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect8(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     err = off();
     // Check whether the write was successful
     if (err != kSTkErrOk)
-        return err; 
+        return err;
     delay(crydelay);
 
     for (i = 1429; i > 1053; i -= step) // 1429, 1053
@@ -562,8 +563,8 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect8(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     return off();
@@ -586,15 +587,15 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect9(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     err = off();
     // Check whether the write was successful
     if (err != kSTkErrOk)
-        return err; 
-        
+        return err;
+
     delay(crydelay);
 
     for (i = 1667; i > 1250; i -= step) // 1667, 1250
@@ -607,14 +608,14 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect9(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     err = off();
     // Check whether the write was successful
     if (err != kSTkErrOk)
-        return err; 
+        return err;
     delay(crydelay);
 
     for (i = 1429; i > 1053; i -= step) // 1429, 1053
@@ -627,8 +628,8 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect9(const uint8_t &volume)
         err = on();
         // Check whether the write was successful
         if (err != kSTkErrOk)
-            return err;      
-                         
+            return err;
+
         delay(10);
     }
     return off();
