@@ -27,7 +27,6 @@
 
 #include <SparkFun_Toolkit.h>
 #include <stdint.h>
-#include <Arduino.h>
 #include "sfeQwiicBuzzerRegisters.h"
 #include "sfeQwiicBuzzerPitches.h"
 
