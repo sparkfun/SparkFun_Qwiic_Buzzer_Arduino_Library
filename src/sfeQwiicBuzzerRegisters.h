@@ -26,6 +26,8 @@
 
 #pragma once
 
+#include <stdint.h>
+
 // Register Pointer Map
 enum Qwiic_Buzzer_Register : uint8_t
 {
