@@ -76,7 +76,7 @@ sfeTkError_t sfeQwiicBuzzer::firmwareVersionMinor(uint8_t &versionMinor)
 sfeTkError_t sfeQwiicBuzzer::configureBuzzer(const uint16_t toneFrequency, const uint16_t duration,
                                              const uint8_t volume)
 {
-    // All of the necessary configuration register addresses are in sequencial order,
+    // All of the necessary configuration register addresses are in sequential order,
     // starting at "kSfeQwiicBuzzerRegToneFrequencyMsb".
     // We can write all of them in a single use of "writeRegisterRegion()".
 
