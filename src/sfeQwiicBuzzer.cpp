@@ -144,7 +144,7 @@ uint8_t sfeQwiicBuzzer::address()
     return _theBus->address();
 }
 
-sfeTkError_t sfeQwiicBuzzer::playSoundEffect(const uint8_t soundEffectNumber, const uint8_t volume)
+bool sfeQwiicBuzzer::playSoundEffect(const uint8_t soundEffectNumber, const uint8_t volume)
 {
     sfeTkError_t err;
 
@@ -184,7 +184,10 @@ sfeTkError_t sfeQwiicBuzzer::playSoundEffect(const uint8_t soundEffectNumber, co
         err = kSTkErrFail;
     }
 
-    return err;
+    if (err == kSTkErrOk)
+        return true;
+    else
+        return false;
 }
 
 sfeTkError_t sfeQwiicBuzzer::soundEffect0(const uint8_t volume)

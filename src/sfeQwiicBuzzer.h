@@ -108,8 +108,8 @@ class sfeQwiicBuzzer
     /// @brief Plays one of the sound effects included in this library
     /// @param soundEffectNumber The sound effect you with to play
     /// @param volume Volume (4 settings; 0=off, 1=quiet... 4=loudest)
-    /// @return 0 for succuss, negative for errors, positive for warnings
-    sfeTkError_t playSoundEffect(const uint8_t soundEffectNumber, const uint8_t volume);
+    /// @return 1 for succuss, 0 error
+    bool playSoundEffect(const uint8_t soundEffectNumber, const uint8_t volume);
 
   private:
     /// @brief Plays sound effect 0 (aka "Siren")
