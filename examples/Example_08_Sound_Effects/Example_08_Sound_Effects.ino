@@ -76,7 +76,7 @@
 #include <SparkFun_Qwiic_Buzzer_Arduino_Library.h>
 QwiicBuzzer buzzer;
 
-#define BUZZER_VOLUME 4 // loudest!!
+#define BUZZER_VOLUME 4 // loudest!!     
 //#define BUZZER_VOLUME 3 // pretty good volume for most things
 sfeTkError_t err; // used for checking for errors
 
