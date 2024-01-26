@@ -18,7 +18,7 @@
 
     SPDX-License-Identifier: MIT
 
-    Copyright (c) 2023 SparkFun Electronics
+    Copyright (c) 2024 SparkFun Electronics
 
     Distributed as-is; no warranty is given.
 ******************************************************************************/
