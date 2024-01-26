@@ -26,7 +26,7 @@ QwiicBuzzer buzzer;
 uint8_t firmwareVersionMajor;
 uint8_t firmwareVersionMinor;
 
-sfeTkError_t err; // used for checking for errors
+bool err; // used for checking for errors
 
 void setup() {
   Serial.begin(115200);
@@ -43,7 +43,7 @@ void setup() {
   err = buzzer.firmwareVersionMajor(firmwareVersionMajor);
 
   // Check whether the firmware read was successful
-  if (err != kSTkErrOk)
+  if (err == false)
   {
     Serial.println("Could not read firmware version Major. Freezing.");
     while (1);
@@ -52,7 +52,7 @@ void setup() {
   err = buzzer.firmwareVersionMinor(firmwareVersionMinor);
 
   // Check whether the firmware read was successful
-  if (err != kSTkErrOk)
+  if (err == false)
   {
     Serial.println("Could not read firmware version Minor. Freezing.");
     while (1);
