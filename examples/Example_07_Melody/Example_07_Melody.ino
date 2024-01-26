@@ -32,7 +32,7 @@ int melody[] = {
   SFE_QWIIC_BUZZER_NOTE_G3, 
   SFE_QWIIC_BUZZER_NOTE_A3, 
   SFE_QWIIC_BUZZER_NOTE_G3, 
-  0,                        // silence (aka "rest")
+  SFE_QWIIC_BUZZER_NOTE_REST,  // silence (aka "rest")
   SFE_QWIIC_BUZZER_NOTE_B3, 
   SFE_QWIIC_BUZZER_NOTE_C4
 };
