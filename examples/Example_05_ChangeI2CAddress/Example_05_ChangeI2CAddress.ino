@@ -5,8 +5,8 @@
   Fischer Moseley @ SparkFun Electronics
   Original Creation Date: July 30, 2019
 
-  This code is Lemonadeware; if you see me (or any other SparkFun employee) at the
-  local, and you've found our code helpful, please buy us a round!
+  SparkFun code, firmware, and software is released under the MIT License.
+	Please see LICENSE.md for further details.
 
   Hardware Connections:
   Attach the Qwiic Buzzer to your Redboard via Qwiic Cable
@@ -18,17 +18,20 @@
 #include <SparkFun_Qwiic_Buzzer_Arduino_Library.h>
 QwiicBuzzer buzzer;
 
+// The default address is 0x34, change this if your buzzer currently has a different address!
+uint8_t initialAddress = SFE_QWIIC_BUZZER_DEFAULT_ADDRESS;
+
 void setup() {
   Serial.begin(115200);
   Serial.println("Qwiic Buzzer example - I2C Address Change");
   Wire.begin(); //Join I2C bus
 
-  //check if device will acknowledge over I2C
-  if (buzzer.begin(0x5B) == false) {
-    Serial.println("Device did not acknowledge! Running scanner.");
+  //check if device will connect over I2C
+  if (buzzer.begin(initialAddress) == false) {
+    Serial.println("Device did not connect! Running scanner.");
   }
   else{
-    Serial.println("Device acknowledged!");
+    Serial.println("Device connected!");
   
     Serial.println();
     Serial.println("Enter a new I2C address for the Qwiic Buzzer to use!");
@@ -51,11 +54,11 @@ void setup() {
   
       if (success) {
         if (newAddress > 0x08 && newAddress < 0x77) {
-          Serial.println("Character recieved, and device address is valid!");
+          Serial.println("Character received, and device address is valid!");
           Serial.print("Attempting to set device address to 0x");
           Serial.println(newAddress, HEX);
   
-          if (buzzer.setI2Caddress(newAddress) == true) {
+          if (buzzer.setAddress(newAddress) == true) {
             Serial.println("Device address set succeeded!");
           }
   
@@ -66,16 +69,16 @@ void setup() {
           delay(100); //give the hardware time to do whatever configuration it needs to do
   
           if (buzzer.isConnected()) {
-            Serial.println("Device will acknowledge on new I2C address!");
+            Serial.println("Device will connect on new I2C address!");
           }
   
           else {
-            Serial.println("Device will not acknowledge on new I2C address.");
+            Serial.println("Device will not connect on new I2C address.");
           }
         }
   
         else {
-          Serial.println("Address out of range! Try an adress between 0x08 and 0x77");
+          Serial.println("Address out of range! Try an address between 0x08 and 0x77");
         }
       }
   
@@ -99,7 +102,7 @@ void loop() {
   for (address = 1; address < 127; address++ )
   {
     // The i2c_scanner uses the return value of
-    // the Write.endTransmisstion to see if
+    // the Write.endTransmission to see if
     // a device did acknowledge to the address.
     Wire.beginTransmission(address);
     error = Wire.endTransmission();

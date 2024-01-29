@@ -8,11 +8,11 @@
   By Pete Lewis @ SparkFun Electronics
   December 2023
 
-  Based on code orginally written by Fischer Moseley @ SparkFun Electronics
+  Based on code originally written by Fischer Moseley @ SparkFun Electronics
   Original Creation Date: June 28, 2019
 
-  This code is Lemonadeware; if you see me (or any other SparkFun employee) at the
-  local, and you've found our code helpful, please buy us a round!
+  SparkFun code, firmware, and software is released under the MIT License.
+	Please see LICENSE.md for further details.
 
   Hardware Connections:
   Connect QWIIC cable from Arduino to Qwiic Buzzer
@@ -28,12 +28,12 @@ void setup() {
   Serial.println("Qwiic Buzzer Example_01_Buzz");
   Wire.begin(); //Join I2C bus
 
-  //check if buzzer will acknowledge over I2C
+  //check if buzzer will connect over I2C
   if (buzzer.begin() == false) {
-    Serial.println("Device did not acknowledge! Freezing.");
+    Serial.println("Device did not connect! Freezing.");
     while (1);
   }
-  Serial.println("Buzzer acknowledged.");
+  Serial.println("Buzzer connected.");
 }
 
 void loop() {

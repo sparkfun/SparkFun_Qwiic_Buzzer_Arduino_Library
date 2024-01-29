@@ -13,8 +13,8 @@
   Based on code originally written by Fischer Moseley @ SparkFun Electronics
   Original Creation Date: June 28, 2019
 
-  This code is Lemonadeware; if you see me (or any other SparkFun employee) at the
-  local, and you've found our code helpful, please buy us a round!
+  SparkFun code, firmware, and software is released under the MIT License.
+	Please see LICENSE.md for further details.
 
   Hardware Connections:
   Connect QWIIC cable from Arduino to Qwiic Buzzer
@@ -30,22 +30,26 @@ void setup() {
   Serial.println("Qwiic Buzzer Example_02_Buzz_Frequency");
   Wire.begin(); //Join I2C bus
 
-  //check if buzzer will acknowledge over I2C
+  //check if buzzer will connect over I2C
   if (buzzer.begin() == false) {
-    Serial.println("Device did not acknowledge! Freezing.");
+    Serial.println("Device did not connect! Freezing.");
     while (1);
   }
-  Serial.println("Buzzer acknowledged.");
+  Serial.println("Buzzer connected.");
 }
 
 void loop() {
-  buzzer.on(2730); // resonant frequency is 2.73KHz
+  // Configure with desired settings
+  // Resonant frequency is 2.73KHz
+  buzzer.configureBuzzer(SFE_QWIIC_BUZZER_RESONANT_FREQUENCY); 
+  buzzer.on(); 
   delay(100);
   
   buzzer.off();
   delay(1000);
 
-  buzzer.on(1000); // try out 1KHz for fun
+  buzzer.configureBuzzer(1000); // set frequency to 1KHz
+  buzzer.on(); 
   delay(100);
   
   buzzer.off();

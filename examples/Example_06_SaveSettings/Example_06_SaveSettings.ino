@@ -23,8 +23,8 @@
   Qwiic buzzer up. Then you can use the TRIGGER header to cause the buzzer to 
   buzz at your saved settings.
 
-  Note, the "on()" function accepts three arguments:
-  on(frequency, duration, volume);
+  Note, the "configureBuzzer()" function accepts three arguments:
+  configureBuzzer(frequency, duration, volume);
 
   By Pete Lewis @ SparkFun Electronics
   December 2023
@@ -32,8 +32,8 @@
   Based on code originally written by Fischer Moseley @ SparkFun Electronics
   Original Creation Date: June 28, 2019
 
-  This code is Lemonadeware; if you see me (or any other SparkFun employee) at the
-  local, and you've found our code helpful, please buy us a round!
+  SparkFun code, firmware, and software is released under the MIT License.
+	Please see LICENSE.md for further details.
 
   Hardware Connections:
   Connect QWIIC cable from Arduino to Qwiic Buzzer
@@ -49,23 +49,24 @@ void setup() {
   Serial.println("Qwiic Buzzer Example_06_SaveSettings");
   Wire.begin(); //Join I2C bus
 
-  //check if buzzer will acknowledge over I2C
+  //check if buzzer will connect over I2C
   if (buzzer.begin() == false) {
-    Serial.println("Device did not acknowledge! Freezing.");
+    Serial.println("Device did not connect! Freezing.");
     while (1);
   }
-  Serial.println("Buzzer acknowledged.");
+  Serial.println("Buzzer connected.");
 
   Serial.println("Buzzing at 1K, volume 3");
 
   // Comment/Un-Comment the following "buzzer.on()" example lines to try different settings:
   
   // "MOMENTARY" SETUP
-  buzzer.on(1000, 0, 3); // frequency: 1KHz, duration: 0 (aka forever), volume: 3
+  buzzer.configureBuzzer(1000, 0, SFE_QWIIC_BUZZER_VOLUME_MID); // frequency: 1KHz, duration: 0 (aka forever), volume: MID
 
   // "ONE-SHOT" Setup (aka adding in a duration amount).
-  // buzzer.on(1000, 100, 3); // frequency: 1KHz, duration: 100ms, volume: 3
+  // buzzer.configureBuzzer(1000, 100, SFE_QWIIC_BUZZER_VOLUME_MID); // frequency: 1KHz, duration: 100ms, volume: MID
 
+  buzzer.on();
   delay(1000);
 
   Serial.println("Buzzer OFF");
