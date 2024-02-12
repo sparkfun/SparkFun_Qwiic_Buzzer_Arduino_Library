@@ -4,7 +4,7 @@
   This example shows how to control multiple buzzers.
   
   Note, you must use the ChangeI2CAddress example to change the address of your
-  second (or third, etc.) buzzers. Here, we are using "0x35" for the address
+  second (or third, etc.) buzzers. Here, we are using "0x5B" for the address
   of buzzer2.
   
   It turns each buzzer on and off with their own unique frequencies in a 
@@ -30,7 +30,7 @@ QwiicBuzzer buzzer1;
 QwiicBuzzer buzzer2; // create a second buzzer
 
 #define BUZZER_1_ADDRESS SFE_QWIIC_BUZZER_DEFAULT_ADDRESS // default is 0x34
-#define BUZZER_2_ADDRESS 0x35
+#define BUZZER_2_ADDRESS 0x5B
 
 void setup() {
   Serial.begin(115200);
