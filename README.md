@@ -30,6 +30,14 @@ This library provides an interface that enables the following functionality when
 * Change the I2C address to enable the use of multiple buzzers on one device
 
 
+## Documentation
+
+The full API and use documentation for this library is provided [here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer_Arduino_Library/). For a quick reference, the main methods available in the library are listed [here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer_Arduino_Library/class_qwiic_buzzer.html).
+
+Curious about the hardware this board works with - visit the SparkFun Qwiic Buzzer [hardware repository](https://github.com/sparkfun/SparkFun_Qwiic_Buzzer).
+
+The ***Hookup Guide*** for the SparkFun Qwiic Buzzer is available [here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer).
+
 ## General Use
 The following outlines the general use of the library in an Arduino Sketch. 
 
@@ -145,14 +153,6 @@ The following examples are provided with the library
 - [Sound Effects](examples/Example_08_Sound_Effects/Example_08_Sound_Effects.ino) - This example demos the sound effects included in this library.
 - [Firmware Version](examples/Example_09_FirmwareVersion/Example_09_FirmwareVersion.ino) - This example shows how to read the firmware version from the Qwiic Buzzer
 - [Buzz Multiple](examples/Example_10_Buzz_Multiple/Example_10_Buzz_Multiple.ino) - This example shows how to control multiple buzzers.
-
-## Documentation
-
-The full API and use documentation for this library is provided [here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer_Arduino_Library/). For a quick reference, the main methods available in the library are listed [here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer_Arduino_Library/class_qwiic_buzzer.html).
-
-Curious about the hardware this board works with - visit the SparkFun Qwiic Buzzer [hardware repository](https://github.com/sparkfun/SparkFun_Qwiic_Buzzer).
-
-The ***Hookup Guide*** for the SparkFun Qwiic Buzzer is available [here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer).
 
 ## License Information
 
