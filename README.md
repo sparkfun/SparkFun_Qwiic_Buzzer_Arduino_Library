@@ -1,58 +1,63 @@
-SparkFun Qwiic Buzzer Arduino Library [![Build Status](https://travis-ci.org/sparkfun/SparkFun_Qwiic_Buzzer_Arduino_Library.svg?branch=master)](https://travis-ci.org/sparkfun/SparkFun_Qwiic_Buzzer_Arduino_Library)
-========================================
 
-[![SparkFun Qwiic Buzzer](https://cdn.sparkfun.com/r/600-600/assets/parts/2/4/8/3/2/BOB-24474-Qwiic-Buzzer-Feature.jpg)](https://www.sparkfun.com/products/24474)
+![SparkFun Qwiic Buzzer](docs/images/gh-banner-2025-arduino-buzzer.png "SparkFun Qwiic Buzzer")
 
-[*SparkFun Qwiic Buzzer (BOB-24474)*](https://www.sparkfun.com/products/24474)
+# SparkFun Qwiic Buzzer
 
-<!---
+Arduino Library for the SparkFun Qwiic Buzzer breakout board
+
+![License](https://img.shields.io/github/license/sparkfun/SparkFun_Qwiic_Buzzer_Arduino_Library)
+![Release](https://img.shields.io/github/v/release/sparkfun/SparkFun_Qwiic_Buzzer_Arduino_Library)
+![Release Date](https://img.shields.io/github/release-date/sparkfun/SparkFun_Qwiic_Buzzer_Arduino_Library)
+![Documentation - build](https://img.shields.io/github/actions/workflow/status/sparkfun/SparkFun_Qwiic_Buzzer_Arduino_Library/build-deploy-ghpages.yml?label=doc%20build)
+![Compile - Test](https://img.shields.io/github/actions/workflow/status/sparkfun/SparkFun_Qwiic_Buzzer_Arduino_Library/compile-sketch.yml?label=compile%20test)
+![GitHub issues](https://img.shields.io/github/issues/sparkfun/SparkFun_Qwiic_Buzzer_Arduino_Library)
 
 
-UPDATE WHAT DOES THIS LIBRARY DO!?! =) 
+The [SparkFun_Qwiic_Buzzer_Arduino_Library (BOB-24474)](https://www.sparkfun.com/sparkfun-qwiic-buzzer.html)  adds simple beeps and buzzes to your projects via I2C. Make some noises to alert you when something interesting (or urgent) happens. Simply connect a Qwiic cable and load up some pre-written code to an Arduino to start making noises!
+
+The board includes an ATtiny84 with custom firmware to control the magnetic buzzer over I2C. Utilizing our handy Qwiic system, no soldering is required to connect it to the rest of your system. However, we still broke out 0.1"-spaced PTH pads if you prefer to use a breadboard to access the board's I2C, power, trigger, and reset pins on the board's edge. A 2.2k&ohm; pull-up resistor is included on the data and clock lines.
+
+Looking for the board that matches this library - pick up a [SparkFun Qwiic Buzzer (BOB-24474)](https://www.sparkfun.com/sparkfun-qwiic-buzzer.html) at www.sparkfun.com.
+
+## Functionality
+
+This library provides an interface that enables the following functionality when a SparkFun Qwiic Buzzer breakout board:
+
+* ***TODO***
+* 
 
 
+## General Use
 
-This library allows the user to:
+***TODO***
 
-* Turn the buzzer on and off directly
-* Optionally, set the frequency, duration, and volume of the sound
-* Adjust the device's I<sup>2</sup>C address
+## Examples
 
--->
+The following examples are provided with the library
 
-Repository Contents
--------------------
+- [Buzz](examples/Example_01_Buzz/Example_01_Buzz.ino) - This example shows how to turn the buzzer on and off.
+- [Buzz Frequency](examples/Example_02_Buzz_Frequency/Example_02_Buzz_Frequency.ino) - This example shows how to adjust the frequency of the buzzer. 
+- [Buzz Duration](examples/Example_03_Buzz_Duration/Example_03_Buzz_Duration.ino) - This example shows how to control the buzzer using frequency and duration.
+- [Buzz Volume](examples/Example_04_Buzz_Volume/Example_04_Buzz_Volume.ino) - This example shows how to control the buzzer to sound at different volumes.
+-[Change I2C Address](examples/Example_05_ChangeI2CAddress/Example_05_ChangeI2CAddress.ino) -  A configurator for changing the I2C address on the Qwiic Buzzer that walks the user through finding the address of their buzzer, and then changing it!
+- [Save Settings](examples/Example_06_SaveSettings/Example_06_SaveSettings.ino) - This example shows how to save settings to the buzzer.
+- [Melody](examples/Example_07_Melody/Example_07_Melody.ino) - TThis example shows how to buzz a melody on the Qwiic Buzzer.
+- [Sound Effects](examples/Example_08_Sound_Effects/Example_08_Sound_Effects.ino) - This example demos the sound effects included in this library.
+- [Firmware Version](examples/Example_09_FirmwareVersion/Example_09_FirmwareVersion.ino) - This example shows how to read the firmware version from the Qwiic Buzzer
+- [Buzz Multiple](examples/Example_10_Buzz_Multiple/Example_10_Buzz_Multiple.ino) - This example shows how to control multiple buzzers.
 
-* **/examples** - Example sketches for the library (.ino). Run these from the Arduino IDE. 
-* **/src** - Source files for the library (.cpp, .h).
-* **keywords.txt** - Keywords from this library that will be highlighted in the Arduino IDE. 
-* **library.properties** - General library properties for the Arduino package manager. 
+## Documentation
 
-Documentation
---------------
+The full API and use documentation for this library is provided [here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer_Arduino_Library/). For a quick reference, the main methods available in the library are listed [here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer_Arduino_Library/functions.html).
 
-* **[Installing an Arduino Library Guide](https://learn.sparkfun.com/tutorials/installing-an-arduino-library)** - Basic information on how to install an Arduino library.
-* **[Product Repository](https://github.com/sparkfun/SparkFun_Qwiic_Buzzer)** - Main repository (including hardware files) for the SparkFun Qwiic Buzzer Breakout Board.
-* **[Hookup Guide](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer)** - Basic hookup guide for the  Qwiic Buzzer.
+Curious about the hardware this board works with - visit the SparkFun Qwiic Buzzer [hardware repository](https://github.com/sparkfun/SparkFun_Qwiic_Buzzer).
 
-Products that use this Library 
----------------------------------
+The ***Hookup Guide*** for the SparkFun Qwiic Buzzer is available [here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer).
 
-* [*BOB-24474*](https://www.sparkfun.com/products/24474) - Initial release
+## License Information
 
-Version History
----------------
+This product is ***open source***!
 
-* v1.0.0 - Initial Public release.
+This product is licensed using the [MIT Open Source License](https://opensource.org/license/mit). 
 
-License Information
--------------------
-
-This product is _**open source**_! 
-
-Please review the LICENSE.md file for license information. 
-
-If you have any questions or concerns on licensing, please contact technical support on our [SparkFun forums](https://forum.sparkfun.com/viewforum.php?f=152).
-
-Distributed as-is; no warranty is given.
 
