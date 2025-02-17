@@ -39,7 +39,7 @@ The following examples are provided with the library
 - [Buzz Frequency](examples/Example_02_Buzz_Frequency/Example_02_Buzz_Frequency.ino) - This example shows how to adjust the frequency of the buzzer. 
 - [Buzz Duration](examples/Example_03_Buzz_Duration/Example_03_Buzz_Duration.ino) - This example shows how to control the buzzer using frequency and duration.
 - [Buzz Volume](examples/Example_04_Buzz_Volume/Example_04_Buzz_Volume.ino) - This example shows how to control the buzzer to sound at different volumes.
--[Change I2C Address](examples/Example_05_ChangeI2CAddress/Example_05_ChangeI2CAddress.ino) -  A configurator for changing the I2C address on the Qwiic Buzzer that walks the user through finding the address of their buzzer, and then changing it!
+- [Change I2C Address](examples/Example_05_ChangeI2CAddress/Example_05_ChangeI2CAddress.ino) -  A configurator for changing the I2C address on the Qwiic Buzzer that walks the user through finding the address of their buzzer, and then changing it!
 - [Save Settings](examples/Example_06_SaveSettings/Example_06_SaveSettings.ino) - This example shows how to save settings to the buzzer.
 - [Melody](examples/Example_07_Melody/Example_07_Melody.ino) - TThis example shows how to buzz a melody on the Qwiic Buzzer.
 - [Sound Effects](examples/Example_08_Sound_Effects/Example_08_Sound_Effects.ino) - This example demos the sound effects included in this library.
