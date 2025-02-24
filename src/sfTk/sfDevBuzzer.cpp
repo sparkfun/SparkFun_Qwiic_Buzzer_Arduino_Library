@@ -55,13 +55,13 @@ sfTkError_t sfDevBuzzer::isConnected()
 
 sfTkError_t sfDevBuzzer::deviceId(uint8_t &deviceId)
 {
-    return _theBus->readRegisterByte(kSfeQwiicBuzzerRegId, deviceId);
+    return _theBus->readRegister(kSfeQwiicBuzzerRegId, deviceId);
 }
 
 bool sfDevBuzzer::firmwareVersionMajor(uint8_t &versionMajor)
 {
     sfTkError_t err;
-    err = _theBus->readRegisterByte(kSfeQwiicBuzzerRegFirmwareMajor, versionMajor);
+    err = _theBus->readRegister(kSfeQwiicBuzzerRegFirmwareMajor, versionMajor);
     if (err == ksfTkErrOk)
         return true;
     else
@@ -71,7 +71,7 @@ bool sfDevBuzzer::firmwareVersionMajor(uint8_t &versionMajor)
 bool sfDevBuzzer::firmwareVersionMinor(uint8_t &versionMinor)
 {
     sfTkError_t err;
-    err = _theBus->readRegisterByte(kSfeQwiicBuzzerRegFirmwareMinor, versionMinor);
+    err = _theBus->readRegister(kSfeQwiicBuzzerRegFirmwareMinor, versionMinor);
     if (err == ksfTkErrOk)
         return true;
     else
@@ -105,22 +105,22 @@ sfTkError_t sfDevBuzzer::configureBuzzer(const uint16_t toneFrequency, const uin
     data[3] = durationMSB;      // kSfeQwiicBuzzerRegDurationMsb
     data[4] = durationLSB;      // kSfeQwiicBuzzerRegDurationLsb
 
-    return _theBus->writeRegisterRegion(kSfeQwiicBuzzerRegToneFrequencyMsb, data, dataLength);
+    return _theBus->writeRegister(kSfeQwiicBuzzerRegToneFrequencyMsb, data, dataLength);
 }
 
 sfTkError_t sfDevBuzzer::on()
 {
-    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 1);
+    return _theBus->writeRegisterUInt8(kSfeQwiicBuzzerRegActive, 1);
 }
 
 sfTkError_t sfDevBuzzer::off()
 {
-    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0);
+    return _theBus->writeRegisterUInt8(kSfeQwiicBuzzerRegActive, 0);
 }
 
 sfTkError_t sfDevBuzzer::saveSettings()
 {
-    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegSaveSettings, 1);
+    return _theBus->writeRegisterUInt8(kSfeQwiicBuzzerRegSaveSettings, 1);
 }
 
 sfTkError_t sfDevBuzzer::setAddress(const uint8_t &address)
@@ -130,7 +130,7 @@ sfTkError_t sfDevBuzzer::setAddress(const uint8_t &address)
         return ksfTkErrFail; // error immediately if the address is out of legal range
     }
 
-    sfTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegI2cAddress, address);
+    sfTkError_t err = _theBus->writeRegister(kSfeQwiicBuzzerRegI2cAddress, address);
 
     // Check whether the write was successful
     if (err != ksfTkErrOk)
