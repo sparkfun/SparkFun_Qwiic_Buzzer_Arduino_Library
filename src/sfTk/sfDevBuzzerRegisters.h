@@ -21,17 +21,15 @@
 #include <stdint.h>
 
 // Register Pointer Map
-enum Qwiic_Buzzer_Register : uint8_t
-{
-    kSfeQwiicBuzzerRegId = 0x00,
-    kSfeQwiicBuzzerRegFirmwareMinor,
-    kSfeQwiicBuzzerRegFirmwareMajor,
-    kSfeQwiicBuzzerRegToneFrequencyMsb,
-    kSfeQwiicBuzzerRegToneFrequencyLsb,
-    kSfeQwiicBuzzerRegVolume,
-    kSfeQwiicBuzzerRegDurationMsb,
-    kSfeQwiicBuzzerRegDurationLsb,
-    kSfeQwiicBuzzerRegActive,
-    kSfeQwiicBuzzerRegSaveSettings,
-    kSfeQwiicBuzzerRegI2cAddress,
-};
+
+const uint8_t kSfeQwiicBuzzerRegId = 0x00;
+const uint8_t kSfeQwiicBuzzerRegFirmwareMinor = 0x01;
+const uint8_t kSfeQwiicBuzzerRegFirmwareMajor = 0x02;
+const uint8_t kSfeQwiicBuzzerRegToneFrequencyMsb = 0x03;
+const uint8_t kSfeQwiicBuzzerRegToneFrequencyLsb = 0x04;
+const uint8_t kSfeQwiicBuzzerRegVolume = 0x05;
+const uint8_t kSfeQwiicBuzzerRegDurationMsb = 0x06;
+const uint8_t kSfeQwiicBuzzerRegDurationLsb = 0x07;
+const uint8_t kSfeQwiicBuzzerRegActive = 0x08;
+const uint8_t kSfeQwiicBuzzerRegSaveSettings = 0x09;
+const uint8_t kSfeQwiicBuzzerRegI2cAddress = 0x0A;
