@@ -1,90 +1,84 @@
-/******************************************************************************
-    sfeQwiicBuzzer.h
-    SparkFun Qwiic Buzzer Library header file
+/**
+ * @file    sfDevBuzzer.cpp
+ * @brief   Implementation file for SparkFun Qwiic Buzzer Library
+ * @author  Pete Lewis \@SparkFun Electronics
+ * @date    January 2024
+ *
+ * @note    Based on original source code by Fischer Moseley @ SparkFun Electronics
+ *          Original Creation Date: July 24, 2019
+ *
+ * @details This file contains the implementation of the sfDevBuzzer class, which
+ *          provides control functionality for the SparkFun Qwiic Buzzer hardware.
+ *
+ * @copyright Copyright (c) 2023-2025 SparkFun Electronics. This project is released under the MIT License.
+ * @license   SPDX-License-Identifier: MIT
+ *
+ * Distributed as-is; no warranty is given.
+ */
 
-    by Pete Lewis @SparkFun Electronics
-    January 2024
+#include "sfDevBuzzer.h"
 
-    Based on original source code written by
-    Fischer Moseley @ SparkFun Electronics
-    Original Creation Date: July 24, 2019
-
-    Development environment specifics:
-    IDE: Arduino 2.2.1
-    Hardware Platform: Arduino Uno/SparkFun Redboard
-    Qwiic Buzzer Version: v10
-
-    SPDX-License-Identifier: MIT
-
-    Copyright (c) 2023 SparkFun Electronics
-
-    Distributed as-is; no warranty is given.
-******************************************************************************/
-
-#include "sfeQwiicBuzzer.h"
-
-sfeTkError_t sfeQwiicBuzzer::begin(sfeTkII2C *theBus)
+sfTkError_t sfDevBuzzer::begin(sfTkII2C *theBus)
 {
     // Nullptr check
     if (theBus == nullptr)
-        return kSTkErrFail;
+        return ksfTkErrFail;
 
     // Set bus pointer
     _theBus = theBus;
 
-    sfeTkError_t err;
+    sfTkError_t err;
     err = isConnected();
     // Check whether the ping was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
 
     uint8_t readDeviceId;
     err = deviceId(readDeviceId);
     // Check whether the read was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
 
     // check that device ID matches
     if (readDeviceId != SFE_QWIIC_BUZZER_DEVICE_ID)
-        return kSTkErrFail;
+        return ksfTkErrFail;
 
     // Done!
-    return kSTkErrOk;
+    return ksfTkErrOk;
 }
 
-sfeTkError_t sfeQwiicBuzzer::isConnected()
+sfTkError_t sfDevBuzzer::isConnected()
 {
     // Just ping the device address
     return _theBus->ping();
 }
 
-sfeTkError_t sfeQwiicBuzzer::deviceId(uint8_t &deviceId)
+sfTkError_t sfDevBuzzer::deviceId(uint8_t &deviceId)
 {
-    return _theBus->readRegisterByte(kSfeQwiicBuzzerRegId, deviceId);
+    return _theBus->readRegister(kSfeQwiicBuzzerRegId, deviceId);
 }
 
-bool sfeQwiicBuzzer::firmwareVersionMajor(uint8_t &versionMajor)
+bool sfDevBuzzer::firmwareVersionMajor(uint8_t &versionMajor)
 {
-    sfeTkError_t err;
-    err = _theBus->readRegisterByte(kSfeQwiicBuzzerRegFirmwareMajor, versionMajor);
-    if (err == kSTkErrOk)
+    sfTkError_t err;
+    err = _theBus->readRegister(kSfeQwiicBuzzerRegFirmwareMajor, versionMajor);
+    if (err == ksfTkErrOk)
         return true;
     else
         return false;
 }
 
-bool sfeQwiicBuzzer::firmwareVersionMinor(uint8_t &versionMinor)
+bool sfDevBuzzer::firmwareVersionMinor(uint8_t &versionMinor)
 {
-    sfeTkError_t err;
-    err = _theBus->readRegisterByte(kSfeQwiicBuzzerRegFirmwareMinor, versionMinor);
-    if (err == kSTkErrOk)
+    sfTkError_t err;
+    err = _theBus->readRegister(kSfeQwiicBuzzerRegFirmwareMinor, versionMinor);
+    if (err == ksfTkErrOk)
         return true;
     else
-        return false;   
+        return false;
 }
 
-sfeTkError_t sfeQwiicBuzzer::configureBuzzer(const uint16_t toneFrequency, const uint16_t duration,
-                                             const uint8_t volume)
+sfTkError_t sfDevBuzzer::configureBuzzer(const uint16_t toneFrequency, const uint16_t duration, const uint8_t volume)
 {
     // All of the necessary configuration register addresses are in sequential order,
     // starting at "kSfeQwiicBuzzerRegToneFrequencyMsb".
@@ -111,52 +105,52 @@ sfeTkError_t sfeQwiicBuzzer::configureBuzzer(const uint16_t toneFrequency, const
     data[3] = durationMSB;      // kSfeQwiicBuzzerRegDurationMsb
     data[4] = durationLSB;      // kSfeQwiicBuzzerRegDurationLsb
 
-    return _theBus->writeRegisterRegion(kSfeQwiicBuzzerRegToneFrequencyMsb, data, dataLength);
+    return _theBus->writeRegister(kSfeQwiicBuzzerRegToneFrequencyMsb, data, dataLength);
 }
 
-sfeTkError_t sfeQwiicBuzzer::on()
+sfTkError_t sfDevBuzzer::on()
 {
-    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 1);
+    return _theBus->writeRegisterUInt8(kSfeQwiicBuzzerRegActive, 1);
 }
 
-sfeTkError_t sfeQwiicBuzzer::off()
+sfTkError_t sfDevBuzzer::off()
 {
-    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegActive, 0);
+    return _theBus->writeRegisterUInt8(kSfeQwiicBuzzerRegActive, 0);
 }
 
-sfeTkError_t sfeQwiicBuzzer::saveSettings()
+sfTkError_t sfDevBuzzer::saveSettings()
 {
-    return _theBus->writeRegisterByte(kSfeQwiicBuzzerRegSaveSettings, 1);
+    return _theBus->writeRegisterUInt8(kSfeQwiicBuzzerRegSaveSettings, 1);
 }
 
-sfeTkError_t sfeQwiicBuzzer::setAddress(const uint8_t &address)
+sfTkError_t sfDevBuzzer::setAddress(const uint8_t &address)
 {
     if (address < 0x08 || address > 0x77)
     {
-        return kSTkErrFail; // error immediately if the address is out of legal range
+        return ksfTkErrFail; // error immediately if the address is out of legal range
     }
 
-    sfeTkError_t err = _theBus->writeRegisterByte(kSfeQwiicBuzzerRegI2cAddress, address);
+    sfTkError_t err = _theBus->writeRegister(kSfeQwiicBuzzerRegI2cAddress, address);
 
     // Check whether the write was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
 
     // Update the address in the bus
     _theBus->setAddress(address);
 
     // Done!
-    return kSTkErrOk;
+    return ksfTkErrOk;
 }
 
-uint8_t sfeQwiicBuzzer::address()
+uint8_t sfDevBuzzer::address()
 {
     return _theBus->address();
 }
 
-bool sfeQwiicBuzzer::playSoundEffect(const uint8_t soundEffectNumber, const uint8_t volume)
+bool sfDevBuzzer::playSoundEffect(const uint8_t soundEffectNumber, const uint8_t volume)
 {
-    sfeTkError_t err;
+    sfTkError_t err;
 
     switch (soundEffectNumber)
     {
@@ -191,169 +185,169 @@ bool sfeQwiicBuzzer::playSoundEffect(const uint8_t soundEffectNumber, const uint
         err = soundEffect9(volume);
         break;
     default:
-        err = kSTkErrFail;
+        err = ksfTkErrFail;
     }
 
-    if (err == kSTkErrOk)
+    if (err == ksfTkErrOk)
         return true;
     else
         return false;
 }
 
-sfeTkError_t sfeQwiicBuzzer::soundEffect0(const uint8_t volume)
+sfTkError_t sfDevBuzzer::soundEffect0(const uint8_t volume)
 {
-    sfeTkError_t err;
+    sfTkError_t err;
     for (int note = 150; note < 4000; note += 150)
     {
         err = configureBuzzer(note, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     for (int note = 4000; note > 150; note -= 150)
     {
         err = configureBuzzer(note, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     return off();
 }
 
-sfeTkError_t sfeQwiicBuzzer::soundEffect1(const uint8_t volume)
+sfTkError_t sfDevBuzzer::soundEffect1(const uint8_t volume)
 {
-    sfeTkError_t err;
+    sfTkError_t err;
     for (int i = 0; i <= 2; i++)
     {
         for (int note = 150; note < 4000; note += 150)
         {
             err = configureBuzzer(note, 0, volume);
             // Check whether the write was successful
-            if (err != kSTkErrOk)
+            if (err != ksfTkErrOk)
                 return err;
 
             err = on();
             // Check whether the write was successful
-            if (err != kSTkErrOk)
+            if (err != ksfTkErrOk)
                 return err;
 
-            delay(2);
+            sftk_delay_ms(2);
         }
         for (int note = 4000; note > 150; note -= 150)
         {
             err = configureBuzzer(note, 0, volume);
             // Check whether the write was successful
-            if (err != kSTkErrOk)
+            if (err != ksfTkErrOk)
                 return err;
 
             err = on();
             // Check whether the write was successful
-            if (err != kSTkErrOk)
+            if (err != ksfTkErrOk)
                 return err;
 
-            delay(2);
+            sftk_delay_ms(2);
         }
     }
     return off();
 }
 
-sfeTkError_t sfeQwiicBuzzer::soundEffect2(const uint8_t volume)
+sfTkError_t sfDevBuzzer::soundEffect2(const uint8_t volume)
 {
-    sfeTkError_t err;
+    sfTkError_t err;
     for (int note = 150; note < 4000; note += 150)
     {
         err = configureBuzzer(note, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(40);
+        sftk_delay_ms(40);
     }
     return off();
 }
 
-sfeTkError_t sfeQwiicBuzzer::soundEffect3(const uint8_t volume)
+sfTkError_t sfDevBuzzer::soundEffect3(const uint8_t volume)
 {
-    sfeTkError_t err;
+    sfTkError_t err;
     for (int note = 150; note < 4000; note += 150)
     {
         err = configureBuzzer(note, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     return off();
 }
 
-sfeTkError_t sfeQwiicBuzzer::soundEffect4(const uint8_t volume)
+sfTkError_t sfDevBuzzer::soundEffect4(const uint8_t volume)
 {
-    sfeTkError_t err;
+    sfTkError_t err;
     for (int note = 4000; note > 150; note -= 150)
     {
         err = configureBuzzer(note, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(40);
+        sftk_delay_ms(40);
     }
     return off();
 }
 
-sfeTkError_t sfeQwiicBuzzer::soundEffect5(const uint8_t volume)
+sfTkError_t sfDevBuzzer::soundEffect5(const uint8_t volume)
 {
-    sfeTkError_t err;
+    sfTkError_t err;
     for (int note = 4000; note > 150; note -= 150)
     {
         err = configureBuzzer(note, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     return off();
 }
 
-sfeTkError_t sfeQwiicBuzzer::soundEffect6(const uint8_t volume)
+sfTkError_t sfDevBuzzer::soundEffect6(const uint8_t volume)
 {
-    sfeTkError_t err;
+    sfTkError_t err;
     int laughdelay = 400;
     int laughstep = 10;
     uint16_t i;
@@ -362,83 +356,83 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect6(const uint8_t volume)
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     err = off();
     // Check whether the write was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
 
-    delay(laughdelay);
+    sftk_delay_ms(laughdelay);
 
     for (i = 1250; i < 1515; i += laughstep) // 1250, 1515
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     err = off();
     // Check whether the write was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
-    delay(laughdelay);
+    sftk_delay_ms(laughdelay);
 
     for (i = 1111; i < 1342; i += laughstep) // 1111, 1342
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     err = off();
     // Check whether the write was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
-    delay(laughdelay);
+    sftk_delay_ms(laughdelay);
 
     for (i = 1010; i < 1176; i += laughstep) // 1010, 1176
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     return off();
 }
 
-sfeTkError_t sfeQwiicBuzzer::soundEffect7(const uint8_t volume)
+sfTkError_t sfDevBuzzer::soundEffect7(const uint8_t volume)
 {
-    sfeTkError_t err;
+    sfTkError_t err;
     int laughdelay = 200;
     int laughstep = 15;
     uint16_t i;
@@ -447,82 +441,82 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect7(const uint8_t volume)
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     err = off();
     // Check whether the write was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
-    delay(laughdelay);
+    sftk_delay_ms(laughdelay);
 
     for (i = 1250; i < 1515; i += laughstep) // 1250, 1515
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     err = off();
     // Check whether the write was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
-    delay(laughdelay);
+    sftk_delay_ms(laughdelay);
 
     for (i = 1111; i < 1342; i += laughstep) // 1111, 1342
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     err = off();
     // Check whether the write was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
-    delay(laughdelay);
+    sftk_delay_ms(laughdelay);
 
     for (i = 1010; i < 1176; i += laughstep) // 1010, 1176
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     return off();
 }
 
-sfeTkError_t sfeQwiicBuzzer::soundEffect8(const uint8_t volume)
+sfTkError_t sfDevBuzzer::soundEffect8(const uint8_t volume)
 {
-    sfeTkError_t err;
+    sfTkError_t err;
     int crydelay = 500;
     int step = 10;
     uint16_t i;
@@ -531,62 +525,62 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect8(const uint8_t volume)
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     err = off();
     // Check whether the write was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
-    delay(crydelay);
+    sftk_delay_ms(crydelay);
 
     for (i = 1667; i > 1250; i -= step) // 1667, 1250
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     err = off();
     // Check whether the write was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
-    delay(crydelay);
+    sftk_delay_ms(crydelay);
 
     for (i = 1429; i > 1053; i -= step) // 1429, 1053
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     return off();
 }
 
-sfeTkError_t sfeQwiicBuzzer::soundEffect9(const uint8_t volume)
+sfTkError_t sfDevBuzzer::soundEffect9(const uint8_t volume)
 {
-    sfeTkError_t err;
+    sfTkError_t err;
     int crydelay = 200;
     int step = 20;
     uint16_t i;
@@ -595,56 +589,56 @@ sfeTkError_t sfeQwiicBuzzer::soundEffect9(const uint8_t volume)
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     err = off();
     // Check whether the write was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
 
-    delay(crydelay);
+    sftk_delay_ms(crydelay);
 
     for (i = 1667; i > 1250; i -= step) // 1667, 1250
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     err = off();
     // Check whether the write was successful
-    if (err != kSTkErrOk)
+    if (err != ksfTkErrOk)
         return err;
-    delay(crydelay);
+    sftk_delay_ms(crydelay);
 
     for (i = 1429; i > 1053; i -= step) // 1429, 1053
     {
         err = configureBuzzer(i, 0, volume);
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
         err = on();
         // Check whether the write was successful
-        if (err != kSTkErrOk)
+        if (err != ksfTkErrOk)
             return err;
 
-        delay(10);
+        sftk_delay_ms(10);
     }
     return off();
 }

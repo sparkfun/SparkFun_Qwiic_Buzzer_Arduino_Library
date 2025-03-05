@@ -1,34 +1,26 @@
-/******************************************************************************
-    SparkFun_Qwiic_Buzzer_Arduino_Library.h
-    SparkFun Qwiic Buzzer Library header file
-
-    by Pete Lewis @SparkFun Electronics
-    January 2024
-
-    Based on original source code written by
-        Fischer Moseley @ SparkFun Electronics
-        Original Creation Date: July 24, 2019
-
-    This file implements the QwiicBuzzer class, prototyped in SparkFun_Qwiic_Buzzer_Arduino_Library.h
-
-    Development environment specifics:
-    IDE: Arduino 2.2.1
-    Hardware Platform: Arduino Uno/SparkFun Redboard
-    Qwiic Buzzer Version: v10
-
-    SPDX-License-Identifier: MIT
-
-    Copyright (c) 2024 SparkFun Electronics
-
-    Distributed as-is; no warranty is given.
-******************************************************************************/
+/**
+ * @file    SparkFun_Qwiic_Buzzer_Arduino_Library.h
+ * @brief   SparkFun Qwiic Buzzer Library header file
+ * @author  Pete Lewis \@SparkFun Electronics
+ * @date    January 2024
+ *
+ * @note    Based on original source code written by Fischer Moseley \@ SparkFun Electronics
+ *          Original Creation Date: July 24, 2019
+ *
+ * @details This file implements the QwiicBuzzer class, prototyped in SparkFun_Qwiic_Buzzer_Arduino_Library.h
+ *
+ * @copyright Copyright (c) 2024 SparkFun Electronics. This project is released under the MIT License.
+ * @license   SPDX-License-Identifier: MIT
+ *
+ */
 
 #pragma once
 
-#include "sfeQwiicBuzzer.h"
+// clang-format off
 #include <SparkFun_Toolkit.h>
-
-class QwiicBuzzer : public sfeQwiicBuzzer
+#include "sfTk/sfDevBuzzer.h"
+// clang-format on
+class QwiicBuzzer : public sfDevBuzzer
 {
   public:
     /// @brief Begins the Qwiic Buzzer
@@ -41,16 +33,16 @@ class QwiicBuzzer : public sfeQwiicBuzzer
         _theI2CBus.init(wirePort, address);
 
         // Begin the sensor
-        return sfeQwiicBuzzer::begin(&_theI2CBus) == kSTkErrOk;
+        return sfDevBuzzer::begin(&_theI2CBus) == ksfTkErrOk;
     }
 
     /// @brief Checks if the Qwiic Buzzer is connected
     /// @return True if the sensor is connected, false otherwise
     bool isConnected()
     {
-        return sfeQwiicBuzzer::isConnected() == kSTkErrOk;
+        return sfDevBuzzer::isConnected() == ksfTkErrOk;
     }
 
   private:
-    sfeTkArdI2C _theI2CBus;
+    sfTkArdI2C _theI2CBus;
 };
