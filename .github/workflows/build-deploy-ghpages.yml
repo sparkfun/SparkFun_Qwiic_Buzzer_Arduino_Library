@@ -22,7 +22,7 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           submodules: "true"
@@ -30,10 +30,20 @@ jobs:
       - name: Set Version
         run: echo "PROJECT_NUMBER = `git describe --tags`" >> ./docs/doxygen/doxygen-config
 
-      - name: Build Documentation
-        uses: mattnotmitt/doxygen-action@v1.12.0
-        with:
-          doxyfile-path: "./docs/doxygen/doxygen-config"
+      - name: Install Doxygen 1.16.1
+        run: |
+          wget -q https://github.com/doxygen/doxygen/releases/download/Release_1_16_1/doxygen-1.16.1.linux.bin.tar.gz
+          tar -xzf doxygen-1.16.1.linux.bin.tar.gz
+          sudo cp doxygen-1.16.1/bin/doxygen /usr/local/bin/doxygen
+          doxygen --version
+
+      - name: Build Doxygen docs
+        run: doxygen ./docs/doxygen/doxygen-config
+
+      # - name: Build Documentation
+      #   uses: mattnotmitt/doxygen-action@v1.12.0
+      #   with:
+      #     doxyfile-path: "./docs/doxygen/doxygen-config"
 
       # Upload the documentation as an artifact
       - name: Upload documentation
