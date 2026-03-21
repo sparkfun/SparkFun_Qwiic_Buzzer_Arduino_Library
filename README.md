@@ -36,27 +36,27 @@ The following outlines the general use of the library in an Arduino Sketch.
 
 At the start of your sketch, the library header file is included using the following statement:
 
-```cpp
+~~~cpp
 #include <SparkFun_Qwiic_Buzzer_Arduino_Library.h>
-```
+~~~
 
 Before the arduino ```setup()``` function, create a Buzzer object in your file with the following declaration:
 
-```c
+~~~cpp
 QwiicBuzzer buzzer; // its a buzzer
-```
+~~~
 
 ### Initialization
 
 In the Arduino ```setup()``` function, initialize the buzzer by calling the begin method. This method is called after the Arduino `Wire` (I2C) library is initialized.
 
-```cpp
+~~~cpp
 //check if buzzer will connect over I2C
 if (buzzer.begin() == false) {
 Serial.println("Device did not connect! Freezing.");
 while (1);
 }
-```
+~~~
 
 The begin method returns true if the buzzer is connected and available, and false if it is not. If a value of *false* is returned in the above example, the  sketch execution is halted.
 
@@ -66,7 +66,7 @@ The begin method returns true if the buzzer is connected and available, and fals
 
 Turn the buzzer on and off as shown in the following loop example:
 
-```cpp
+~~~cpp
 void loop() {
   buzzer.on();
   
@@ -76,13 +76,13 @@ void loop() {
   
   delay(1000);
 }
-```
+~~~
 
 #### Frequency Control
 
 The buzzer frequency is controlled using the ```configureBuzzer()``` method.
 
-```cpp
+~~~cpp
 void loop() {
   // Configure with desired settings
   // Resonant frequency is 2.73KHz
@@ -100,25 +100,25 @@ void loop() {
   buzzer.off();
   delay(1000);
 }
-```
+~~~
 
 #### Buzz Duration
 
 The buzz duration is set by adding a timing value after the frequency to the ```configureBuzzer()``` method.
 
-```cpp
+~~~cpp
  buzzer.configureBuzzer(2730, 100); // frequency: 2.73KHz, duration: 100ms
-```
+~~~
 
 #### Volume
 
 The buzz volume is an additional optional parameter to the ```configureBuzzer()``` method.
 
-```cpp
+~~~cpp
 buzzer.configureBuzzer(2730, 100, SFE_QWIIC_BUZZER_VOLUME_MIN); // frequency: 2.73KHz, duration: 100ms, volume: MIN
 ...
 buzzer.configureBuzzer(2730, 100, SFE_QWIIC_BUZZER_VOLUME_MAX); // frequency: 2.73KHz, duration: 100ms, volume: MAX
-```
+~~~
 
 #### Sound Effects
 
@@ -126,9 +126,9 @@ The buzzer has a collection of sound effects included in this library. These are
 
 Playing sound effect 1:
 
-```cpp
+~~~cpp
  err = buzzer.playSoundEffect(1, BUZZER_VOLUME);
-```
+~~~
 
 ## Examples
 
