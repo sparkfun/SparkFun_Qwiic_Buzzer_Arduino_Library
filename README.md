@@ -1,7 +1,7 @@
 
-![SparkFun Qwiic Buzzer](docs/images/gh-banner-2025-arduino-buzzer.png "SparkFun Qwiic Buzzer")
-
 # SparkFun Qwiic Buzzer
+
+![SparkFun Qwiic Buzzer](docs/images/gh-banner-2025-arduino-buzzer.png "SparkFun Qwiic Buzzer")
 
 Arduino Library for the SparkFun Qwiic Buzzer breakout board
 
