@@ -16,6 +16,8 @@ The [SparkFun_Qwiic_Buzzer_Arduino_Library (BOB-24474)](https://www.sparkfun.com
 
 The board includes an ATtiny84 with custom firmware to control the magnetic buzzer over I2C. Utilizing our handy Qwiic system, no soldering is required to connect it to the rest of your system. However, we still broke out 0.1"-spaced PTH pads if you prefer to use a breadboard to access the board's I2C, power, trigger, and reset pins on the board's edge. A 2.2k ohm pull-up resistor is included on the data and clock lines.
 
+Looking for the board that matches this library - pick up a [SparkFun Qwiic Buzzer (BOB-24474)](https://www.sparkfun.com/sparkfun-qwiic-buzzer.html) at SparkFun.
+
 ## Functionality
 
 This library provides an interface that enables the following functionality when a SparkFun Qwiic Buzzer breakout board:

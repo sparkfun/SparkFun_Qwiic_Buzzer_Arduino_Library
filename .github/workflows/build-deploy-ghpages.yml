@@ -31,7 +31,7 @@ jobs:
         run: echo "PROJECT_NUMBER = `git describe --tags`" >> ./docs/doxygen/doxygen-config
 
       - name: Build Documentation
-        uses: mattnotmitt/doxygen-action@v1.9.5
+        uses: mattnotmitt/doxygen-action@v1.12.0
         with:
           doxyfile-path: "./docs/doxygen/doxygen-config"
 
