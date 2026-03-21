@@ -37,6 +37,9 @@ jobs:
           sudo cp doxygen-1.16.1/bin/doxygen /usr/local/bin/doxygen
           doxygen --version
 
+      - name: Check Doxygen version
+        run: which doxygen && doxygen --version
+
       - name: Build Doxygen docs
         run: doxygen ./docs/doxygen/doxygen-config
 
