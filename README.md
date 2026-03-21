@@ -14,9 +14,9 @@ Arduino Library for the SparkFun Qwiic Buzzer breakout board
 
 The [SparkFun_Qwiic_Buzzer_Arduino_Library (BOB-24474)](https://www.sparkfun.com/sparkfun-qwiic-buzzer.html)  adds simple beeps and buzzes to your projects via I2C. Make some noises to alert you when something interesting (or urgent) happens. Simply connect a Qwiic cable and load up some pre-written code to an Arduino to start making noises!
 
-The board includes an ATtiny84 with custom firmware to control the magnetic buzzer over I2C. Utilizing our handy Qwiic system, no soldering is required to connect it to the rest of your system. However, we still broke out 0.1"-spaced PTH pads if you prefer to use a breadboard to access the board's I2C, power, trigger, and reset pins on the board's edge. A 2.2k&ohm; pull-up resistor is included on the data and clock lines.
+The board includes an ATtiny84 with custom firmware to control the magnetic buzzer over I2C. Utilizing our handy Qwiic system, no soldering is required to connect it to the rest of your system. However, we still broke out 0.1"-spaced PTH pads if you prefer to use a breadboard to access the board's I2C, power, trigger, and reset pins on the board's edge. A 2.2k ohm pull-up resistor is included on the data and clock lines.
 
-Looking for the board that matches this library - pick up a [SparkFun Qwiic Buzzer (BOB-24474)](https://www.sparkfun.com/sparkfun-qwiic-buzzer.html) at <www.sparkfun.com>.
+Looking for the board that matches this library - pick up a [SparkFun Qwiic Buzzer (BOB-24474)](https://www.sparkfun.com/sparkfun-qwiic-buzzer.html) at SparkFun.
 
 ## Functionality
 
@@ -147,11 +147,11 @@ The following examples are provided with the library
 
 ## Documentation
 
-The full API and use documentation for this library is provided [here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer_Arduino_Library/). For a quick reference, the main methods available in the library are listed [here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer_Arduino_Library/class_qwiic_buzzer.html).
+The full API and use documentation for this library is [provided here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer_Arduino_Library/). For a quick reference, the main methods available in the library are [listed here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer_Arduino_Library/class_qwiic_buzzer.html).
 
 Curious about the hardware this board works with - visit the SparkFun Qwiic Buzzer [hardware repository](https://github.com/sparkfun/SparkFun_Qwiic_Buzzer/).
 
-The ***Hookup Guide*** for the SparkFun Qwiic Buzzer is available [here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer/).
+The ***Hookup Guide*** for the SparkFun Qwiic Buzzer is [available here](https://docs.sparkfun.com/SparkFun_Qwiic_Buzzer/).
 
 ## License Information
 
