@@ -1,8 +1,6 @@
 
 # SparkFun Qwiic Buzzer
 
-![SparkFun Qwiic Buzzer](docs/images/gh-banner-2025-arduino-buzzer.png "SparkFun Qwiic Buzzer")
-
 Arduino Library for the SparkFun Qwiic Buzzer breakout board
 
 ![License](https://img.shields.io/github/license/sparkfun/SparkFun_Qwiic_Buzzer_Arduino_Library)
